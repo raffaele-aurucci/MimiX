@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Face Landmarker</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    video {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      transform: rotateY(180deg);
+    }
+  </style>
+</head>
+
+<body>
+<video id="webcam" autoplay playsinline></video>
+
+<script type="module">
+  import vision from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3";
+  const { FaceLandmarker, FilesetResolver } = vision;
+
+  let faceLandmarker;
+  let webcamRunning = false;
+  const video = document.getElementById("webcam");
+
+  // Funzione per abilitare la webcam e fare la predizione
+  async function setupFaceLandmarker() {
+    const filesetResolver = await FilesetResolver.forVisionTasks(
+            "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/wasm"
+    );
+
+    faceLandmarker = await FaceLandmarker.createFromOptions(filesetResolver, {
+      baseOptions: {
+        modelAssetPath: `https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task`,
+        delegate: "GPU"
+      },
+      outputFaceBlendshapes: true,
+      runningMode: "VIDEO",
+      numFaces: 1,
+    });
+
+    // Abilita la webcam
+    enableWebcam();
+  }
+
+  async function enableWebcam() {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      video.srcObject = stream;
+      if (!webcamRunning) {
+        video.addEventListener("loadeddata", predictWebcam);
+        webcamRunning = true;
+      }
+    } catch (error) {
+      console.error("Errore nell'accesso alla webcam:", error);
+    }
+  }
+
+  async function predictWebcam() {
+    if (!webcamRunning || !faceLandmarker) return;
+
+    const startTimeMs = performance.now();
+    const results = await faceLandmarker.detectForVideo(video, startTimeMs);
+
+    if (results?.faceLandmarks?.length && results.faceBlendshapes) {
+      // Invia i risultati a Flutter
+      FaceDetection?.postMessage(JSON.stringify({
+        face_landmarks: results.faceLandmarks[0],
+        face_blendshapes: results.faceBlendshapes[0]
+      }));
+    }
+
+    // Richiama la funzione per continuare la predizione
+    window.requestAnimationFrame(predictWebcam);
+  }
+
+  // Carica il FaceLandmarker e abilita la webcam
+  setupFaceLandmarker();
+
+  document.addEventListener("visibilitychange", async () => {
+    if (document.hidden) {
+      // Pausa predizione e stop della webcam
+      webcamRunning = false;
+      const stream = video.srcObject;
+      if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+      }
+    } else {
+      // Verifica se il modello `faceLandmarker` è definito, se non lo è, ricaricalo
+      if (!faceLandmarker) {
+        await setupFaceLandmarker();  // Ricarica il modello
+      }
+
+      // Riattiva la webcam e riavvia la predizione
+      enableWebcam();
+    }
+  });
+
+</script>
+</body>
+
+</html>
