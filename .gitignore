@@ -44,3 +44,4 @@ app.*.map.json
 
 # test flow
 /lib/flow.dart
+/lib/test.dart

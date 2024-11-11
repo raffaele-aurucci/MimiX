@@ -130,7 +130,7 @@ class _FaceDetectionState extends State<FaceDetection> {
                         final Category category = result!.faceBlendshapes!.categories![index];
                         return ListTile(
                           title: Text(category.categoryName ?? 'UNKNOWN'),
-                          subtitle: Text((category.score ?? 0).roundDecimal(precision: 1).toString()),);
+                          subtitle: Text((category.score ?? 0).roundDecimal(precision: 2).toString()),);
                       },)
                   : const Center(
                       child: Text(
