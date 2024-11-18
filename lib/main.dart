@@ -1,6 +1,8 @@
 // Start application
+import 'package:mimix_app/utils/storage/database_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:sqflite/sqflite.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -16,7 +18,9 @@ void main() async {
 
 // TODO: Initialize the resources needed by app while the splash screen is displayed.
 Future<bool> _simulateInitialization() async {
-  await Future.delayed(const Duration(seconds: 1));
+  final dbHelper = DatabaseHelper();
+  Database db = await dbHelper.database;
+  print('database: $db');
   return false;
 }
 
@@ -31,8 +35,17 @@ class MimixApp extends StatelessWidget {
       title: 'Mimix App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+
+        // Define the default `TextTheme`. Use this to specify the default
+        // text styling for headlines, titles, bodies of text, and more.
+        textTheme: const TextTheme(
+          displayLarge: TextStyle(
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+          ),
+        )
       ),
       home: isLoggedIn ? const HomePage() : const RegisterPage(),
     );
