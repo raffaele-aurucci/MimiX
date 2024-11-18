@@ -97,8 +97,10 @@ flutter_native_splash:
   web: false
 
   color: "#ffffff"
+  color_dark: "#ffffff"
   image: assets/logos/logo_mimix.png
 
   android_12:
     color: "#ffffff"
+    color_dark: "#ffffff"
     image: assets/logos/logo_mimix.png
