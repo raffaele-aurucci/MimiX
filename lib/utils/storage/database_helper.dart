@@ -18,11 +18,11 @@ class DatabaseHelper {
   Future<Database> get database async {
     if (_database != null) return _database!;
 
-    _database = await initDatabase();
+    _database = await _initDatabase();
     return _database!;
   }
 
-  Future<Database> initDatabase() async {
+  Future<Database> _initDatabase() async {
     String path = join(await getDatabasesPath(), _databaseName);
     return await openDatabase(
       path,
@@ -32,10 +32,10 @@ class DatabaseHelper {
   }
 
   Future<void> _onCreate(Database db, int version) async {
-    await createUserTable(db);
+    await _createUserTable(db);
   }
 
-  Future<void> createUserTable(Database db) async {
+  Future<void> _createUserTable(Database db) async {
     const todoSql = '''CREATE TABLE USER (
       id INTEGER PRIMARY KEY,
       username TEXT NOT NULL,
