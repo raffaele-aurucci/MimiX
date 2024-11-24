@@ -68,6 +68,7 @@ flutter:
     - assets/face_mesh.html
     - assets/logos/logo_mimix.png
     - assets/fonts/
+    - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
