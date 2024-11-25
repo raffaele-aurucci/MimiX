@@ -66,7 +66,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/face_mesh.html
-    - assets/logos/logo_mimix.png
+    - assets/logos/
     - assets/fonts/
     - assets/images/
 
@@ -110,8 +110,10 @@ flutter_native_splash:
   color: "#ffffff"
   color_dark: "#ffffff"
   image: assets/logos/logo_mimix.png
+  branding: assets/logos/branding.png
 
   android_12:
     color: "#ffffff"
     color_dark: "#ffffff"
     image: assets/logos/logo_mimix.png
+    branding: assets/logos/branding.png
