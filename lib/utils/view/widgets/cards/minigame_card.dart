@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mimix_app/utils/view/app_palette.dart';
 import 'package:mimix_app/utils/view/widgets/texts/card_title_text.dart';
 
 class MinigameCard extends StatelessWidget {
@@ -33,7 +34,7 @@ class MinigameCard extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: PaletteColor.whiteColor,
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(12),
                     bottomRight: Radius.circular(12),

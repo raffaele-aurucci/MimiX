@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mimix_app/utils/view/app_palette.dart';
+
 
 class IconButtonWidget extends StatelessWidget {
   final IconData icon;
@@ -11,7 +13,7 @@ class IconButtonWidget extends StatelessWidget {
     return IconButton(
       icon: Icon(icon),
       iconSize: 32.0,
-      color: const Color(0xFF003659),
+      color: PaletteColor.darkBlue,
       onPressed: onPressed,
     );
   }
