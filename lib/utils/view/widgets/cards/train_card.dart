@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mimix_app/utils/view/app_palette.dart';
 import 'package:mimix_app/utils/view/widgets/texts/card_title_text.dart';
 import 'package:mimix_app/utils/view/widgets/texts/description_text.dart';
 
@@ -23,13 +24,13 @@ class TrainCard extends StatelessWidget {
       child: GestureDetector(
         // onTap: onTap, // Add the function
         child: Card(
-          color: Colors.white,
+          color: PaletteColor.whiteColor,
           elevation: 4,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12), // Angoli arrotondati
+            borderRadius: BorderRadius.circular(12),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(16.0), // Padding interno
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

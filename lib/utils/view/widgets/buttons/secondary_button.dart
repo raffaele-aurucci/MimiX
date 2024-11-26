@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mimix_app/utils/view/app_palette.dart';
 
 class SecondaryButton extends StatelessWidget {
   final String text;
@@ -10,14 +11,14 @@ class SecondaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.white,
-        foregroundColor: const Color(0xFF003659),
+        backgroundColor: PaletteColor.backgroundColor,
+        foregroundColor: PaletteColor.darkBlue,
         minimumSize: Size(150, 40), // Min size of button (w, h)
         maximumSize: Size(200, 60), // Max size of button (w, h)
         padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0),
         textStyle: const TextStyle(fontFamily: 'Raleway', fontSize: 14, fontWeight: FontWeight.w500),
         side: const BorderSide(
-          color: Color(0xFF003659),
+          color: PaletteColor.darkBlue,
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),

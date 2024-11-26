@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mimix_app/utils/view/app_palette.dart';
 
 class ProgressBar extends StatelessWidget {
   final double progress; // % progress of bar (double type)
@@ -13,7 +14,7 @@ class ProgressBar extends StatelessWidget {
     return Container(
       height: 7, // To edit
       decoration: BoxDecoration(
-        color: const Color(0xFFF0F2F4),
+        color: PaletteColor.progressBarBackground,
         borderRadius: BorderRadius.circular(16.0),
       ),
       child: ClipRRect(
@@ -21,9 +22,9 @@ class ProgressBar extends StatelessWidget {
         child: LinearProgressIndicator(
           borderRadius: BorderRadius.circular(16.0),
           value: progress,
-          backgroundColor: const Color(0xFFF0F2F4),
+          backgroundColor: PaletteColor.progressBarBackground,
           valueColor: AlwaysStoppedAnimation<Color>(
-            Color(0xFF97CADB), // Colore di default della barra
+            PaletteColor.lightSkyBlue,
           ),
         ),
       ),

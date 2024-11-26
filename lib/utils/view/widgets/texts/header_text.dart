@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mimix_app/utils/view/app_palette.dart';
 
 // aggiungere costanti per la definizione della size del font
 
@@ -19,7 +20,7 @@ class HeaderText extends StatelessWidget {
       style: TextStyle(
         fontSize: size,
         fontWeight: FontWeight.w800,
-        color: const Color(0xFF003659),
+        color: PaletteColor.darkBlue,
       ),
     );
   }

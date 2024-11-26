@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mimix_app/utils/view/app_palette.dart';
 
 class AppTheme {
 
@@ -7,7 +8,7 @@ class AppTheme {
     // Set the universal font to Raleway
     fontFamily: 'Raleway',  // This is the font family name defined in pubspec.yaml
 
-    colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF003659)),
+    colorScheme: ColorScheme.fromSeed(seedColor: PaletteColor.darkBlue),
     useMaterial3: true,
     brightness: Brightness.light,
   );

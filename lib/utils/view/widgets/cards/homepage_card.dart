@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mimix_app/utils/view/app_palette.dart';
 import 'package:mimix_app/utils/view/widgets/texts/card_title_text.dart';
 
 class HomePageCard extends StatelessWidget {
@@ -15,15 +16,13 @@ class HomePageCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20), // Add horizontal margin to the card
-
+    return
       // GestureDetector is a fundamental tool for making widgets interactive and responding to gestures without
       // using predefined widgets such as buttons.
-      child: GestureDetector(
+      GestureDetector(
         onTap: onTap,
         child: Card(
-          color: const Color(0xFFEAFAFE),
+          color: PaletteColor.powderBlue,
           elevation: 4,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
@@ -31,7 +30,7 @@ class HomePageCard extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween, // Spazio tra le due colonne
+              mainAxisAlignment: MainAxisAlignment.spaceBetween, // Space between two columns
               children: [
                 Expanded(
                   child: Column(
@@ -50,8 +49,7 @@ class HomePageCard extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }
 

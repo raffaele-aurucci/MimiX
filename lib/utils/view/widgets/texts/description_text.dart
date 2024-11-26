@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mimix_app/utils/view/app_palette.dart';
 
 class DescriptionText extends StatelessWidget {
 
@@ -17,7 +18,7 @@ class DescriptionText extends StatelessWidget {
       style: TextStyle(
         fontSize: size,
         fontWeight: FontWeight.w400,
-        color: const Color(0xFF003659),
+        color: PaletteColor.darkBlue,
       ),
     );
   }

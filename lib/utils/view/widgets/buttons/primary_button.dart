@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mimix_app/utils/view/app_palette.dart';
 
 class PrimaryButton extends StatelessWidget {
   final String text;
@@ -11,8 +12,8 @@ class PrimaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFF003659),
-        foregroundColor: Colors.white,
+        backgroundColor: PaletteColor.darkBlue,
+        foregroundColor: PaletteColor.whiteColor,
         minimumSize: Size(150, 40), // Min size of button (w, h)
         maximumSize: Size(200, 60), // Max size of button (w, h)
         padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0),

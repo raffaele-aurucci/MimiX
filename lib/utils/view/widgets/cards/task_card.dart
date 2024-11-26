@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mimix_app/utils/view/app_palette.dart';
 import 'package:mimix_app/utils/view/widgets/texts/card_title_text.dart';
 import 'package:mimix_app/utils/view/widgets/texts/description_text.dart';
 import 'package:mimix_app/utils/view/widgets/progress_bar.dart';
@@ -22,7 +23,7 @@ class TaskCard extends StatelessWidget {
       width: 150, // To edit
       height: 150, // To edit
       child: Card(
-        color: Colors.white,
+        color: PaletteColor.whiteColor,
         elevation: 4,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
