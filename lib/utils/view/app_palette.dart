@@ -20,5 +20,5 @@ class PaletteColor {
   static const Color progressBarBackground = Color(0xFFF0F2F4);
 
   // For error messages
-  static const Color errorMessage = Colors.red;
+  static const Color errorMessage = Color(0xFFEB5858);
 }

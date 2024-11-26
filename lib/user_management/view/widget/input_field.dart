@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:mimix_app/utils/view/app_palette.dart';
 
 class InputField extends StatefulWidget {
 
   final String label;
+  final TextInputType keyboardType;
+  final TextEditingController controller;
+  final String? Function(String?) validator;
 
-  const InputField({super.key, required this.label});
+  const InputField({super.key, required this.label, required this.keyboardType,
+  required this.controller, required this.validator});
 
   @override
   _InputFieldState createState() => _InputFieldState();
@@ -13,10 +18,8 @@ class InputField extends StatefulWidget {
 class _InputFieldState extends State<InputField>{
 
   final FocusNode _focusNode = FocusNode();
-  bool _selectField = false;
-
-  final TextEditingController _controller = TextEditingController(); // Aggiungi il controller
-  bool _isTextFilled = false;
+  bool _isSelected = false;
+  bool _isValid = true;
 
   @override
   void initState() {
@@ -25,26 +28,19 @@ class _InputFieldState extends State<InputField>{
     _focusNode.addListener(() {
       if (_focusNode.hasFocus) {
         setState(() {
-          _selectField = true;
+          _isSelected = true;
         });
       } else {
         setState(() {
-          _selectField = false;
+          _isSelected = false;
         });
       }
-    });
-
-    _controller.addListener(() {
-      setState(() {
-        _isTextFilled = _controller.text.isNotEmpty;
-      });
     });
   }
 
   @override
   void dispose() {
     _focusNode.dispose();
-    _controller.dispose();
     super.dispose();
   }
 
@@ -52,43 +48,51 @@ class _InputFieldState extends State<InputField>{
   Widget build(BuildContext context) {
     return TextFormField(
         focusNode: _focusNode,
-        controller: _controller,
+        controller: widget.controller,
+        keyboardType: widget.keyboardType,
         decoration: InputDecoration(
           labelText: widget.label,
           labelStyle: TextStyle(
-            color: _selectField ? const Color(0xFF003659)
-                  : _isTextFilled ? const Color(0xFF003659)
-                  : const Color(0xFF97CADB),
+            color: _isValid ? PaletteColor.darkBlue : PaletteColor.errorMessage,
+            fontWeight: _isSelected ? FontWeight.w600 : FontWeight.normal,
+            fontSize: 16
           ),
+          errorStyle: const TextStyle(color: PaletteColor.errorMessage),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: _isTextFilled ? const Color(0xFF003659) : const Color(0xFF97CADB)),
-          ),
-          focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
             borderSide: const BorderSide(color: Color(0xFF003659)),
           ),
-          errorBorder: OutlineInputBorder(
+          focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: _selectField ? const Color(0xFF003659)
-                : _isTextFilled ? const Color(0xFF003659)
-                : const Color(0xFF97CADB),
+            borderSide: const BorderSide(
+              color: PaletteColor.darkBlue,
+              width: 2.0,
             ),
           ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: const BorderSide(color: PaletteColor.errorMessage),
+            ),
           focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: _selectField ? const Color(0xFF003659) : _isTextFilled ? const Color(0xFF003659) : const Color(0xFF97CADB),
+            borderSide: const BorderSide(
+              color: PaletteColor.errorMessage,
+              width: 2.0,
             )),
-          errorStyle: const TextStyle(
-            color: Color(0xFFEB5858)
-          ),
         ),
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'The field ${widget.label} cannot empty';
-        }
-        if (value.length < 3) return 'The field ${widget.label} must contain at least 3 characters';
-        return null;
+        validator: (value) {
+          String? message = widget.validator(value);
+          if (message == null) {
+            setState(() {
+            _isValid = true;
+            });
+          }
+          else {
+            setState(() {
+            _isValid = false;
+            });
+          }
+          return message;
       }
     );
   }

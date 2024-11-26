@@ -1,4 +1,6 @@
 // Start application
+import 'package:mimix_app/user_management/beans/user.dart';
+import 'package:mimix_app/user_management/storage/user_dao.dart';
 import 'package:mimix_app/utils/storage/database_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -23,6 +25,9 @@ Future<bool> _simulateInitialization() async {
   final dbHelper = DatabaseHelper();
   Database db = await dbHelper.database;
   print('database: $db');
+  // UserDao userDao = UserDao();
+  // User? user = await userDao.getUserById(1);
+  // print(user.toString());
   return false;
 }
 
