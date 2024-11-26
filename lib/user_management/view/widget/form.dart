@@ -18,9 +18,16 @@ class _FormWidgetState extends State<FormWidget> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _ageController = TextEditingController();
 
+  final FocusNode _usernameFocusNode = FocusNode();
+  final FocusNode _ageFocusNode = FocusNode();
+
   bool? _isRegistered;
 
   Future<void> _handleRegistration() async {
+
+    _usernameFocusNode.unfocus();
+    _ageFocusNode.unfocus();
+
     final isRegistered = await registerUser(
       _formKey,
       _usernameController.text,
@@ -44,7 +51,6 @@ class _FormWidgetState extends State<FormWidget> {
 
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -57,6 +63,7 @@ class _FormWidgetState extends State<FormWidget> {
           keyboardType: TextInputType.text,
           controller: _usernameController,
           validator: validateUsername,
+          focusNode: _usernameFocusNode,
         ),
         // const TextField(),
         const SizedBox(height: 10),
@@ -65,6 +72,7 @@ class _FormWidgetState extends State<FormWidget> {
           keyboardType: TextInputType.number,
           controller: _ageController,
           validator: validateAge,
+          focusNode: _ageFocusNode,
         ),
         const SizedBox(height: 20),
         PrimaryButton(
@@ -79,6 +87,8 @@ class _FormWidgetState extends State<FormWidget> {
   void dispose() {
     _usernameController.dispose();
     _ageController.dispose();
+    _usernameFocusNode.dispose();
+    _ageFocusNode.dispose();
     super.dispose();
   }
 }

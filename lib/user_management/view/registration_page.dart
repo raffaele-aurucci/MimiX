@@ -16,25 +16,27 @@ class _RegistrationPageState extends State<RegistrationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const HeaderText(text: 'Hello Beautiful', size: 20),
-                    const HeaderText(text: 'User Profile', size: HeaderText.H3),
-                    const SizedBox(height: 30),
-                    Image.asset('assets/images/welcome.png'),
-                    const FormWidget(),
-                  ],
+        body: GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: SafeArea(
+                child: SingleChildScrollView(
+                    child: Container(
+                        margin: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+                        child: Center(
+                            child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              const HeaderText(text: 'Hello Beautiful', size: 20),
+                              const HeaderText(text: 'User Profile', size: HeaderText.H3),
+                              const SizedBox(height: 30),
+                              Image.asset('assets/images/welcome.png'),
+                              const FormWidget(),
+                            ],
                 )
               )
             )
           )
         )
-    );
+    ));
   }
 }

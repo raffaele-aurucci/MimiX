@@ -7,9 +7,10 @@ class InputField extends StatefulWidget {
   final TextInputType keyboardType;
   final TextEditingController controller;
   final String? Function(String?) validator;
+  final FocusNode focusNode;
 
   const InputField({super.key, required this.label, required this.keyboardType,
-  required this.controller, required this.validator});
+  required this.controller, required this.validator, required this.focusNode});
 
   @override
   _InputFieldState createState() => _InputFieldState();
@@ -17,7 +18,7 @@ class InputField extends StatefulWidget {
 
 class _InputFieldState extends State<InputField>{
 
-  final FocusNode _focusNode = FocusNode();
+  // final FocusNode _focusNode = FocusNode();
   bool _isSelected = false;
   bool _isValid = true;
 
@@ -25,8 +26,8 @@ class _InputFieldState extends State<InputField>{
   void initState() {
     super.initState();
 
-    _focusNode.addListener(() {
-      if (_focusNode.hasFocus) {
+    widget.focusNode.addListener(() {
+      if (widget.focusNode.hasFocus) {
         setState(() {
           _isSelected = true;
         });
@@ -39,15 +40,9 @@ class _InputFieldState extends State<InputField>{
   }
 
   @override
-  void dispose() {
-    _focusNode.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return TextFormField(
-        focusNode: _focusNode,
+        focusNode: widget.focusNode,
         controller: widget.controller,
         keyboardType: widget.keyboardType,
         decoration: InputDecoration(
