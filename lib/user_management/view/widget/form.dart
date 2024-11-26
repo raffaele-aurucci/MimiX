@@ -4,6 +4,8 @@ import 'package:mimix_app/utils/view/widgets/buttons/primary_button.dart';
 import 'package:mimix_app/user_management/logic/user_logic.dart';
 import 'package:mimix_app/utils/view/widgets/alert_dialog.dart';
 
+import '../home_page.dart';
+
 class FormWidget extends StatefulWidget {
   const FormWidget({super.key});
 
@@ -32,6 +34,7 @@ class _FormWidgetState extends State<FormWidget> {
       _formKey,
       _usernameController.text,
       _ageController.text,
+      context
     );
 
     // Verify that the widget is still mounted
@@ -46,6 +49,13 @@ class _FormWidgetState extends State<FormWidget> {
       context: context,
       title: "Registration Failed",
       message: "There was an issue registering your account. Please try again.",
+      );
+    }
+    else if (_isRegistered == true) {
+      // navigate to HomePage
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HomePage()),
       );
     }
 

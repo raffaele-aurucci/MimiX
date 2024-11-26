@@ -1,11 +1,12 @@
 // Start application
 import 'package:mimix_app/user_management/beans/user.dart';
+import 'package:mimix_app/user_management/beans/user_provider.dart';
 import 'package:mimix_app/user_management/storage/user_dao.dart';
-import 'package:mimix_app/utils/storage/database_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:mimix_app/user_management/view/home_page.dart';
 import 'package:mimix_app/utils/view/app_theme.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:provider/provider.dart';
 import 'package:mimix_app/user_management/view/registration_page.dart';
 
 void main() async {
@@ -13,76 +14,42 @@ void main() async {
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   // Simulate initialization
-  final bool isLoggedIn = await _simulateInitialization();
+  final user = await _simulateInitialization();
 
   FlutterNativeSplash.remove();
 
-  runApp(MimixApp(isLoggedIn: isLoggedIn));
+  runApp(MimixApp(user: user));
 }
 
 // TODO: Initialize the resources needed by app while the splash screen is displayed.
-Future<bool> _simulateInitialization() async {
-  final dbHelper = DatabaseHelper();
-  Database db = await dbHelper.database;
-  print('database: $db');
-  // UserDao userDao = UserDao();
-  // User? user = await userDao.getUserById(1);
-  // print(user.toString());
-  return false;
+Future<User?> _simulateInitialization() async {
+  // final dbHelper = DatabaseHelper();
+  // Database db = await dbHelper.database;
+  // print('database: $db');
+
+  // only one user in DB
+  UserDao userDao = UserDao();
+  User? user = await userDao.getUserById(1);
+
+  return user;
 }
 
 class MimixApp extends StatelessWidget {
-  final bool isLoggedIn;
 
-  const MimixApp({super.key, required this.isLoggedIn});
+  final User? user;
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Mimix App',
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
-      home: isLoggedIn ? const HomePage() : const RegistrationPage(),
-    );
-  }
-}
-
-// TODO: remove after that HomePage is created
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const MimixApp({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
-
-    return const Scaffold(
-        body: SafeArea(
-            child: Padding(
-              padding: EdgeInsets.all(48),
-              child: Center(
-                  child: Text("Home Page!")
-              ),
-            )
-        )
-    );
-  }
-}
-
-// TODO: remove after that RegisterPage is created
-class RegisterPage extends StatelessWidget {
-  const RegisterPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-
-    return const Scaffold(
-        body: SafeArea(
-            child: Padding(
-              padding: EdgeInsets.all(48),
-              child: Center(
-                  child: Text("Register Page!")
-              ),
-            )
-        )
+    return ChangeNotifierProvider( // initialize provider for all application
+        create: (_) => UserProvider(user),
+        child: MaterialApp(
+        title: 'Mimix App',
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.lightTheme,
+        home: user != null ? const HomePage() : const RegistrationPage(),
+    )
     );
   }
 }

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mimix_app/user_management/beans/user.dart';
 import 'package:mimix_app/user_management/storage/user_dao.dart';
+import 'package:provider/provider.dart';
+
+import '../beans/user_provider.dart';
 
 String? validateUsername(String? value) {
   if (value == null || value.isEmpty) {
@@ -28,19 +31,21 @@ String? validateAge(String? value) {
   return null;
 }
 
-Future<bool?> registerUser(GlobalKey<FormState> formKey, String username, String age) async {
+Future<bool?> registerUser(GlobalKey<FormState> formKey, String username,
+    String age, BuildContext context) async {
   bool isValid = formKey.currentState!.validate();
 
   if (isValid){
-    User user = User(username: username, age: int.parse(age), level: 1, levelCompletionDate: DateTime.now());
+    User user = User(username: username, age: int.parse(age), level: 1,
+        levelCompletionDate: DateTime.now());
     UserDao userDao = UserDao();
     int userId;
 
     try {
       userId = await userDao.insertUser(user);
       user.id = userId;
+      context.read<UserProvider>().setUser(user);
       return true;
-      // add user to context application
     } catch (e) {
       return false;
     }
