@@ -14,10 +14,8 @@ class PrimaryButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: PaletteColor.darkBlue,
         foregroundColor: PaletteColor.whiteColor,
-        minimumSize: Size(150, 40), // Min size of button (w, h)
-        maximumSize: Size(200, 60), // Max size of button (w, h)
-        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0),
-        textStyle: const TextStyle(fontFamily: 'Raleway', fontSize: 14, fontWeight: FontWeight.w500),
+        minimumSize: const Size.fromHeight(56),
+        textStyle: const TextStyle(fontFamily: 'Raleway', fontSize: 16, fontWeight: FontWeight.w500),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
