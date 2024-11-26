@@ -11,11 +11,9 @@ class SecondaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: PaletteColor.backgroundColor,
+        backgroundColor: PaletteColor.whiteColor,
         foregroundColor: PaletteColor.darkBlue,
-        minimumSize: Size(150, 40), // Min size of button (w, h)
-        maximumSize: Size(200, 60), // Max size of button (w, h)
-        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0),
+        minimumSize: const Size.fromHeight(30),
         textStyle: const TextStyle(fontFamily: 'Raleway', fontSize: 14, fontWeight: FontWeight.w500),
         side: const BorderSide(
           color: PaletteColor.darkBlue,
