@@ -1,7 +1,12 @@
 import 'package:mimix_app/user_management/beans/user.dart';
 import 'package:mimix_app/user_management/beans/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:mimix_app/utils/view/widgets/cards/homepage_card.dart';
+import 'package:mimix_app/utils/view/widgets/footer_menu.dart';
+import 'package:mimix_app/utils/view/widgets/user_level.dart';
 import 'package:provider/provider.dart';
+
+import 'package:mimix_app/utils/view/widgets/texts/header_text.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -12,20 +17,39 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(48),
+            padding: EdgeInsets.symmetric(vertical: 40, horizontal: 20),
             child: Center(
-              child: // use watch when you want that the widget update himself
-              context.watch<UserProvider>().user == null
-                  ? const Text('No user logged in')
-                  : Text('Hello, ${context.watch<UserProvider>().user!.username}!'),
-            ),
-          )
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                    HeaderText(text: '👋🏻 Hi ${context.watch<UserProvider>().user!.username}!', size: HeaderText.H4),
+                    ProfileImageWithLevel(experienceLevel: 1, experienceProgress: context.watch<UserProvider>().user!.levelProgress)
+                  ],),
+                  const SizedBox(height: 20),
+                  HomePageCard(
+                      title: "Minigames",
+                      image: Image.asset('assets/images/image.png'),
+                      onTap: () => {}),
+                  HomePageCard(
+                      title: "Train",
+                      image: Image.asset('assets/images/image.png'),
+                      onTap: () => {}),
+                  HomePageCard(
+                      title: "Tasks",
+                      image: Image.asset('assets/images/image.png'),
+                      onTap: () => {}),
+                  HomePageCard(
+                      title: "Trophies",
+                      image: Image.asset('assets/images/image.png'),
+                      onTap: () => {})
+                ],
+              )
+            )
+        )
       ),
-      floatingActionButton: ElevatedButton(onPressed: () {
-        User? user = context.read<UserProvider>().user; // use read when you update user
-        user?.username = "Raffy28";
-        context.read<UserProvider>().setUser(user!);    // update user into Provider
-      }, child: const Text('Change username')),
+      bottomNavigationBar: const FooterMenu(selectedIndex: 0),
     );
   }
 }

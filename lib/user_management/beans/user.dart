@@ -4,13 +4,15 @@ class User {
   int age;
   int level;
   DateTime levelCompletionDate;
+  double levelProgress;
 
   User({
     this.id,
     required this.username,
     required this.age,
     required this.level,
-    required this.levelCompletionDate
+    required this.levelCompletionDate,
+    required this.levelProgress
   });
 
   Map<String, dynamic> toJson() {
@@ -19,7 +21,8 @@ class User {
       'username' : username,
       'age' : age,
       'level' : level,
-      'level_completion_date' : levelCompletionDate.millisecondsSinceEpoch
+      'level_completion_date' : levelCompletionDate.millisecondsSinceEpoch,
+      'level_progress' : levelProgress,
     };
   }
 
@@ -30,13 +33,14 @@ class User {
       age: json['age'],
       level: json['level'],
       levelCompletionDate: DateTime.fromMillisecondsSinceEpoch(json['level_completion_date']),
+      levelProgress: json['level_progress'],
     );
   }
 
   @override
   String toString() {
     return 'User{id: $id, username: $username, age: $age, level: $level, '
-        'levelCompletionDate: $levelCompletionDate}';
+        'levelCompletionDate: $levelCompletionDate}, level_progress: $levelProgress';
   }
 
 }

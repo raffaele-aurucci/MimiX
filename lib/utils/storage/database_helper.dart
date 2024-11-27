@@ -55,7 +55,8 @@ class DatabaseHelper {
       username TEXT NOT NULL,
       age INTEGER NOT NULL,
       level INTEGER NOT NULL,
-      level_completion_date INTEGER NOT NULL
+      level_completion_date INTEGER NOT NULL,
+      level_progress REAL NOT NULL
       )''';
     await db.execute(todoSql);
   }

@@ -37,7 +37,7 @@ Future<bool?> registerUser(GlobalKey<FormState> formKey, String username,
 
   if (isValid){
     User user = User(username: username, age: int.parse(age), level: 1,
-        levelCompletionDate: DateTime.now());
+        levelCompletionDate: DateTime.now(), levelProgress: 0);
     UserDao userDao = UserDao();
     int userId;
 

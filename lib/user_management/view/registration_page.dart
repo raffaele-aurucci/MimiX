@@ -20,8 +20,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
             onTap: () => FocusScope.of(context).unfocus(),
             child: SafeArea(
                 child: SingleChildScrollView(
-                    child: Container(
-                        margin: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+                    child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
                         child: Center(
                             child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
