@@ -45,8 +45,8 @@ class DatabaseHelper {
     await _createActionMinigameTable(db);
     await _createActionFacialExpressionTable(db);
     await _createFacialExpressionLogTable(db);
-    await _createTrophyTable(db);
-    await _createUserTrophyTable(db);
+    await _createRewardTable(db);
+    await _createUserRewardTable(db);
   }
 
   Future<void> _createUserTable(Database db) async {
@@ -112,7 +112,7 @@ class DatabaseHelper {
   }
 
   Future<void> _createPlayLogTable(Database db) async {
-    const todoSql = '''CREATE TABLE check_play_log (
+    const todoSql = '''CREATE TABLE play_log (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       date INTEGER NOT NULL,
       record INTEGER NOT NULL,
@@ -207,8 +207,8 @@ class DatabaseHelper {
     await db.execute(todoSql);
   }
 
-  Future<void> _createTrophyTable(Database db) async {
-    const todoSql = '''CREATE TABLE trophy (
+  Future<void> _createRewardTable(Database db) async {
+    const todoSql = '''CREATE TABLE reward (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL,
       description TEXT NOT NULL,
@@ -220,13 +220,13 @@ class DatabaseHelper {
     await db.execute(todoSql);
   }
 
-  Future<void> _createUserTrophyTable(Database db) async {
-    const todoSql = '''CREATE TABLE user_trophy (
+  Future<void> _createUserRewardTable(Database db) async {
+    const todoSql = '''CREATE TABLE user_reward (
       user_id INTEGER NOT NULL, 
-      trophy_id INTEGER NOT NULL,
-      PRIMARY KEY (user_id, trophy_id),
+      reward_id INTEGER NOT NULL,
+      PRIMARY KEY (user_id, reward_id),
       FOREIGN KEY (user_id) REFERENCES user(id),
-      FOREIGN KEY (trophy_id) REFERENCES trophy(id)
+      FOREIGN KEY (reward_id) REFERENCES reward(id)
       )''';
     await db.execute(todoSql);
   }
