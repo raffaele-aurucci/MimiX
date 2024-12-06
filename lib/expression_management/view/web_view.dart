@@ -9,14 +9,14 @@ class WebView extends StatefulWidget {
 
   const WebView({
     Key? key,
-    required this.onExpressionScoresUpdated,
-    required this.onCameraHiddenUpdated,
-    required this.onFaceDetectedUpdated
+    required this.onExpressionScoresUpdated, // update external expression scores
+    required this.onCameraHiddenUpdated,     // update external hidden camera state
+    required this.onFaceDetectedUpdated      // update external face detected state
   }) : super(key: key);
 
   final Function(ExpressionScores? expressionScores) onExpressionScoresUpdated;
   final Function(bool hidden) onCameraHiddenUpdated;
-  final Function(bool hidden) onFaceDetectedUpdated;
+  final Function(bool detected) onFaceDetectedUpdated;
 
   @override
   State<StatefulWidget> createState() => _WebViewState();
@@ -53,54 +53,57 @@ class _WebViewState extends State<WebView> {
       future: future,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          return ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: InAppWebView(
-              initialSettings: settings,
-              initialUrlRequest: URLRequest(
-                url: WebUri("http://localhost:8080/index.html"),
-              ),
-              onWebViewCreated: (controller) {
-                controller.addWebMessageListener(
-                  WebMessageListener(
-                    jsObjectName: "FaceDetection",
-                    onPostMessage: (message, sourceOrigin, isMainFrame, replyProxy) {
-
-                      if (message?.data != null) {
-                        Map<String, dynamic> object = jsonDecode(message!.data);
-                        var data = object['data'];
-
-                        // Callback for using expression scores data to external
-                        if (data != null) {
-                          ExpressionScores _expressionScores = ExpressionScores.fromJson(data);
-                          widget.onExpressionScoresUpdated(_expressionScores);
-                          widget.onFaceDetectedUpdated(true);
-                        }
-
-                        // Callback for handle overlay of progress indicator
-                        var hidden = object['hidden'];
-                        if (hidden != null) {
-                          widget.onCameraHiddenUpdated(hidden);
-                        }
-
-                        // Callback for face blendshape detected (always false)
-                        var detected = object['detected'];
-                        if (detected != null) {
-                          widget.onFaceDetectedUpdated(detected);
-                        }
-
-                      }
-                    },
+          return GestureDetector(
+              onHorizontalDragUpdate: (details) {},
+              onVerticalDragUpdate: (details) {},
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: InAppWebView(
+                  initialSettings: settings,
+                  initialUrlRequest: URLRequest(
+                    url: WebUri("http://localhost:8080/index.html"),
                   ),
-                );
-              },
-              onPermissionRequest: (controller, request) async {
-                return PermissionResponse(
-                  resources: request.resources,
-                  action: PermissionResponseAction.GRANT,
-                );
-              },
-            ),
+                  onWebViewCreated: (controller) {
+                    controller.addWebMessageListener(
+                      WebMessageListener(
+                        jsObjectName: "FaceDetection",
+                        onPostMessage: (message, sourceOrigin, isMainFrame, replyProxy) {
+
+                          if (message?.data != null) {
+                            Map<String, dynamic> object = jsonDecode(message!.data);
+                            var data = object['data'];
+
+                            // Callback for using expression scores data to external
+                            if (data != null) {
+                              ExpressionScores _expressionScores = ExpressionScores.fromJson(data);
+                              widget.onExpressionScoresUpdated(_expressionScores);
+                              widget.onFaceDetectedUpdated(true);
+                            }
+
+                            // Callback for handle overlay of progress indicator
+                            var hidden = object['hidden'];
+                            if (hidden != null) {
+                              widget.onCameraHiddenUpdated(hidden);
+                            }
+
+                            // Callback for face blendshape detected (always false)
+                            var detected = object['detected'];
+                            if (detected != null) {
+                              widget.onFaceDetectedUpdated(detected);
+                            }
+                          }
+                        },
+                      ),
+                    );
+                  },
+                  onPermissionRequest: (controller, request) async {
+                    return PermissionResponse(
+                      resources: request.resources,
+                      action: PermissionResponseAction.GRANT,
+                    );
+                  },
+                ),
+              )
           );
         } else {
           return const SizedBox.shrink();
