@@ -2,17 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:mimix_app/utils/view/app_palette.dart';
 
 class ProgressBar extends StatelessWidget {
+
+  static const double smallCard = 7; // Width of progress bar in small cards
+  static const double bigCard = 12; // Width of progress bar in big cards
+
   final double progress; // % progress of bar (double type)
+  final double height;
 
   const ProgressBar({
     Key? key,
     required this.progress,
+    required this.height
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 7, // To edit
+      height: height, // To edit
       decoration: BoxDecoration(
         color: PaletteColor.progressBarBackground,
         borderRadius: BorderRadius.circular(16.0),
@@ -24,7 +30,7 @@ class ProgressBar extends StatelessWidget {
           value: progress,
           backgroundColor: PaletteColor.progressBarBackground,
           valueColor: AlwaysStoppedAnimation<Color>(
-            PaletteColor.lightSkyBlue,
+            PaletteColor.lightSkyBlue, // Colore di default della barra
           ),
         ),
       ),

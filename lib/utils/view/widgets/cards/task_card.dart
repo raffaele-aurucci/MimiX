@@ -39,6 +39,7 @@ class TaskCard extends StatelessWidget {
               SizedBox(height: 16),
               ProgressBar(
                 progress: progress,
+                height: ProgressBar.smallCard,
               ),
             ],
           ),

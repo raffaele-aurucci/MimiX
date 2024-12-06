@@ -7,13 +7,13 @@ import 'package:mimix_app/utils/view/widgets/texts/description_text.dart';
 class TrainCard extends StatelessWidget {
   final String title;
   final String description;
-  // final VoidCallback onTap; // Add the function to start the training session
+  final VoidCallback onTap; // Add the function to start the training session
 
   const TrainCard({
     Key? key,
     required this.title,
     required this.description,
-    // this.onTap,
+    required this.onTap,
   }) : super(key: key);
 
   @override
@@ -22,7 +22,7 @@ class TrainCard extends StatelessWidget {
       width: 150, // To edit
       height: 150, // To edit
       child: GestureDetector(
-        // onTap: onTap, // Add the function
+        onTap: onTap, // Add the function
         child: Card(
           color: PaletteColor.whiteColor,
           elevation: 4,
