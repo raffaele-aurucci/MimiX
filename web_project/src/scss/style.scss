@@ -1,0 +1,31 @@
+body {
+  font-family: helvetica, arial, sans-serif;
+  margin: 0;
+  padding:0;
+  color: #3d3d3d;
+  --mdc-theme-primary: #007f8b;
+  --mdc-theme-on-primary: #f1f3f4;
+  background-color: #FFFFFF;
+}
+
+video {
+  clear: both;
+  display: block;
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  width: 100%;
+}
+
+.output_canvas {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.camera {
+  position: relative;
+}

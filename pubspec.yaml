@@ -42,6 +42,10 @@ dependencies:
   path: ^1.9.0
   provider: ^6.1.2
 
+  flutter_inappwebview: ^6.2.0-beta.2
+  flame: ^1.16.0
+  flutter_animate: ^4.5.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -70,6 +74,12 @@ flutter:
     - assets/logos/
     - assets/fonts/
     - assets/images/
+    # assets camera for mediapipe-task-vision
+    - assets/camera/
+    - assets/camera/assets/
+    - assets/camera/assets/js/
+    - assets/camera/assets/js/wasm/
+    - assets/camera/assets/modelAsset/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

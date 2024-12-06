@@ -61,7 +61,7 @@ class _MinigamePage extends State<MinigamePage> {
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 child: HomePageCard(
                   title: 'Minigames',
-                  image: Image.asset('assets/images/train.png'),
+                  image: Image.asset('assets/images/image.png'),
                   onTap: () => print('Home page card'),
                 ),
               ),
@@ -88,7 +88,7 @@ class _MinigamePage extends State<MinigamePage> {
                   itemBuilder: (context, index) {
                     return MinigameCard(
                       title: 'Title $index',
-                      image: AssetImage('assets/images/images.jpeg'),
+                      image: AssetImage('assets/images/image.png'),
                       onTap: () => print('TrainCard $index tapped'), // Edit: add link to minigame selected
                     );
                   },
