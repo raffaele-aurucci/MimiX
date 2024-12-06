@@ -7,9 +7,16 @@ import '../beans/expression_scores.dart';
 
 class WebView extends StatefulWidget {
 
-  const WebView({Key? key, required this.onExpressionScoresUpdated}) : super(key: key);
+  const WebView({
+    Key? key,
+    required this.onExpressionScoresUpdated,
+    required this.onCameraHiddenUpdated,
+    required this.onFaceDetectedUpdated
+  }) : super(key: key);
 
   final Function(ExpressionScores? expressionScores) onExpressionScoresUpdated;
+  final Function(bool hidden) onCameraHiddenUpdated;
+  final Function(bool hidden) onFaceDetectedUpdated;
 
   @override
   State<StatefulWidget> createState() => _WebViewState();
@@ -47,7 +54,7 @@ class _WebViewState extends State<WebView> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           return ClipRRect(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(10),
             child: InAppWebView(
               initialSettings: settings,
               initialUrlRequest: URLRequest(
@@ -62,10 +69,26 @@ class _WebViewState extends State<WebView> {
                       if (message?.data != null) {
                         Map<String, dynamic> object = jsonDecode(message!.data);
                         var data = object['data'];
-                        ExpressionScores _expressionScores = ExpressionScores.fromJson(data);
 
-                        // Callback for using data to external
-                        widget.onExpressionScoresUpdated(_expressionScores);
+                        // Callback for using expression scores data to external
+                        if (data != null) {
+                          ExpressionScores _expressionScores = ExpressionScores.fromJson(data);
+                          widget.onExpressionScoresUpdated(_expressionScores);
+                          widget.onFaceDetectedUpdated(true);
+                        }
+
+                        // Callback for handle overlay of progress indicator
+                        var hidden = object['hidden'];
+                        if (hidden != null) {
+                          widget.onCameraHiddenUpdated(hidden);
+                        }
+
+                        // Callback for face blendshape detected (always false)
+                        var detected = object['detected'];
+                        if (detected != null) {
+                          widget.onFaceDetectedUpdated(detected);
+                        }
+
                       }
                     },
                   ),

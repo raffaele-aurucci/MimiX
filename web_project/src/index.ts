@@ -22,21 +22,37 @@ function sendDataToFlutter(data:any):void {
   let categoryMap: { [key: string]: number } = {};
 
   if(window.FaceDetection !== undefined) {
-      var categories = data['categories'];
+    var categories = data['categories'];
 
-      for (let i = 0; i < categories.length; i++) {
-        if (categoriesName.includes(categories[i].categoryName)) {
-          // Arrotonda lo score a 3 cifre decimali
-          let roundedScore = parseFloat(categories[i].score.toFixed(3));
-          // Aggiungi alla mappa
-          categoryMap[categories[i].categoryName] = roundedScore;
-        }
+    for (let i = 0; i < categories.length; i++) {
+      if (categoriesName.includes(categories[i].categoryName)) {
+        // Arrotonda lo score a 3 cifre decimali
+        let roundedScore = parseFloat(categories[i].score.toFixed(3));
+        // Aggiungi alla mappa
+        categoryMap[categories[i].categoryName] = roundedScore;
       }
+    }
 
-      // console.log(categoryMap)
-      window.FaceDetection?.postMessage(JSON.stringify({data: categoryMap}));
+    // console.log(categoryMap)
+    window.FaceDetection?.postMessage(JSON.stringify({data: categoryMap}));
   }
 
+}
+
+
+// Inform flutter of the hidden state of camera.
+function sendCameraHiddenToFlutter(hidden: boolean){
+  if(window.FaceDetection !== undefined) {
+    window.FaceDetection?.postMessage(JSON.stringify({hidden: hidden}));
+  }
+}
+
+
+// Inform flutter that face blandshapes is not detected.
+function sendNoFaceDetectedToFlutter(){
+  if(window.FaceDetection !== undefined) {
+    window.FaceDetection?.postMessage(JSON.stringify({detected: false}));
+  }
 }
 
 // Setup model.
@@ -82,7 +98,10 @@ function enableWebcam() {
   // Activate the webcam stream
   navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
     video.srcObject = stream;
-    video.addEventListener("loadeddata", predictWebcam);
+    video.addEventListener("loadeddata", () => {
+      predictWebcam();
+      sendCameraHiddenToFlutter(false);
+    });
   });
 }
 
@@ -109,10 +128,13 @@ async function predictWebcam() {
     lastVideoTime = video.currentTime;
     results = faceLandmarker.detectForVideo(video, startTimeMs);
   }
+
   if (results.faceLandmarks) {
 
     if (results.faceBlendshapes[0])
       sendDataToFlutter(results.faceBlendshapes[0])
+    else
+      sendNoFaceDetectedToFlutter();
 
     for (const landmarks of results.faceLandmarks) {
       drawingUtils.drawConnectors(
@@ -193,6 +215,8 @@ document.addEventListener("visibilitychange", async () => {
     }
 
     video.removeEventListener("loadeddata", predictWebcam);
+
+    sendCameraHiddenToFlutter(true);
   } else {
     // Check if the model has loaded, for example when the user puts the app in background before the model is loading.
     if (faceLandmarker && !webcamRunning) {
