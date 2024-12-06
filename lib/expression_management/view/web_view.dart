@@ -28,11 +28,13 @@ class _WebViewState extends State<WebView> {
   late final Future future;
 
   InAppWebViewSettings settings = InAppWebViewSettings(
-    isInspectable: kDebugMode,
-    mediaPlaybackRequiresUserGesture: false,
-    allowsInlineMediaPlayback: true,
-    iframeAllow: "camera; microphone",
-    iframeAllowFullscreen: true,
+      isInspectable: kDebugMode,
+      mediaPlaybackRequiresUserGesture: false,
+      allowsInlineMediaPlayback: true,
+      iframeAllow: "camera; microphone",
+      iframeAllowFullscreen: true,
+      disableHorizontalScroll: true,
+      disableVerticalScroll: true
   );
 
   @override
@@ -53,57 +55,54 @@ class _WebViewState extends State<WebView> {
       future: future,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          return GestureDetector(
-              onHorizontalDragUpdate: (details) {},
-              onVerticalDragUpdate: (details) {},
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: InAppWebView(
-                  initialSettings: settings,
-                  initialUrlRequest: URLRequest(
-                    url: WebUri("http://localhost:8080/index.html"),
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: InAppWebView(
+              initialSettings: settings,
+              initialUrlRequest: URLRequest(
+                url: WebUri("http://localhost:8080/index.html"),
+              ),
+              onWebViewCreated: (controller) {
+                controller.addWebMessageListener(
+                  WebMessageListener(
+                    jsObjectName: "FaceDetection",
+                    onPostMessage: (message, sourceOrigin, isMainFrame, replyProxy) {
+
+                      if (message?.data != null) {
+                        Map<String, dynamic> object = jsonDecode(message!.data);
+                        var data = object['data'];
+
+                        // Callback for using expression scores data to external
+                        if (data != null) {
+                          ExpressionScores _expressionScores = ExpressionScores.fromJson(data);
+                          widget.onExpressionScoresUpdated(_expressionScores);
+                          widget.onFaceDetectedUpdated(true);
+                        }
+
+                        // Callback for handle overlay of progress indicator
+                        var hidden = object['hidden'];
+                        if (hidden != null) {
+                          widget.onCameraHiddenUpdated(hidden);
+                        }
+
+                        // Callback for face blendshape detected (always false)
+                        var detected = object['detected'];
+                        if (detected != null) {
+                          widget.onFaceDetectedUpdated(detected);
+                        }
+
+                      }
+                    },
                   ),
-                  onWebViewCreated: (controller) {
-                    controller.addWebMessageListener(
-                      WebMessageListener(
-                        jsObjectName: "FaceDetection",
-                        onPostMessage: (message, sourceOrigin, isMainFrame, replyProxy) {
-
-                          if (message?.data != null) {
-                            Map<String, dynamic> object = jsonDecode(message!.data);
-                            var data = object['data'];
-
-                            // Callback for using expression scores data to external
-                            if (data != null) {
-                              ExpressionScores _expressionScores = ExpressionScores.fromJson(data);
-                              widget.onExpressionScoresUpdated(_expressionScores);
-                              widget.onFaceDetectedUpdated(true);
-                            }
-
-                            // Callback for handle overlay of progress indicator
-                            var hidden = object['hidden'];
-                            if (hidden != null) {
-                              widget.onCameraHiddenUpdated(hidden);
-                            }
-
-                            // Callback for face blendshape detected (always false)
-                            var detected = object['detected'];
-                            if (detected != null) {
-                              widget.onFaceDetectedUpdated(detected);
-                            }
-                          }
-                        },
-                      ),
-                    );
-                  },
-                  onPermissionRequest: (controller, request) async {
-                    return PermissionResponse(
-                      resources: request.resources,
-                      action: PermissionResponseAction.GRANT,
-                    );
-                  },
-                ),
-              )
+                );
+              },
+              onPermissionRequest: (controller, request) async {
+                return PermissionResponse(
+                  resources: request.resources,
+                  action: PermissionResponseAction.GRANT,
+                );
+              },
+            ),
           );
         } else {
           return const SizedBox.shrink();
@@ -112,4 +111,3 @@ class _WebViewState extends State<WebView> {
     );
   }
 }
-
