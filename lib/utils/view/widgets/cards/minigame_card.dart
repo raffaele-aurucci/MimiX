@@ -5,19 +5,19 @@ import 'package:mimix_app/utils/view/widgets/texts/card_title_text.dart';
 class MinigameCard extends StatelessWidget {
   final String title;
   final AssetImage image;
-  // final VoidCallback onTap; // Add the function to start the mini-game
+  final VoidCallback onTap; // Add the function to start the mini-game
 
   const MinigameCard({
     Key? key,
     required this.title,
     required this.image,
-    // this.onTap,
+    required this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // onTap: onTap, // To link the function to card
+      onTap: onTap, // To link the function to card
       child: Container(
         height: 150, // To edit
         width: 150, // To edit
