@@ -1,5 +1,4 @@
 import 'package:mimix_app/minigame_managment/view/minigame_page.dart';
-import 'package:mimix_app/user_management/beans/user.dart';
 import 'package:mimix_app/user_management/beans/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:mimix_app/utils/view/widgets/cards/homepage_card.dart';

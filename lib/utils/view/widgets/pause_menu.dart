@@ -51,7 +51,7 @@ class PauseMenu extends StatelessWidget {
             SecondaryButton(
                 text: 'Quit',
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  // Navigator.of(context).pop();
                 }),
             Container(
               alignment: Alignment.bottomRight,

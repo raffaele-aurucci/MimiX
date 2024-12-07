@@ -19,6 +19,38 @@ class MinigamePage extends StatefulWidget {
 class _MinigamePage extends State<MinigamePage> {
   bool _isTextVisible = false; // To manage the visibility of the text in AppBar()
 
+  // List names of games
+  List<String> nameGameList = [
+    "Face Breakout",
+    "Face Run",
+    "Face Labyrinth",
+    "Face Kick",
+    "Stay Tuned",
+    "Stay Tuned",
+    "Stay Tuned",
+    "Stay Tuned",
+    "Stay Tuned",
+    "Stay Tuned",
+    "Stay Tuned",
+    "Stay Tuned"
+  ];
+
+  // List image of games
+  List<AssetImage> imageGameList = [
+    AssetImage('assets/images/breakout.png'),
+    AssetImage('assets/images/question_mark.jpg'),
+    AssetImage('assets/images/question_mark.jpg'),
+    AssetImage('assets/images/question_mark.jpg'),
+    AssetImage('assets/images/question_mark.jpg'),
+    AssetImage('assets/images/question_mark.jpg'),
+    AssetImage('assets/images/question_mark.jpg'),
+    AssetImage('assets/images/question_mark.jpg'),
+    AssetImage('assets/images/question_mark.jpg'),
+    AssetImage('assets/images/question_mark.jpg'),
+    AssetImage('assets/images/question_mark.jpg'),
+    AssetImage('assets/images/question_mark.jpg'),
+  ];
+
   // To change the visibility of the text when you scroll
   bool _onScroll(ScrollNotification notification) {
     if (notification.metrics.pixels >= 65 && !_isTextVisible) {
@@ -88,14 +120,22 @@ class _MinigamePage extends State<MinigamePage> {
                   ),
                   itemCount: 12, // Number of TrainCards
                   itemBuilder: (context, index) {
-                    return MinigameCard(
-                      title: 'Face Breakout',
-                      image: AssetImage('assets/images/breakout.png'),
-                      onTap: () => {
-                        Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => FaceBreakoutPage())
-                      )},
-                    );
+                    if(index == 0){
+                      return MinigameCard(
+                        title: nameGameList[index],
+                        image: imageGameList[index],
+                        onTap: () => {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => FaceBreakoutPage())
+                          )},
+                      );
+                    } else {
+                      return MinigameCard(
+                        title: nameGameList[index],
+                        image: imageGameList[index],
+                        onTap: () => {},
+                      );
+                    }
                   },
                 ),
               ),
