@@ -41,7 +41,7 @@ class HomePage extends StatelessWidget {
                         )
                       }),
                   HomePageCard(
-                      title: "Train",
+                      title: "Training",
                       image: Image.asset('assets/images/image.png'),
                       onTap: () => {}),
                   HomePageCard(

@@ -5,6 +5,8 @@ import 'package:mimix_app/utils/view/widgets/cards/minigame_card.dart';
 import 'package:mimix_app/utils/view/widgets/buttons/icon_button.dart';
 import 'package:mimix_app/utils/view/widgets/texts/header_text.dart';
 
+import '../breakout/face_breakout_page.dart';
+
 class MinigamePage extends StatefulWidget {
   const MinigamePage({super.key, required this.title});
 
@@ -87,9 +89,12 @@ class _MinigamePage extends State<MinigamePage> {
                   itemCount: 12, // Number of TrainCards
                   itemBuilder: (context, index) {
                     return MinigameCard(
-                      title: 'Title $index',
-                      image: AssetImage('assets/images/image.png'),
-                      onTap: () => print('TrainCard $index tapped'), // Edit: add link to minigame selected
+                      title: 'Face Breakout',
+                      image: AssetImage('assets/images/breakout.png'),
+                      onTap: () => {
+                        Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => FaceBreakoutPage())
+                      )},
                     );
                   },
                 ),
