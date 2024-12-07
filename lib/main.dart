@@ -6,12 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:mimix_app/user_management/view/home_page.dart';
 import 'package:mimix_app/utils/view/app_theme.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:mimix_app/user_management/view/registration_page.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  await Permission.camera.request();
+  await Permission.microphone.request();
 
   // Simulate initialization
   final user = await _simulateInitialization();
