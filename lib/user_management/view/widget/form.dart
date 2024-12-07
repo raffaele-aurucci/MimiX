@@ -49,6 +49,7 @@ class _FormWidgetState extends State<FormWidget> {
       context: context,
       title: "Registration Failed",
       message: "There was an issue registering your account. Please try again.",
+      buttonMessage: "OK"
       );
     }
     else if (_isRegistered == true) {

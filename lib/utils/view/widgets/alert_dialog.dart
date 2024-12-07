@@ -3,38 +3,44 @@ import 'package:mimix_app/utils/view/app_palette.dart';
 
 class DialogUtils {
 
-  static void showErrorDialog({required BuildContext context, required String title,
-    required String message}) {
+  static void showErrorDialog({
+    required BuildContext context,
+    required String title,
+    required String message,
+    VoidCallback? onTap,
+    required String buttonMessage,
+  }) {
     showDialog(
+      barrierDismissible: false,
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-        title: Text(
+          title: Text(
             title,
             style: const TextStyle(
               color: PaletteColor.darkBlue,
               fontWeight: FontWeight.w500,),
-        ),
-        content: Text(
+          ),
+          content: Text(
             message,
             style: const TextStyle(
               color: PaletteColor.darkBlue,
             ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(); // close dialog
-            },
-            child: const Text(
-                "OK",
-                style: TextStyle(
+          ),
+          actions: [
+            TextButton(
+              onPressed: onTap ?? () {
+                Navigator.of(context).pop(); // close dialog
+              },
+              child: Text(
+                buttonMessage,
+                style: const TextStyle(
                     color: PaletteColor.darkBlue,
                     fontWeight: FontWeight.w500),
+              ),
             ),
-          ),
-        ],
-      );
+          ],
+        );
       },
     );
   }
