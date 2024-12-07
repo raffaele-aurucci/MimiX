@@ -3,13 +3,13 @@ import 'package:mimix_app/utils/view/app_palette.dart';
 import 'package:mimix_app/utils/view/widgets/texts/card_title_text.dart';
 
 class ProfileImageWithLevel extends StatelessWidget {
-  final String? profileImageUrl; // url or path image
+  final AssetImage? profileImage; // accept an image from assets folder
   final int experienceLevel; // experience level
   final double experienceProgress; // experience progress
 
   const ProfileImageWithLevel({
     Key? key,
-    this.profileImageUrl,
+    this.profileImage,
     required this.experienceLevel,
     required this.experienceProgress,
   }) : super(key: key);
@@ -19,37 +19,35 @@ class ProfileImageWithLevel extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: PaletteColor.powderBlue,
-        borderRadius: BorderRadius.circular(40.0),
+        borderRadius: BorderRadius.circular(30.0),
       ),
-      padding: const EdgeInsets.all(6.0),
+      padding: const EdgeInsets.all(4.0),
       child: Row(
         mainAxisSize: MainAxisSize.min, // Adapt the witdh at the content
         children: [
           // Profile image
           CircleAvatar(
             radius: 20.0,
-            backgroundImage: profileImageUrl != null // Static image if image doesn't exist
-                ? NetworkImage(profileImageUrl!)
-                : null,
+            backgroundImage: profileImage,
             backgroundColor: Colors.grey[200],
-            child: profileImageUrl == null
+            child: profileImage == null
                 ? const Icon(
               Icons.person, // Default icon
-              size: 30.0,
+              size: 20.0,
               color: Colors.grey,
             )
                 : null,
           ),
 
-          const SizedBox(width: 8.0),
+          const SizedBox(width: 6.0),
 
           // Circular bar progress
           Stack(
             alignment: Alignment.center,
             children: [
               CustomPaint(
-                size: const Size(40, 40),
-                painter: _RoundedCircularProgressPainter(
+                size: const Size(35, 35),
+                painter: RoundedCircularProgressPainter(
                   progress: experienceProgress,
                   progressColor: PaletteColor.darkBlue,
                   strokeWidth: 3.5,
@@ -65,12 +63,12 @@ class ProfileImageWithLevel extends StatelessWidget {
   }
 }
 
-class _RoundedCircularProgressPainter extends CustomPainter {
+class RoundedCircularProgressPainter extends CustomPainter {
   final double progress;
   final Color progressColor;
   final double strokeWidth;
 
-  _RoundedCircularProgressPainter({
+  RoundedCircularProgressPainter({
     required this.progress,
     required this.progressColor,
     this.strokeWidth = 4.0,
@@ -82,7 +80,7 @@ class _RoundedCircularProgressPainter extends CustomPainter {
     final radius = (size.width - strokeWidth) / 2;
 
     final backgroundPaint = Paint()
-      ..color = PaletteColor.progressBarBackground
+      ..color = Colors.transparent
       ..strokeWidth = strokeWidth
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;

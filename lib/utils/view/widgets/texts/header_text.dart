@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mimix_app/utils/view/app_palette.dart';
 
-// aggiungere costanti per la definizione della size del font
-
 class HeaderText extends StatelessWidget {
 
   static const double H3 = 32; // For page header

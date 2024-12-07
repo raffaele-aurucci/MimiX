@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mimix_app/utils/view/app_palette.dart';
 
-
 class IconButtonWidget extends StatelessWidget {
   final IconData icon;
   final VoidCallback onPressed;
