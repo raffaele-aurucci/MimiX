@@ -1,15 +1,40 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:mimix_app/minigame_managment/breakout/face_breakout_game_page.dart';
 import 'package:mimix_app/minigame_managment/breakout/src/breakout.dart';
 import 'package:mimix_app/utils/view/widgets/buttons/primary_button.dart';
 
 import 'package:mimix_app/utils/view/app_palette.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../expression_management/beans/expression_scores.dart';
 import '../../utils/view/widgets/buttons/icon_button.dart';
 import '../../utils/view/widgets/texts/description_text.dart';
 import '../../utils/view/widgets/texts/header_text.dart';
 import '../../utils/view/widgets/alert_dialog.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Permission.camera.request();
+  await Permission.microphone.request();
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+          useMaterial3: true,
+        ),
+        debugShowCheckedModeBanner: false,
+        home: const FaceBreakoutPage());
+  }
+}
 
 class FaceBreakoutPage extends StatefulWidget {
   const FaceBreakoutPage({super.key});
@@ -136,9 +161,9 @@ class _GameOverviewPageState extends State<FaceBreakoutPage> {
 
                   PrimaryButton(
                       text: 'Play',
-                      onPressed: () => {/*
+                      onPressed: () => {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => ))*/
+                            MaterialPageRoute(builder: (context) => const FaceBreakoutGamePage()))
                       }
                   )
                 ]
