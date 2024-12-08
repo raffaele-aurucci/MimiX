@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
                     ProfileImageWithLevel(
                       experienceLevel: context.watch<UserProvider>().user!.level,
                       experienceProgress: context.watch<UserProvider>().user!.levelProgress + 0.2,
-                      profileImage: const AssetImage('assets/images/welcome.png'),
+                      profileImage: const AssetImage('assets/images/user.png'),
                     )
                   ],),
                   const SizedBox(height: 20),
