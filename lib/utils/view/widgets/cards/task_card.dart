@@ -4,7 +4,6 @@ import 'package:mimix_app/utils/view/widgets/texts/card_title_text.dart';
 import 'package:mimix_app/utils/view/widgets/texts/description_text.dart';
 import 'package:mimix_app/utils/view/widgets/progress_bar.dart';
 
-
 class TaskCard extends StatelessWidget {
   final String title;
   final String description;
@@ -35,8 +34,9 @@ class TaskCard extends StatelessWidget {
             children: [
               CardTitleText(text: title, size: CardTitleText.H6,),
               SizedBox(height: 8),
-              DescriptionText(text: description, size: DescriptionText.P1),
-              SizedBox(height: 16),
+              DescriptionText(text: description, size: DescriptionText.P2),
+              SizedBox(height: 8),
+              // TODO: keep the progress bar in the footer of the card
               ProgressBar(
                 progress: progress,
                 height: ProgressBar.smallCard,

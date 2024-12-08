@@ -4,12 +4,12 @@ import 'package:mimix_app/utils/view/widgets/texts/card_title_text.dart';
 import 'package:mimix_app/utils/view/widgets/texts/description_text.dart';
 
 
-class TrainCard extends StatelessWidget {
+class TrainingCard extends StatelessWidget {
   final String title;
   final String description;
   final VoidCallback onTap; // Add the function to start the training session
 
-  const TrainCard({
+  const TrainingCard({
     Key? key,
     required this.title,
     required this.description,

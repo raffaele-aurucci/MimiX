@@ -1,25 +1,28 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 import '../../utils/view/app_palette.dart';
 import '../../utils/view/widgets/buttons/icon_button.dart';
 import '../../utils/view/widgets/cards/homepage_card.dart';
-import '../../utils/view/widgets/cards/training_card.dart';
+import '../../utils/view/widgets/cards/task_card.dart';
 import '../../utils/view/widgets/texts/header_text.dart';
 
-class TrainingPage extends StatefulWidget {
-  const TrainingPage({super.key, required this.title});
+class TaskPage extends StatefulWidget {
+  const TaskPage({super.key, required this.title});
 
   final String title;
 
   @override
-  _TrainingPage createState() => _TrainingPage();
+  _TaskPage createState() => _TaskPage();
 }
 
-class _TrainingPage extends State<TrainingPage> {
+class _TaskPage extends State<TaskPage> {
   bool _isTextVisible = false; // To manage the visibility of the text in AppBar()
 
+  Random random = Random();
+
   // List names of games
-  List<String> nameTrainingList = [
+  List<String> nameTaskList = [
     "Brow Down",
     "Brown Up",
     "Mouth Open",
@@ -28,13 +31,13 @@ class _TrainingPage extends State<TrainingPage> {
     "Mouth Lower"
   ];
 
-  List<String> nameTrainingDescriptionList = [
+  List<String> nameTaskDescriptionList = [
     "Improve your ability to lower your eyebrows",
     "Enhance your skill in raising your eyebrows",
-    "Practice opening your mouth naturally",
-    "Learn to form a natural smile",
+    "Practice opening your mouth naturally mouth",
+    "Learn to form a natural smile form natural",
     "Master puckering your lips for focused gestures",
-    "Practice lowering your bottom lip"
+    "Practice lowering your bottom lip focused"
   ];
 
   // To change the visibility of the text when you scroll
@@ -65,7 +68,7 @@ class _TrainingPage extends State<TrainingPage> {
         title: Visibility(
           visible: _isTextVisible,
           child: const HeaderText(
-            text: 'Training',
+            text: 'Task',
             size: HeaderText.H4,
           ),
         ),
@@ -80,7 +83,7 @@ class _TrainingPage extends State<TrainingPage> {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 child: HomePageCard(
-                  title: 'Training',
+                  title: 'Task',
                   image: AssetImage('assets/images/image.png'),
                   onTap: () => print('Home page card'),
                 ),
@@ -106,10 +109,10 @@ class _TrainingPage extends State<TrainingPage> {
                   ),
                   itemCount: 6, // Number of TrainCards
                   itemBuilder: (context, index) {
-                    return TrainingCard(
-                      title: nameTrainingList[index],
-                      description: nameTrainingDescriptionList[index],
-                      onTap: () => print('TrainingCard $index tapped'),
+                    return TaskCard(
+                      title: nameTaskList[index],
+                      description: nameTaskDescriptionList[index],
+                      progress: random.nextDouble(),
                     );
                   },
                 ),
