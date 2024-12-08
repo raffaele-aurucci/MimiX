@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
                     HeaderText(text: '👋🏻 Hi ${context.watch<UserProvider>().user!.username}!', size: HeaderText.H4),
                     ProfileImageWithLevel(
                       experienceLevel: context.watch<UserProvider>().user!.level,
-                      experienceProgress: context.watch<UserProvider>().user!.levelProgress,
+                      experienceProgress: context.watch<UserProvider>().user!.levelProgress + 0.2,
                       profileImage: const AssetImage('assets/images/welcome.png'),
                     )
                   ],),
