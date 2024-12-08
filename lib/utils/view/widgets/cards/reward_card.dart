@@ -47,12 +47,13 @@ class RewardCard extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    width: 125,
-                    height: 90,
+                    width: 110,
+                    height: 80,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       image: DecorationImage(
                         image: image,
+                        opacity: 0.5
                       ),
                     ),
                   ),
