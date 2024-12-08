@@ -1,4 +1,5 @@
 import 'package:mimix_app/minigame_managment/view/minigame_page.dart';
+import 'package:mimix_app/reward_managment/view/reward_page.dart';
 import 'package:mimix_app/task_managment/view/task_page.dart';
 import 'package:mimix_app/training_managment/view/training_page.dart';
 import 'package:mimix_app/user_management/beans/user_provider.dart';
@@ -63,14 +64,21 @@ class HomePage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => TaskPage(title: 'Task'),
+                            builder: (context) => TaskPage(title: 'Tasks'),
                           ),
                         )
                       }),
                   HomePageCard(
                       title: "Rewards",
                       image: AssetImage('assets/images/rewards_icon.png'),
-                      onTap: () => {})
+                      onTap: () => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => RewardPage(title: 'Rewards'),
+                          ),
+                        )
+                      })
                 ],
               )
             )
