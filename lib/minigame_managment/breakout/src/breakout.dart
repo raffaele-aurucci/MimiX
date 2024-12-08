@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'components/components.dart';
 import 'config.dart';
 
-enum PlayState { welcome, playing, gameOver, won, isPaused }
+enum PlayState { welcome, playing, gameOver, won, isPaused, countdown }
 
 
 class Breakout extends FlameGame with HasCollisionDetection {
@@ -16,6 +16,8 @@ class Breakout extends FlameGame with HasCollisionDetection {
   // external function to handle game over and win (for UI)
   final Function handleGameOver;
   final Function handleWon;
+  bool isBallBig = false;
+  bool isBatBig = false;
 
   Breakout({
     required this.handleGameOver,
@@ -60,57 +62,120 @@ class Breakout extends FlameGame with HasCollisionDetection {
     world.add(Bat(
         size: Vector2(batWidth, batHeight),
         cornerRadius: const Radius.circular(batRadius / 2),
-        position: Vector2(width / 2, height * 0.95)));
+        position: Vector2(width / 2, height * 0.95),
+        color: batColor));
 
     world.addAll([
       for (var i = 0; i < 10; i++)
-        for (var j = 1; j <= 5; j++)
+        for (var j = 0; j < 5; j++)
           Brick(
             position: Vector2(
               (i + 0.5) * brickWidth + (i + 1) * brickGutter,
               (j + 2.0) * brickHeight + j * brickGutter,
             ),
-            color: (i%2!=0) ? brickColor : specialBrickColor,
+            color: () {
+              if ((i == 1 && j == 1) ||
+                  (i == 8 && j == 1) ||
+                  (i == 3 && j == 3) ||
+                  (i == 6 && j == 3)) {
+                return bigBallBrickColor;
+              } else if ((i == 3 && j == 1) ||
+                  (i == 1 && j == 3) ||
+                  (i == 6 && j == 1) ||
+                  (i == 8 && j == 3)) {
+                return bigBatBrickColor;
+              } else {
+                return neutralBrickColor;
+              }
+            }(),
           ),
     ]);
   }
 
-  // Using this method to start game to external.
   void startGame() {
     if (playState == PlayState.playing) return;
 
-    world.removeAll(world.children.query<Ball>());
-    world.removeAll(world.children.query<Bat>());
-    world.removeAll(world.children.query<Brick>());
+    playState = PlayState.countdown;
 
-    playState = PlayState.playing;
+    int countdownValue = 3;
 
-    score.value = 0;
+    final countdownText = TextComponent(
+      text: countdownValue.toString(),
+      position: Vector2(width / 2 - 35, height * 0.45),
+      textRenderer: TextPaint(
+        style: const TextStyle(
+          color: mimixBlue,
+          fontSize: 150,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
 
-    world.add(Ball(
-        difficultyModifier: difficultyModifier,
-        radius: ballRadius,
-        position: size / 2,
-        velocity: Vector2((rand.nextDouble() - 0.5) * width, height * 0.2)
-            .normalized()
-          ..scale(height / 4)));
+    world.add(countdownText);
 
-    world.add(Bat(
-        size: Vector2(batWidth, batHeight),
-        cornerRadius: const Radius.circular(batRadius / 2),
-        position: Vector2(width / 2, height * 0.95)));
+    Future.delayed(const Duration(seconds: 0), () async {
 
-    world.addAll([
-      for (var i = 0; i < 10; i++)
-        for (var j = 1; j <= 5; j++)
-          Brick(
-            position: Vector2(
-              (i + 0.5) * brickWidth + (i + 1) * brickGutter,
-              (j + 2.0) * brickHeight + j * brickGutter,
+      while (countdownValue > 0) {
+        await Future.delayed(const Duration(seconds: 1));
+        countdownValue--;
+        countdownText.text = countdownValue.toString();
+
+        world.add(countdownText);
+      }
+
+      world.remove(countdownText);
+
+      playState = PlayState.playing;
+
+      world.removeAll(world.children.query<Ball>());
+      world.removeAll(world.children.query<Bat>());
+      world.removeAll(world.children.query<Brick>());
+
+      score.value = 0;
+
+      world.add(
+        Ball(
+          radius: ballRadius,
+          position: size / 2,
+          velocity: Vector2(350, 350),
+        ),
+      );
+
+      world.add(
+        Bat(
+          size: Vector2(batWidth, batHeight),
+          cornerRadius: const Radius.circular(batRadius / 2),
+          position: Vector2(width / 2, height * 0.95),
+          color: batColor,
+        ),
+      );
+
+      world.addAll([
+        for (var i = 0; i < 10; i++)
+          for (var j = 0; j < 5; j++)
+            Brick(
+              position: Vector2(
+                (i + 0.5) * brickWidth + (i + 1) * brickGutter,
+                (j + 2.0) * brickHeight + j * brickGutter,
+              ),
+              color: () {
+                if ((i == 1 && j == 1) ||
+                    (i == 8 && j == 1) ||
+                    (i == 3 && j == 3) ||
+                    (i == 6 && j == 3)) {
+                  return bigBallBrickColor;
+                } else if ((i == 3 && j == 1) ||
+                    (i == 1 && j == 3) ||
+                    (i == 6 && j == 1) ||
+                    (i == 8 && j == 3)) {
+                  return bigBatBrickColor;
+                } else {
+                  return neutralBrickColor;
+                }
+              }(),
             ),
-            color: (i%2!=0) ? brickColor : specialBrickColor,
-          ),
-    ]);
+      ]);
+    });
   }
 
   @override
@@ -136,5 +201,4 @@ class Breakout extends FlameGame with HasCollisionDetection {
       world.children.query<Bat>().first.moveBy(batStep);
     }
   }
-
 }
