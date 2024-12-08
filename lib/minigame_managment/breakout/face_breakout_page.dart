@@ -6,7 +6,6 @@ import 'package:mimix_app/utils/view/widgets/buttons/primary_button.dart';
 
 import 'package:mimix_app/utils/view/app_palette.dart';
 
-import '../../expression_management/beans/expression_scores.dart';
 import '../../utils/view/widgets/buttons/icon_button.dart';
 import '../../utils/view/widgets/texts/description_text.dart';
 import '../../utils/view/widgets/texts/header_text.dart';
@@ -16,50 +15,18 @@ class FaceBreakoutPage extends StatefulWidget {
   const FaceBreakoutPage({super.key});
 
   @override
-  State<FaceBreakoutPage> createState() => _GameOverviewPageState();
+  State<FaceBreakoutPage> createState() => _FaceBreakoutOverviewPageState();
 }
 
-class _GameOverviewPageState extends State<FaceBreakoutPage> {
+class _FaceBreakoutOverviewPageState extends State<FaceBreakoutPage> {
 
+  // static game for adding scene
   late final Breakout game;
-
-  late ExpressionScores? _expressionScores;
-
-  void handleExpressionScore(ExpressionScores? expressionScores) {
-    _expressionScores = expressionScores;
-    print(_expressionScores);
-  }
-
-  void handleGameOver() {
-    DialogUtils.showErrorDialog(
-        context: context,
-        title: "Game Over",
-        message: "Please try again.",
-        buttonMessage: 'Restart',
-        onTap: () {
-          Navigator.of(context).pop();
-          game.startGame();
-        }
-    );
-  }
-
-  void handleWon() {
-    DialogUtils.showErrorDialog(
-        context: context,
-        title: "You Won!",
-        message: "Please try again.",
-        buttonMessage: 'Restart',
-        onTap: () {
-          Navigator.of(context).pop();
-          game.startGame();
-        }
-    );
-  }
 
   @override
   void initState() {
     super.initState();
-    game = Breakout(handleWon: handleWon, handleGameOver: handleGameOver);
+    game = Breakout(handleWon: () => {}, handleGameOver: () => {});
   }
 
   @override
