@@ -95,6 +95,45 @@ class Breakout extends FlameGame with HasCollisionDetection {
   void startGame() {
     if (playState == PlayState.playing) return;
 
+    world.removeAll(world.children.query<Ball>());
+    world.removeAll(world.children.query<Bat>());
+    world.removeAll(world.children.query<Brick>());
+
+    world.add(
+      Bat(
+        size: Vector2(batWidth, batHeight),
+        cornerRadius: const Radius.circular(batRadius / 2),
+        position: Vector2(width / 2, height * 0.95),
+        color: batColor,
+      ),
+    );
+
+    world.addAll([
+      for (var i = 0; i < 10; i++)
+        for (var j = 0; j < 5; j++)
+          Brick(
+            position: Vector2(
+              (i + 0.5) * brickWidth + (i + 1) * brickGutter,
+              (j + 2.0) * brickHeight + j * brickGutter,
+            ),
+            color: () {
+              if ((i == 1 && j == 1) ||
+                  (i == 8 && j == 1) ||
+                  (i == 3 && j == 3) ||
+                  (i == 6 && j == 3)) {
+                return bigBallBrickColor;
+              } else if ((i == 3 && j == 1) ||
+                  (i == 1 && j == 3) ||
+                  (i == 6 && j == 1) ||
+                  (i == 8 && j == 3)) {
+                return bigBatBrickColor;
+              } else {
+                return neutralBrickColor;
+              }
+            }(),
+          ),
+    ]);
+
     playState = PlayState.countdown;
 
     int countdownValue = 3;
@@ -127,10 +166,6 @@ class Breakout extends FlameGame with HasCollisionDetection {
 
       playState = PlayState.playing;
 
-      world.removeAll(world.children.query<Ball>());
-      world.removeAll(world.children.query<Bat>());
-      world.removeAll(world.children.query<Brick>());
-
       score.value = 0;
 
       world.add(
@@ -141,40 +176,6 @@ class Breakout extends FlameGame with HasCollisionDetection {
         ),
       );
 
-      world.add(
-        Bat(
-          size: Vector2(batWidth, batHeight),
-          cornerRadius: const Radius.circular(batRadius / 2),
-          position: Vector2(width / 2, height * 0.95),
-          color: batColor,
-        ),
-      );
-
-      world.addAll([
-        for (var i = 0; i < 10; i++)
-          for (var j = 0; j < 5; j++)
-            Brick(
-              position: Vector2(
-                (i + 0.5) * brickWidth + (i + 1) * brickGutter,
-                (j + 2.0) * brickHeight + j * brickGutter,
-              ),
-              color: () {
-                if ((i == 1 && j == 1) ||
-                    (i == 8 && j == 1) ||
-                    (i == 3 && j == 3) ||
-                    (i == 6 && j == 3)) {
-                  return bigBallBrickColor;
-                } else if ((i == 3 && j == 1) ||
-                    (i == 1 && j == 3) ||
-                    (i == 6 && j == 1) ||
-                    (i == 8 && j == 3)) {
-                  return bigBatBrickColor;
-                } else {
-                  return neutralBrickColor;
-                }
-              }(),
-            ),
-      ]);
     });
   }
 
