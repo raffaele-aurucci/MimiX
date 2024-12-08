@@ -24,7 +24,7 @@ class _TaskPage extends State<TaskPage> {
   // List names of games
   List<String> nameTaskList = [
     "Brow Down",
-    "Brown Up",
+    "Brow Up",
     "Mouth Open",
     "Mouth Smile",
     "Mouth Pucker",
