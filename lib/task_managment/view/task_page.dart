@@ -84,7 +84,7 @@ class _TaskPage extends State<TaskPage> {
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 child: HomePageCard(
                   title: 'Task',
-                  image: AssetImage('assets/images/image.png'),
+                  image: AssetImage('assets/images/tasks_icon.png'),
                   onTap: () => print('Home page card'),
                 ),
               ),

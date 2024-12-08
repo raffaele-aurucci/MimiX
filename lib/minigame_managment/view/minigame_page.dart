@@ -95,7 +95,7 @@ class _MinigamePage extends State<MinigamePage> {
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 child: HomePageCard(
                   title: 'Minigames',
-                  image: AssetImage('assets/images/image.png'),
+                  image: AssetImage('assets/images/minigames_icon.png'),
                   onTap: () => print('Home page card'),
                 ),
               ),

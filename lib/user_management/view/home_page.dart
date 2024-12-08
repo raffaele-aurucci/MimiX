@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
                   const SizedBox(height: 20),
                   HomePageCard(
                       title: "Minigames",
-                      image: AssetImage('assets/images/image.png'),
+                      image: AssetImage('assets/images/minigames_icon.png'),
                       onTap: () => {
                         Navigator.push(
                           context,
@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
                       }),
                   HomePageCard(
                       title: "Training",
-                      image: AssetImage('assets/images/image.png'),
+                      image: AssetImage('assets/images/training_icon.png'),
                       onTap: () => {
                         Navigator.push(
                           context,
@@ -58,7 +58,7 @@ class HomePage extends StatelessWidget {
                       }),
                   HomePageCard(
                       title: "Tasks",
-                      image: AssetImage('assets/images/image.png'),
+                      image: AssetImage('assets/images/tasks_icon.png'),
                       onTap: () => {
                         Navigator.push(
                           context,
@@ -69,7 +69,7 @@ class HomePage extends StatelessWidget {
                       }),
                   HomePageCard(
                       title: "Rewards",
-                      image: AssetImage('assets/images/image.png'),
+                      image: AssetImage('assets/images/rewards_icon.png'),
                       onTap: () => {})
                 ],
               )
