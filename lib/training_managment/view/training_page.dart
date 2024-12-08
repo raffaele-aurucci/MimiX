@@ -1,54 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:mimix_app/utils/view/app_palette.dart';
-import 'package:mimix_app/utils/view/widgets/cards/homepage_card.dart';
-import 'package:mimix_app/utils/view/widgets/cards/minigame_card.dart';
-import 'package:mimix_app/utils/view/widgets/buttons/icon_button.dart';
-import 'package:mimix_app/utils/view/widgets/texts/header_text.dart';
 
-import '../breakout/face_breakout_page.dart';
+import '../../utils/view/app_palette.dart';
+import '../../utils/view/widgets/buttons/icon_button.dart';
+import '../../utils/view/widgets/cards/homepage_card.dart';
+import '../../utils/view/widgets/cards/training_card.dart';
+import '../../utils/view/widgets/texts/header_text.dart';
 
-class MinigamePage extends StatefulWidget {
-  const MinigamePage({super.key, required this.title});
+class TrainingPage extends StatefulWidget {
+  const TrainingPage({super.key, required this.title});
 
   final String title;
 
   @override
-  _MinigamePage createState() => _MinigamePage();
+  _TrainingPage createState() => _TrainingPage();
 }
 
-class _MinigamePage extends State<MinigamePage> {
+class _TrainingPage extends State<TrainingPage> {
   bool _isTextVisible = false; // To manage the visibility of the text in AppBar()
 
   // List names of games
-  List<String> nameGameList = [
-    "Face Breakout",
-    "Face Run",
-    "Face Labyrinth",
-    "Face Kick",
-    "Stay Tuned",
-    "Stay Tuned",
-    "Stay Tuned",
-    "Stay Tuned",
-    "Stay Tuned",
-    "Stay Tuned",
-    "Stay Tuned",
-    "Stay Tuned"
+  List<String> nameTrainingList = [
+    "Brow Down",
+    "Brown Up",
+    "Mouth Open",
+    "Mouth Smile",
+    "Mouth Pucker",
+    "Mouth Lower"
   ];
 
-  // List image of games
-  List<AssetImage> imageGameList = [
-    AssetImage('assets/images/breakout.png'),
-    AssetImage('assets/images/question_mark.jpg'),
-    AssetImage('assets/images/question_mark.jpg'),
-    AssetImage('assets/images/question_mark.jpg'),
-    AssetImage('assets/images/question_mark.jpg'),
-    AssetImage('assets/images/question_mark.jpg'),
-    AssetImage('assets/images/question_mark.jpg'),
-    AssetImage('assets/images/question_mark.jpg'),
-    AssetImage('assets/images/question_mark.jpg'),
-    AssetImage('assets/images/question_mark.jpg'),
-    AssetImage('assets/images/question_mark.jpg'),
-    AssetImage('assets/images/question_mark.jpg'),
+  List<String> nameTrainingDescriptionList = [
+    "Improve your ability to lower your eyebrows",
+    "Enhance your skill in raising your eyebrows",
+    "Practice opening your mouth naturally",
+    "Learn to form a natural smile",
+    "Master puckering your lips for focused gestures",
+    "Practice lowering your bottom lip"
   ];
 
   // To change the visibility of the text when you scroll
@@ -79,7 +65,7 @@ class _MinigamePage extends State<MinigamePage> {
         title: Visibility(
           visible: _isTextVisible,
           child: const HeaderText(
-            text: 'Minigames',
+            text: 'Training',
             size: HeaderText.H4,
           ),
         ),
@@ -94,13 +80,13 @@ class _MinigamePage extends State<MinigamePage> {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 child: HomePageCard(
-                  title: 'Minigames',
+                  title: 'Training',
                   image: AssetImage('assets/images/image.png'),
                   onTap: () => print('Home page card'),
                 ),
               ),
               const SizedBox(height: 8.0),
-              // Grid of Minigames
+              // Grid of TrainCards
               Container(
                 decoration: const BoxDecoration(
                   color: PaletteColor.powderBlue,
@@ -116,26 +102,15 @@ class _MinigamePage extends State<MinigamePage> {
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2, // Two cards per row
                     crossAxisSpacing: 10.0, // Horizontal spacing
-                    mainAxisSpacing: 15.0, // Vertical spacing
+                    mainAxisSpacing: 10.0, // Vertical spacing
                   ),
-                  itemCount: 12, // Number of TrainCards
+                  itemCount: 6, // Number of TrainCards
                   itemBuilder: (context, index) {
-                    if(index == 0){
-                      return MinigameCard(
-                        title: nameGameList[index],
-                        image: imageGameList[index],
-                        onTap: () => {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => FaceBreakoutPage())
-                          )},
-                      );
-                    } else {
-                      return MinigameCard(
-                        title: nameGameList[index],
-                        image: imageGameList[index],
-                        onTap: () => {},
-                      );
-                    }
+                    return TrainCard(
+                      title: nameTrainingList[index],
+                      description: nameTrainingDescriptionList[index],
+                      onTap: () => print('TrainingCard $index tapped'),
+                    );
                   },
                 ),
               ),

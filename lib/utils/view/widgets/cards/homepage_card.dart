@@ -4,7 +4,7 @@ import 'package:mimix_app/utils/view/widgets/texts/card_title_text.dart';
 
 class HomePageCard extends StatelessWidget {
   final String title;
-  final Widget image;
+  final AssetImage image;
   final VoidCallback onTap;
 
   const HomePageCard({
@@ -41,9 +41,14 @@ class HomePageCard extends StatelessWidget {
                   ),
                 ),
                 Container(
-                    width: 70,
-                    height: 80,
-                    child: image
+                  width: 70,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    image: DecorationImage(
+                      image: image,
+                    ),
+                  ),
                 ),
               ],
             ),
