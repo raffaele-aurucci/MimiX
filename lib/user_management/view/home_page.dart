@@ -25,7 +25,11 @@ class HomePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                     HeaderText(text: '👋🏻 Hi ${context.watch<UserProvider>().user!.username}!', size: HeaderText.H4),
-                    ProfileImageWithLevel(experienceLevel: 1, experienceProgress: context.watch<UserProvider>().user!.levelProgress)
+                    ProfileImageWithLevel(
+                      experienceLevel: context.watch<UserProvider>().user!.level,
+                      experienceProgress: context.watch<UserProvider>().user!.levelProgress,
+                      profileImage: const AssetImage('assets/images/welcome.png'),
+                    )
                   ],),
                   const SizedBox(height: 20),
                   HomePageCard(

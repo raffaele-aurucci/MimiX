@@ -80,7 +80,7 @@ class RoundedCircularProgressPainter extends CustomPainter {
     final radius = (size.width - strokeWidth) / 2;
 
     final backgroundPaint = Paint()
-      ..color = Colors.transparent
+      ..color = PaletteColor.progressBarBackground
       ..strokeWidth = strokeWidth
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;

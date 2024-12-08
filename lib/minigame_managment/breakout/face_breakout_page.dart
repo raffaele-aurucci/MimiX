@@ -77,9 +77,9 @@ class _GameOverviewPageState extends State<FaceBreakoutPage> {
                 Navigator.pop(context);
               }),
         ),
-        body: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: SafeArea(
+        body: SafeArea(
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Column(
                 children: [
                   HeaderText(text: 'Face Breakout', size: HeaderText.H3),
@@ -115,16 +115,16 @@ class _GameOverviewPageState extends State<FaceBreakoutPage> {
                     ],
                   ),
 
-                  Container(
-                    height: 400,
-                    margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                    decoration: BoxDecoration(
-                        border: Border.all(color: PaletteColor.darkBlue, width: 2)
-                    ),
-                    child: GameWidget.controlled(
-                      gameFactory: () => game,
-                    ),
-                  ),
+                  Expanded(
+                    child: Container(
+                      margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: PaletteColor.darkBlue, width: 2)
+                      ),
+                      child: GameWidget.controlled(
+                        gameFactory: () => game,
+                      ),
+                  )),
 
 
                   const DescriptionText(

@@ -13,6 +13,9 @@ import 'package:mimix_app/utils/view/widgets/texts/header_text.dart';
 import 'package:mimix_app/utils/view/widgets/user_level.dart';
 
 import 'package:mimix_app/utils/view/widgets/pause_menu.dart';
+import 'package:provider/provider.dart';
+
+import '../../user_management/beans/user_provider.dart';
 
 class FaceBreakoutGamePage extends StatefulWidget {
   const FaceBreakoutGamePage({super.key});
@@ -135,9 +138,9 @@ class _FaceBreakoutGamePageState extends State<FaceBreakoutGamePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: SafeArea(
+        body: SafeArea(
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Column(
                 children: [
 
@@ -155,12 +158,12 @@ class _FaceBreakoutGamePageState extends State<FaceBreakoutGamePage> {
                               }),
                         ],
                       ),
-                      const Column(
+                      Column(
                         children: [
                           ProfileImageWithLevel(
-                            experienceLevel: 1,
-                            experienceProgress: 0.8,
-                            profileImage: AssetImage('assets/images/welcome.png'),
+                              experienceLevel: context.watch<UserProvider>().user!.level,
+                              experienceProgress: context.watch<UserProvider>().user!.levelProgress,
+                              profileImage: const AssetImage('assets/images/welcome.png'),
                           )
                         ],
                       )
