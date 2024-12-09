@@ -25,7 +25,9 @@ class _TrainingPage extends State<TrainingPage> {
     "Mouth Open",
     "Mouth Smile",
     "Mouth Pucker",
-    "Mouth Lower"
+    "Mouth Lower",
+    "Stay tuned",
+    "Stay tuned"
   ];
 
   List<String> nameTrainingDescriptionList = [
@@ -34,7 +36,9 @@ class _TrainingPage extends State<TrainingPage> {
     "Practice opening your mouth naturally",
     "Learn to form a natural smile",
     "Master puckering your lips for focused gestures",
-    "Practice lowering your bottom lip"
+    "Practice lowering your bottom lip",
+    "Lorem ipsum dolor sit amen, consec...",
+    "Lorem ipsum dolor sit amen, consec..."
   ];
 
   // To change the visibility of the text when you scroll
@@ -104,7 +108,7 @@ class _TrainingPage extends State<TrainingPage> {
                     crossAxisSpacing: 10.0, // Horizontal spacing
                     mainAxisSpacing: 10.0, // Vertical spacing
                   ),
-                  itemCount: 6, // Number of TrainCards
+                  itemCount: 8, // Number of TrainCards
                   itemBuilder: (context, index) {
                     return TrainingCard(
                       title: nameTrainingList[index],

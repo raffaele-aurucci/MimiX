@@ -15,7 +15,7 @@ const ballRadius = gameWidth * 0.02;
 const batRadius = gameWidth * 0.02;
 const batWidth = gameWidth * 0.2;
 const batHeight = batRadius * 1;
-const batStep = gameWidth * 0.03;
+const batStep = gameWidth * 0.02;
 
 const brickGutter = gameWidth * 0.015;
 const brickWidth = (gameWidth - (brickGutter * (10 + 1))) / 10;
