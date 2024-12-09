@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-const mimixBlue = Color(0xff1e6091);
+import '../../../utils/view/app_palette.dart';
 
-const ballColor = Color(0xff1e6091);
-const batColor = Color(0xff1e6091);
-const neutralBrickColor = Color(0xff1e6091);
-const bigBallBrickColor = Color(0xff16ef0e);
-const bigBatBrickColor = Color(0xffffe14b);
+const clearBlue = Color(0xff1e6091);
+
+const bigBallBrickColor = PaletteColor.errorMessage;
+const bigBatBrickColor = PaletteColor.yellow;
 
 const gameWidth = 1200.0;
 const gameHeight = 1600.0;

@@ -32,7 +32,7 @@ class Brick extends RectangleComponent with CollisionCallbacks, HasGameReference
     game.score.value++;
 
     switch (_brickColor) {
-      case neutralBrickColor:
+      case clearBlue:
         break;
 
       case bigBallBrickColor:
@@ -46,7 +46,7 @@ class Brick extends RectangleComponent with CollisionCallbacks, HasGameReference
               // Ritorno alla dimensione originale
               Future.delayed(const Duration(seconds: 15), () {
                 ball.size /= 3;
-                ball.setColor(ballColor);
+                ball.setColor(clearBlue);
                 game.isBallBig = false;
               });
             }
@@ -64,7 +64,7 @@ class Brick extends RectangleComponent with CollisionCallbacks, HasGameReference
             // Ritorno alla dimensione originale
             Future.delayed(const Duration(seconds: 15), () {
               bat.size.x /= 2.5;
-              bat.setColor(batColor);
+              bat.setColor(clearBlue);
               game.isBatBig = false;
             });
           }

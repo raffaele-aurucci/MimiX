@@ -5,10 +5,11 @@ import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
+import '../../../utils/view/app_palette.dart';
 import 'components/components.dart';
 import 'config.dart';
 
-enum PlayState { welcome, playing, gameOver, won, isPaused, countdown }
+enum PlayState { welcome, playing, gameOver, won, isPaused, countDown, blockCountDown}
 
 
 class Breakout extends FlameGame with HasCollisionDetection {
@@ -63,7 +64,7 @@ class Breakout extends FlameGame with HasCollisionDetection {
         size: Vector2(batWidth, batHeight),
         cornerRadius: const Radius.circular(batRadius / 2),
         position: Vector2(width / 2, height * 0.95),
-        color: batColor));
+        color: clearBlue));
 
     world.addAll([
       for (var i = 0; i < 10; i++)
@@ -85,7 +86,7 @@ class Breakout extends FlameGame with HasCollisionDetection {
                   (i == 8 && j == 3)) {
                 return bigBatBrickColor;
               } else {
-                return neutralBrickColor;
+                return clearBlue;
               }
             }(),
           ),
@@ -104,7 +105,7 @@ class Breakout extends FlameGame with HasCollisionDetection {
         size: Vector2(batWidth, batHeight),
         cornerRadius: const Radius.circular(batRadius / 2),
         position: Vector2(width / 2, height * 0.95),
-        color: batColor,
+        color: clearBlue,
       ),
     );
 
@@ -128,13 +129,13 @@ class Breakout extends FlameGame with HasCollisionDetection {
                   (i == 8 && j == 3)) {
                 return bigBatBrickColor;
               } else {
-                return neutralBrickColor;
+                return clearBlue;
               }
             }(),
           ),
     ]);
 
-    playState = PlayState.countdown;
+    playState = PlayState.countDown;
 
     int countdownValue = 3;
 
@@ -143,9 +144,10 @@ class Breakout extends FlameGame with HasCollisionDetection {
       position: Vector2(width / 2 - 35, height * 0.45),
       textRenderer: TextPaint(
         style: const TextStyle(
-          color: mimixBlue,
+          color: PaletteColor.darkBlue,
           fontSize: 150,
           fontWeight: FontWeight.bold,
+          fontFamily: 'Raleway'
         ),
       ),
     );
@@ -160,6 +162,12 @@ class Breakout extends FlameGame with HasCollisionDetection {
         countdownText.text = countdownValue.toString();
 
         world.add(countdownText);
+
+        if (playState == PlayState.isPaused) {
+          playState = PlayState.blockCountDown;
+          world.remove(countdownText);
+          return;
+        }
       }
 
       world.remove(countdownText);

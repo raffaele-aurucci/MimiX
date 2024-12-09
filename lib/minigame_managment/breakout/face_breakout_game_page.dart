@@ -76,7 +76,12 @@ class _FaceBreakoutGamePageState extends State<FaceBreakoutGamePage> {
   }
 
   void handleResume() {
-    game.playState = PlayState.playing;
+    if (game.playState == PlayState.blockCountDown){
+      game.startGame();
+    }
+    else {
+      game.playState = PlayState.playing;
+    }
   }
 
   void handleRestart() {

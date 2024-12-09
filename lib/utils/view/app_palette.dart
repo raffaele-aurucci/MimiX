@@ -21,4 +21,7 @@ class PaletteColor {
 
   // For error messages
   static const Color errorMessage = Color(0xFFEB5858);
+  
+  // Yellow 
+  static const Color yellow = Color(0xFFFFCE00);
 }
