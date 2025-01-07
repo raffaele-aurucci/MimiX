@@ -57,7 +57,7 @@ class EnemyManager extends Component with HasGameReference<DinoRun> {
           nFrames: 4,
           stepTime: 0.1,
           textureSize: Vector2(48,48),
-          speedX: 85,
+          speedX: 90,
           canFly: false,
           name: 'scorpio'
         ),

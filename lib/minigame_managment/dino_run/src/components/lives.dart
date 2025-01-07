@@ -25,6 +25,9 @@ class LivesDisplay extends PositionComponent with HasGameReference<DinoRun>{
   void render(Canvas canvas) {
     super.render(canvas);
 
+    // synchronized with interface
+    lives = game.lives.value;
+
     const heartIcon = Icons.favorite;
     const emptyHeartIcon = Icons.favorite_border;
 

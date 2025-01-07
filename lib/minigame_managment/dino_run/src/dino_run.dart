@@ -4,6 +4,7 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flutter/material.dart';
+import 'package:mimix_app/minigame_managment/dino_run/src/components/charges.dart';
 
 import 'package:mimix_app/minigame_managment/dino_run/src/config.dart';
 import 'package:mimix_app/minigame_managment/dino_run/src/components/dino.dart';
@@ -45,11 +46,17 @@ class DinoRun extends FlameGame with TapCallbacks, HasCollisionDetection, DragCa
   // player data accessible to external
   final ValueNotifier<int> score = ValueNotifier(0);
   final ValueNotifier<int> lives = ValueNotifier(5);
+  final ValueNotifier<int> charges = ValueNotifier(3); // used for superJump
 
   // state of game accessible to external
   late PlayState playState;
 
-  late LivesDisplay livesDisplay;  // Display per le vite
+  // display for lives and charges
+  late LivesDisplay livesDisplay;
+  late ChargesDisplay chargesDisplay;
+
+  // timer to recharge
+  final Timer chargeTimer = Timer(4, repeat: true);
 
   @override
   Future<void> onLoad() async {
@@ -62,6 +69,10 @@ class DinoRun extends FlameGame with TapCallbacks, HasCollisionDetection, DragCa
     livesDisplay = LivesDisplay(lives: lives.value);
     world.add(livesDisplay);
 
+    // charges display
+    chargesDisplay = ChargesDisplay(charges: charges.value);
+    world.add(chargesDisplay);
+
     // center the "viewfinder" of camera
     camera.viewfinder.position = camera.viewport.virtualSize * 0.5;
 
@@ -70,6 +81,12 @@ class DinoRun extends FlameGame with TapCallbacks, HasCollisionDetection, DragCa
 
     _dino = Dino(images.fromCache(ImageConstants.dino));
     world.add(_dino);
+
+    chargeTimer.onTick = () {
+      if (charges.value < 3) {
+        charges.value = charges.value + 1;
+      }
+    };
   }
 
   // startGame is necessary to playing
@@ -78,6 +95,8 @@ class DinoRun extends FlameGame with TapCallbacks, HasCollisionDetection, DragCa
     if (_dino.isMounted){
       _dino.removeFromParent();
     }
+
+    chargeTimer.start();
 
     playState = PlayState.playing;
 
@@ -90,21 +109,24 @@ class DinoRun extends FlameGame with TapCallbacks, HasCollisionDetection, DragCa
 
   @override
   void update(double dt) {
-    livesDisplay.lives = lives.value;
+
+    // update chargeTimer
+    chargeTimer.update(dt);
+
     // game over
     _checkGameOver();
     super.update(dt);
   }
 
-  void jumpDino(){
+  void jumpDino() {
     if (playState == PlayState.playing) {
       _dino.jump();
     }
   }
 
-  void superJumpDino(){
+  void superJumpDino() {
     if (playState == PlayState.playing) {
-      _dino.superJump();
+      _dino.superJump(); // all controls is into _dino
     }
   }
 
@@ -130,6 +152,7 @@ class DinoRun extends FlameGame with TapCallbacks, HasCollisionDetection, DragCa
       // reset scores and state
       score.value = 0;
       lives.value = 5;
+      charges.value = 3;
       resumeEngine();
       startGame();
     }

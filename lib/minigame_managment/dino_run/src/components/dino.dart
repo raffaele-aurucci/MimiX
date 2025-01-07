@@ -110,9 +110,14 @@ class Dino extends SpriteAnimationGroupComponent<DinoAnimationStates>
   }
 
   void superJump(){
-    if (isOnGround) {
-      speedY = -400;
-      current = DinoAnimationStates.idle;
+    if (isOnGround && current == DinoAnimationStates.run) {
+      if (game.charges.value >= 1) {
+        game.chargeTimer.stop();
+        game.chargeTimer.start();
+        speedY = -400;
+        current = DinoAnimationStates.idle;
+        game.charges.value = game.charges.value - 1;
+      }
     }
   }
 
