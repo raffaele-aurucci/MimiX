@@ -52,7 +52,6 @@ class _FaceRunGamePageState extends State<FaceRunGamePage> {
   }
 
   void handleGameOver() {
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
       DialogUtils.showErrorDialog(
           context: context,
@@ -68,8 +67,7 @@ class _FaceRunGamePageState extends State<FaceRunGamePage> {
   }
 
   void handleResume() {
-    // Additional control is necessary when the pause occurs during the camera loading process.
-    if (game.playState == PlayState.isPaused || game.playState == PlayState.playing) {
+    if (game.playState == PlayState.isPaused) {
       game.resumeEngine();
       game.playState = PlayState.playing;
     }
@@ -80,19 +78,21 @@ class _FaceRunGamePageState extends State<FaceRunGamePage> {
   }
 
   void showPauseMenu(BuildContext context) {
-    game.playState = PlayState.isPaused;
-    game.pauseEngine();
-    showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (BuildContext context) {
-        return PauseMenu(
+    if (_isOverlayVisible == false) {
+      game.playState = PlayState.isPaused;
+      game.pauseEngine();
+      showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) {
+          return PauseMenu(
             handleResume: handleResume,
             handleRestart: handleRestart,
             gameName: 'Face Run',
-        );
-      },
-    );
+          );
+        },
+      );
+    }
   }
 
   // handle face detected into webview
@@ -103,7 +103,6 @@ class _FaceRunGamePageState extends State<FaceRunGamePage> {
       _isFaceDetected = isFaceDetected;
     });
   }
-
 
   // handle expression scores from webview in order to manage input of game
   late ExpressionScores? _expressionScores;
@@ -150,18 +149,17 @@ class _FaceRunGamePageState extends State<FaceRunGamePage> {
                         children: [
                           IconButtonWidget(
                               icon: Icons.pause_sharp,
-                              onPressed: () {
-                                showPauseMenu(context);
-                              }),
+                              onPressed: !_isOverlayVisible ? () {showPauseMenu(context);} : null
+                          ),
                         ],
                       ),
-                      // TODO: update with user context
-                      const Column(
+
+                      Column(
                         children: [
                           ProfileImageWithLevel(
-                              experienceLevel: 1,
-                              experienceProgress: 0.2,
-                              profileImage: AssetImage('assets/images/user.png'),
+                            experienceLevel: context.watch<UserProvider>().user!.level,
+                            experienceProgress: context.watch<UserProvider>().user!.levelProgress + 0.2,
+                            profileImage: const AssetImage('assets/images/user.png'),
                           )
                         ],
                       )

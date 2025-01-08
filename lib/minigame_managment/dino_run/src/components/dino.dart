@@ -2,9 +2,12 @@ import 'dart:ui';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame_audio/flame_audio.dart';
 
 import 'package:mimix_app/minigame_managment/dino_run/src/dino_run.dart';
 import 'package:mimix_app/minigame_managment/dino_run/src/components/enemy.dart';
+
+import '../config.dart';
 
 enum DinoAnimationStates {
   idle,
@@ -42,7 +45,6 @@ class Dino extends SpriteAnimationGroupComponent<DinoAnimationStates>
 
   final Timer _hitTimer = Timer(1);
   bool isHit = false;
-
 
   Dino(Image image) : super.fromFrameData(image, _animationMap);
 
@@ -103,7 +105,8 @@ class Dino extends SpriteAnimationGroupComponent<DinoAnimationStates>
   bool get isOnGround => (y >= yMax);
 
   void jump() {
-    if (isOnGround) {
+    if (isOnGround && current == DinoAnimationStates.run) {
+      // FlameAudio.play(AudioConstants.jump);
       speedY = -320;
       current = DinoAnimationStates.idle;
     }
@@ -112,6 +115,7 @@ class Dino extends SpriteAnimationGroupComponent<DinoAnimationStates>
   void superJump(){
     if (isOnGround && current == DinoAnimationStates.run) {
       if (game.charges.value >= 1) {
+        // FlameAudio.play(AudioConstants.jump);
         game.chargeTimer.stop();
         game.chargeTimer.start();
         speedY = -400;
@@ -122,6 +126,7 @@ class Dino extends SpriteAnimationGroupComponent<DinoAnimationStates>
   }
 
   void hit() {
+    // FlameAudio.play(AudioConstants.hit);
     isHit = true;
     current = DinoAnimationStates.hit;
     _hitTimer.start();

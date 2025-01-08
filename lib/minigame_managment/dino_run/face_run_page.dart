@@ -8,36 +8,11 @@ import 'package:mimix_app/utils/view/widgets/buttons/primary_button.dart';
 import 'package:mimix_app/utils/view/app_palette.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../utils/view/app_theme.dart';
 import '../../utils/view/widgets/buttons/icon_button.dart';
 import '../../utils/view/widgets/texts/description_text.dart';
 import '../../utils/view/widgets/texts/header_text.dart';
 import '../../utils/view/widgets/alert_dialog.dart';
-
-//TODO: remove
-Future<void> main() async {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  await Permission.camera.request();
-  await Permission.microphone.request();
-  FlutterNativeSplash.remove();
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Dino Run',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const FaceRunPage(),
-    );
-  }
-}
 
 class FaceRunPage extends StatefulWidget {
   const FaceRunPage({super.key});

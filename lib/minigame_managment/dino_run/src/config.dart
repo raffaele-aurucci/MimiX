@@ -1,8 +1,5 @@
 import 'package:flame/extensions.dart';
 
-const double gameWidth = 360.0;
-const double gameHeight = 360.0;
-
 class ImageConstants {
   static const String hyena='dino_run/hyena.png';
   static const String vulture='dino_run/vulture.png';
@@ -15,6 +12,11 @@ class ImageConstants {
   static const String plx5 = 'dino_run/plx-5.png';
   static const String plx6 = 'dino_run/plx-6.png';
 }
+
+// class AudioConstants {
+//   static const String hit='dino_run/hit.wav';
+//   static const String jump='dino_run/jump.wav';
+// }
 
 class EnemyData {
   final Image image;

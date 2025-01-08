@@ -4,6 +4,7 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flame/input.dart';
 import 'package:flutter/material.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:mimix_app/minigame_managment/dino_run/src/components/charges.dart';
 
 import 'package:mimix_app/minigame_managment/dino_run/src/config.dart';
@@ -34,8 +35,15 @@ class DinoRun extends FlameGame with TapCallbacks, HasCollisionDetection, DragCa
     ImageConstants.scorpio
   ];
 
+  // comment for best performance
+  //
+  // static const _audioAssets = [
+  //   AudioConstants.hurt,
+  //   AudioConstants.jump,
+  // ];
+
   late Dino _dino;
-  late EnemyManager _enemyManager;
+  EnemyManager? _enemyManager;
 
   // logic area of the game
   Vector2 get virtualSize => camera.viewport.virtualSize;
@@ -64,6 +72,8 @@ class DinoRun extends FlameGame with TapCallbacks, HasCollisionDetection, DragCa
 
     // load sprites into cache
     await images.loadAll(_imageAssets);
+
+    // await FlameAudio.audioCache.loadAll(_audioAssets);
 
     // lives display
     livesDisplay = LivesDisplay(lives: lives.value);
@@ -104,7 +114,7 @@ class DinoRun extends FlameGame with TapCallbacks, HasCollisionDetection, DragCa
     _enemyManager = EnemyManager();
 
     world.add(_dino);
-    world.add(_enemyManager);
+    world.add(_enemyManager!);
   }
 
   @override
@@ -132,6 +142,7 @@ class DinoRun extends FlameGame with TapCallbacks, HasCollisionDetection, DragCa
 
   void _checkGameOver() {
     if (lives.value <= 0) {
+      chargeTimer.stop();
       playState = PlayState.gameOver;
       pauseEngine();
       handleGameOver();
@@ -140,19 +151,21 @@ class DinoRun extends FlameGame with TapCallbacks, HasCollisionDetection, DragCa
 
   void resetGame() {
     if (playState == PlayState.isPaused || playState == PlayState.gameOver) {
+
       // remove all children
       if (_dino.isMounted) {
         _dino.removeFromParent();
       }
-      if (_enemyManager.isMounted) {
-        _enemyManager.removeAllEnemies();
-        _enemyManager.removeFromParent();
+      if (_enemyManager != null && _enemyManager!.isMounted) {
+        _enemyManager!.removeAllEnemies();
+        _enemyManager!.removeFromParent();
       }
 
       // reset scores and state
       score.value = 0;
       lives.value = 5;
       charges.value = 3;
+
       resumeEngine();
       startGame();
     }
