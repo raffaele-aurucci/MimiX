@@ -3,6 +3,7 @@ import 'package:mimix_app/utils/view/app_palette.dart';
 
 class SecondaryButton extends StatelessWidget {
 
+  // Size of font for secondary button in alert dialog.
   static const double fontSizeAlertDialog = 16;
 
   final String text;

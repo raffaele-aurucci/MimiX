@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mimix_app/training_managment/view/training_session_page.dart';
 
 import '../../utils/view/app_palette.dart';
 import '../../utils/view/widgets/buttons/icon_button.dart';
@@ -21,13 +22,11 @@ class _TrainingPage extends State<TrainingPage> {
   // List names of games
   List<String> nameTrainingList = [
     "Brow Down",
-    "Brown Up",
+    "Brow Up",
     "Mouth Open",
     "Mouth Smile",
     "Mouth Pucker",
     "Mouth Lower",
-    "Stay tuned",
-    "Stay tuned"
   ];
 
   List<String> nameTrainingDescriptionList = [
@@ -36,9 +35,7 @@ class _TrainingPage extends State<TrainingPage> {
     "Practice opening your mouth naturally",
     "Learn to form a natural smile",
     "Master puckering your lips for focused gestures",
-    "Practice lowering your bottom lip",
-    "Lorem ipsum dolor sit amen, consec...",
-    "Lorem ipsum dolor sit amen, consec..."
+    "Practice lowering your bottom lip"
   ];
 
   // To change the visibility of the text when you scroll
@@ -108,12 +105,20 @@ class _TrainingPage extends State<TrainingPage> {
                     crossAxisSpacing: 10.0, // Horizontal spacing
                     mainAxisSpacing: 10.0, // Vertical spacing
                   ),
-                  itemCount: 8, // Number of TrainCards
+                  itemCount: 6, // Number of TrainCards
                   itemBuilder: (context, index) {
                     return TrainingCard(
                       title: nameTrainingList[index],
                       description: nameTrainingDescriptionList[index],
-                      onTap: () => print('TrainingCard $index tapped'),
+                      onTap: () => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              // Passes the expression to be trained to the training session page
+                              builder: (context) => TrainingSessionPage(expression: nameTrainingList[index])
+                          )
+                        )
+                      },
                     );
                   },
                 ),
