@@ -51,7 +51,7 @@ class PauseMenu extends StatelessWidget {
             SecondaryButton(
                 text: 'Quit',
                 onPressed: () {
-                  // Navigator.of(context).pop();
+                  Navigator.popUntil(context, ModalRoute.withName('/minigame_page'));
                 }),
             Container(
               alignment: Alignment.bottomRight,

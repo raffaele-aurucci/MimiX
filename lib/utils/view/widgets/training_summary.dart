@@ -99,8 +99,7 @@ class TrainingSummary extends StatelessWidget {
                 fontSize: SecondaryButton.fontSizeAlertDialog,
                 onPressed: () {
                   // Double pop to return in training page
-                  Navigator.of(context).pop();
-                  Navigator.of(context).pop();
+                  Navigator.popUntil(context, ModalRoute.withName('/training_page'));
                 },
               ),
             ),

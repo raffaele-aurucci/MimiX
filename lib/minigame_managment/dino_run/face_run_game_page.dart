@@ -99,6 +99,7 @@ class _FaceRunGamePageState extends State<FaceRunGamePage> {
   bool _isFaceDetected = false;
 
   void handleFaceDetected(bool isFaceDetected) {
+    if (!mounted) return;
     setState(() {
       _isFaceDetected = isFaceDetected;
     });

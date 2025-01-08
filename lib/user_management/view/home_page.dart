@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+            padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
             child: Center(
               child: Column(
                 children: [
@@ -37,45 +37,35 @@ class HomePage extends StatelessWidget {
                   const SizedBox(height: 20),
                   HomePageCard(
                       title: "Minigames",
-                      image: AssetImage('assets/images/minigames_icon.png'),
+                      image: const AssetImage('assets/images/minigames_icon.png'),
                       onTap: () => {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MinigamePage(title: 'Minigames'),
-                          ),
-                        )
+                      Navigator.pushNamed(context, '/minigame_page')
                       }),
                   HomePageCard(
                       title: "Training",
-                      image: AssetImage('assets/images/training_icon.png'),
+                      image: const AssetImage('assets/images/training_icon.png'),
                       onTap: () => {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => TrainingPage(title: 'Training'),
-                          ),
-                        )
+                        Navigator.pushNamed(context, '/training_page')
                       }),
                   HomePageCard(
                       title: "Tasks",
-                      image: AssetImage('assets/images/tasks_icon.png'),
+                      image: const AssetImage('assets/images/tasks_icon.png'),
                       onTap: () => {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => TaskPage(title: 'Tasks'),
+                            builder: (context) => const TaskPage(title: 'Tasks'),
                           ),
                         )
                       }),
                   HomePageCard(
                       title: "Rewards",
-                      image: AssetImage('assets/images/rewards_icon.png'),
+                      image: const AssetImage('assets/images/rewards_icon.png'),
                       onTap: () => {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => RewardPage(title: 'Rewards'),
+                            builder: (context) => const RewardPage(title: 'Rewards'),
                           ),
                         )
                       })

@@ -1,4 +1,6 @@
 // Start application
+import 'package:mimix_app/minigame_managment/view/minigame_page.dart';
+import 'package:mimix_app/training_managment/view/training_page.dart';
 import 'package:mimix_app/user_management/beans/user.dart';
 import 'package:mimix_app/user_management/beans/user_provider.dart';
 import 'package:mimix_app/user_management/storage/user_dao.dart';
@@ -48,6 +50,10 @@ class MimixApp extends StatelessWidget {
     return ChangeNotifierProvider( // initialize provider for all application
         create: (_) => UserProvider(user),
         child: MaterialApp(
+          routes: {
+            '/minigame_page': (context) => const MinigamePage(title: 'Minigames'),
+            '/training_page': (context) => const TrainingPage(title: 'Training'),
+          },
         title: 'Mimix App',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
