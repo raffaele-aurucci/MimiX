@@ -3,7 +3,7 @@ import 'package:mimix_app/utils/view/app_palette.dart';
 
 class IconButtonWidget extends StatelessWidget {
   final IconData icon;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   const IconButtonWidget({super.key, required this.icon, required this.onPressed});
 
