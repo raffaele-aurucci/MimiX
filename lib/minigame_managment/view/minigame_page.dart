@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mimix_app/minigame_managment/dino_run/face_run_page.dart';
 import 'package:mimix_app/utils/view/app_palette.dart';
 import 'package:mimix_app/utils/view/widgets/cards/homepage_card.dart';
 import 'package:mimix_app/utils/view/widgets/cards/minigame_card.dart';
@@ -37,18 +38,18 @@ class _MinigamePage extends State<MinigamePage> {
 
   // List image of games
   List<AssetImage> imageGameList = [
-    AssetImage('assets/images/breakout.png'),
-    AssetImage('assets/images/question_mark.jpg'),
-    AssetImage('assets/images/question_mark.jpg'),
-    AssetImage('assets/images/question_mark.jpg'),
-    AssetImage('assets/images/question_mark.jpg'),
-    AssetImage('assets/images/question_mark.jpg'),
-    AssetImage('assets/images/question_mark.jpg'),
-    AssetImage('assets/images/question_mark.jpg'),
-    AssetImage('assets/images/question_mark.jpg'),
-    AssetImage('assets/images/question_mark.jpg'),
-    AssetImage('assets/images/question_mark.jpg'),
-    AssetImage('assets/images/question_mark.jpg'),
+    const AssetImage('assets/images/breakout.png'),
+    const AssetImage('assets/images/dino_run.jpg'),
+    const AssetImage('assets/images/question_mark.jpg'),
+    const AssetImage('assets/images/question_mark.jpg'),
+    const AssetImage('assets/images/question_mark.jpg'),
+    const AssetImage('assets/images/question_mark.jpg'),
+    const AssetImage('assets/images/question_mark.jpg'),
+    const AssetImage('assets/images/question_mark.jpg'),
+    const AssetImage('assets/images/question_mark.jpg'),
+    const AssetImage('assets/images/question_mark.jpg'),
+    const AssetImage('assets/images/question_mark.jpg'),
+    const AssetImage('assets/images/question_mark.jpg'),
   ];
 
   // To change the visibility of the text when you scroll
@@ -95,7 +96,7 @@ class _MinigamePage extends State<MinigamePage> {
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 child: HomePageCard(
                   title: 'Minigames',
-                  image: AssetImage('assets/images/minigames_icon.png'),
+                  image: const AssetImage('assets/images/minigames_icon.png'),
                   onTap: () => print('Home page card'),
                 ),
               ),
@@ -126,10 +127,21 @@ class _MinigamePage extends State<MinigamePage> {
                         image: imageGameList[index],
                         onTap: () => {
                           Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => FaceBreakoutPage())
+                              MaterialPageRoute(builder: (context) => const FaceBreakoutPage())
                           )},
                       );
-                    } else {
+                    }
+                    else if (index == 1){
+                      return MinigameCard(
+                        title: nameGameList[index],
+                        image: imageGameList[index],
+                        onTap: () => {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => const FaceRunPage())
+                          )},
+                      );
+                    }
+                    else {
                       return MinigameCard(
                         title: nameGameList[index],
                         image: imageGameList[index],
