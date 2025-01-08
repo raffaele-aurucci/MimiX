@@ -133,17 +133,17 @@ class _TrainingSessionPageState extends State<TrainingSessionPage> {
     }
     if (expression == "Brow Down") {
       firstExpression = "browDownLeft";
-      firstExpression = "browDownRight";
+      secondExpression = "browDownRight";
       _numberOfExpressionToTraining = 2;
     }
     if (expression == "Brow Up") {
       firstExpression = "browOuterUpLeft";
-      firstExpression = "browOuterUpRight";
+      secondExpression = "browOuterUpRight";
       _numberOfExpressionToTraining = 2;
     }
     if (expression == "Mouth Smile") {
       firstExpression = "mouthSmileLeft";
-      firstExpression = "mouthSmileRight";
+      secondExpression = "mouthSmileRight";
       _numberOfExpressionToTraining = 2;
     }
   }
