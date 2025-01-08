@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:mimix_app/utils/view/app_palette.dart';
 
 class SecondaryButton extends StatelessWidget {
+
+  static const double fontSizeAlertDialog = 16;
+
   final String text;
   final VoidCallback onPressed;
+  final double? fontSize;
 
-  const SecondaryButton({super.key, required this.text, required this.onPressed});
+  const SecondaryButton({super.key, required this.text, required this.onPressed, this.fontSize});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +18,7 @@ class SecondaryButton extends StatelessWidget {
         backgroundColor: PaletteColor.whiteColor,
         foregroundColor: PaletteColor.darkBlue,
         minimumSize: const Size.fromHeight(30),
-        textStyle: const TextStyle(fontFamily: 'Raleway', fontSize: 14, fontWeight: FontWeight.w500),
+        textStyle: TextStyle(fontFamily: 'Raleway', fontSize: fontSize ?? 14, fontWeight: FontWeight.w500),
         side: const BorderSide(
           color: PaletteColor.darkBlue,
         ),
