@@ -59,7 +59,7 @@ class _TrainingOverviewPage extends State<TrainingOverviewPage> {
                       child: Container(
                         margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
                         height: screenHeight * 0.4,
-                        child: Image(image: AssetImage('assets/images/facemesh.png')),
+                        child: const Image(image: AssetImage('assets/images/face_mesh.png')),
                       )
                   ),
 

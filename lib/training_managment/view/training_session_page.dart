@@ -223,9 +223,8 @@ class _TrainingSessionPageState extends State<TrainingSessionPage> {
                     children: [
                       IconButtonWidget(
                           icon: Icons.pause_sharp,
-                          onPressed: () {
-                            showPauseMenu(context);
-                          }),
+                          onPressed: !_isOverlayVisible ? () {showPauseMenu(context);} : null
+                      )
                     ],
                   ),
                   Column(
