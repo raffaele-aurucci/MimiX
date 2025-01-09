@@ -98,6 +98,7 @@ class _FaceBreakoutGamePageState extends State<FaceBreakoutGamePage> {
             handleResume: handleResume,
             handleRestart: handleRestart,
             gameName: 'Face Breakout',
+            quitNavigate: '/minigames_page',
         );
       },
     );

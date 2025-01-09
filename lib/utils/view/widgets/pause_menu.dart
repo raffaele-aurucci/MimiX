@@ -8,12 +8,14 @@ import 'buttons/secondary_button.dart';
 class PauseMenu extends StatelessWidget {
 
   final String gameName;
+  final String quitNavigate;
   final Function() handleResume;
   final Function() handleRestart;
 
   const PauseMenu({
     super.key,
     required this.gameName,
+    required this.quitNavigate,
     required this.handleResume,
     required this.handleRestart,
   });
@@ -51,7 +53,7 @@ class PauseMenu extends StatelessWidget {
             SecondaryButton(
                 text: 'Quit',
                 onPressed: () {
-                  Navigator.popUntil(context, ModalRoute.withName('/minigame_page'));
+                  Navigator.popUntil(context, ModalRoute.withName(quitNavigate));
                 }),
             Container(
               alignment: Alignment.bottomRight,

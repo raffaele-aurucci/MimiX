@@ -89,6 +89,7 @@ class _FaceRunGamePageState extends State<FaceRunGamePage> {
             handleResume: handleResume,
             handleRestart: handleRestart,
             gameName: 'Face Run',
+            quitNavigate: '/minigames_page',
           );
         },
       );
