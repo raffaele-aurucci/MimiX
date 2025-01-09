@@ -214,7 +214,7 @@ class _FaceRunGamePageState extends State<FaceRunGamePage> {
                   // Game
                   Expanded(
                     child: Container(
-                      margin: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                      margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
                       decoration: BoxDecoration(
                           border: Border.all(color: PaletteColor.darkBlue, width: 2)
                       ),

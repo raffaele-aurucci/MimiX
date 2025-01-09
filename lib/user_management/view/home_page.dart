@@ -39,7 +39,7 @@ class HomePage extends StatelessWidget {
                       title: "Minigames",
                       image: const AssetImage('assets/images/minigames_icon.png'),
                       onTap: () => {
-                      Navigator.pushNamed(context, '/minigame_page')
+                      Navigator.pushNamed(context, '/minigames_page')
                       }),
                   HomePageCard(
                       title: "Training",

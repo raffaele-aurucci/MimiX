@@ -51,7 +51,7 @@ class MimixApp extends StatelessWidget {
         create: (_) => UserProvider(user),
         child: MaterialApp(
           routes: {
-            '/minigame_page': (context) => const MinigamePage(title: 'Minigames'),
+            '/minigames_page': (context) => const MinigamePage(title: 'Minigames'),
             '/training_page': (context) => const TrainingPage(title: 'Training'),
           },
         title: 'Mimix App',
