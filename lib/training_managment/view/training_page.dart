@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mimix_app/training_managment/view/training_overview_page.dart';
 import 'package:mimix_app/training_managment/view/training_session_page.dart';
 
 import '../../utils/view/app_palette.dart';
@@ -36,6 +37,15 @@ class _TrainingPage extends State<TrainingPage> {
     "Learn to form a natural smile",
     "Master puckering your lips for focused gestures",
     "Practice lowering your bottom lip"
+  ];
+
+  List<String> nameTrainingOverviewDescriptionList = [
+    "Lower your eyebrows to effectively strengthen and control the frontalis muscles.",
+    "Raise your eyebrows to enhance the mobility and precision of the frontalis muscles.",
+    "Open your mouth naturally to train and relax the orbicularis oris and other muscles.",
+    "Smile naturally to engage and strengthen the zygomatic muscles for better expressions.",
+    "Pucker your lips tightly to improve the strength and focus of the orbicularis oris.",
+    "Lower your bottom lip to refine control of the depressor labii and related muscles."
   ];
 
   // To change the visibility of the text when you scroll
@@ -115,7 +125,11 @@ class _TrainingPage extends State<TrainingPage> {
                           context,
                           MaterialPageRoute(
                               // Passes the expression to be trained to the training session page
-                              builder: (context) => TrainingSessionPage(expression: nameTrainingList[index])
+                              builder: (context) =>
+                                  TrainingOverviewPage(
+                                      expression: nameTrainingList[index],
+                                      description: nameTrainingOverviewDescriptionList[index],
+                                  )
                           )
                         )
                       },

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mimix_app/training_managment/view/training_session_page.dart';
+import 'package:provider/provider.dart';
 
+import '../../user_management/beans/user_provider.dart';
 import '../../utils/view/widgets/buttons/icon_button.dart';
 import '../../utils/view/widgets/buttons/primary_button.dart';
 import '../../utils/view/widgets/texts/description_text.dart';
@@ -75,7 +77,12 @@ class _TrainingOverviewPage extends State<TrainingOverviewPage> {
                           text: "Let's go!",
                           onPressed: () => {
                             Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => TrainingSessionPage(expression: widget.expression)))
+                                MaterialPageRoute(builder: (context) =>
+                                    TrainingSessionPage(
+                                        expression: widget.expression,
+                                        userLevel: context.watch<UserProvider>().user!.level,
+
+                                    )))
                           }
                       )
                 ]
