@@ -48,22 +48,20 @@ class _TrainingOverviewPage extends State<TrainingOverviewPage> {
           child: Container(
             height: screenHeight,
             width: screenWidth,
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            margin: const EdgeInsets.only(top: 0, bottom: 40, left: 20, right: 20),
             child: Column(
                 children: [
                   HeaderText(text: widget.expression, size: HeaderText.H3),
 
                   SizedBox(height: 20),
 
-                  Expanded(
-                      child: Container(
+                  Container(
                         margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                        height: screenHeight * 0.4,
+                        height: screenHeight * 0.45,
                         child: const Image(image: AssetImage('assets/images/face_mesh.png')),
-                      )
                   ),
 
-                  const SizedBox(height: 80),
+                  const SizedBox(height: 10),
 
                   DescriptionText(
                       text: widget.description,
