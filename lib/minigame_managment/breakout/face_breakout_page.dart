@@ -46,7 +46,7 @@ class _FaceBreakoutOverviewPageState extends State<FaceBreakoutPage> {
         ),
         body: SafeArea(
           child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            margin: const EdgeInsets.only(top: 0, bottom: 40, left: 20, right: 20),
             child: Column(
                 children: [
                   HeaderText(text: 'Face Breakout', size: HeaderText.H3),
@@ -61,13 +61,13 @@ class _FaceBreakoutOverviewPageState extends State<FaceBreakoutPage> {
                           Row(
                             children: [
                               HeaderText(text: '😊', size: HeaderText.H4),
-                              Icon(Icons.arrow_back, size: 24, color: PaletteColor.darkBlue),
+                              HeaderText(text: ' Left', size: 20.0),
                             ],
                           ),
                           Row(
                             children: [
                               HeaderText(text: '😚', size: HeaderText.H4),
-                              Icon(Icons.arrow_forward, size: 24, color: PaletteColor.darkBlue),
+                              HeaderText(text: ' Right', size: 20.0),
                             ],
                           ),
                         ],
@@ -100,7 +100,7 @@ class _FaceBreakoutOverviewPageState extends State<FaceBreakoutPage> {
                     alignment: DescriptionText.Center,
                   ),
 
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 15),
 
                   PrimaryButton(
                       text: 'Play',

@@ -98,12 +98,12 @@ class _FaceBreakoutOverviewPageState extends State<FaceRunPage> {
 
 
                   const DescriptionText(
-                    text: 'Face Run is a classic game where players control a character that must navigate through an endless obstacle course. Inspired by the popular Dino Run.',
+                    text: 'Face Run is a classic game where players control a character that must navigate through an endless obstacle course.',
                     size: DescriptionText.P1,
                     alignment: DescriptionText.Center,
                   ),
 
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 15),
 
                   PrimaryButton(
                       text: 'Play',

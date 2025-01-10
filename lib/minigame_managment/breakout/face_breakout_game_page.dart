@@ -50,64 +50,71 @@ class _FaceBreakoutGamePageState extends State<FaceBreakoutGamePage> {
   }
 
   void handleGameOver() {
-    DialogUtils.showErrorDialog(
-        context: context,
-        title: "Game Over",
-        message: "Please try again.",
-        buttonMessage: 'Restart',
-        onTap: () {
-          Navigator.of(context).pop();
-          game.startGame();
-        }
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      DialogUtils.showErrorDialog(
+          context: context,
+          title: "Game Over",
+          message: "Please try again.",
+          buttonMessage: 'Restart',
+          onTap: () {
+            Navigator.of(context).pop();
+            game.resetGame();
+          }
+      );
+    });
   }
 
   void handleWon() {
-    DialogUtils.showErrorDialog(
-        context: context,
-        title: "You Won!",
-        message: "Please try again.",
-        buttonMessage: 'Restart',
-        onTap: () {
-          Navigator.of(context).pop();
-          game.startGame();
-        }
-    );
+    game.playState = PlayState.won;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      DialogUtils.showErrorDialog(
+          context: context,
+          title: "You Won!",
+          message: "Please try again.",
+          buttonMessage: 'Restart',
+          onTap: () {
+            Navigator.of(context).pop();
+            game.resetGame();
+          }
+      );
+    });
   }
 
   void handleResume() {
-    if (game.playState == PlayState.blockCountDown){
-      game.startGame();
-    }
-    else {
+    if (game.playState == PlayState.isPaused) {
+      game.resumeEngine();
       game.playState = PlayState.playing;
     }
   }
 
   void handleRestart() {
-    game.startGame();
+    game.resetGame();
   }
 
   void showPauseMenu(BuildContext context) {
-    game.playState = PlayState.isPaused;
-    showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (BuildContext context) {
-        return PauseMenu(
+    if (_isOverlayVisible == false) {
+      game.playState = PlayState.isPaused;
+      game.pauseEngine();
+      showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) {
+          return PauseMenu(
             handleResume: handleResume,
             handleRestart: handleRestart,
             gameName: 'Face Breakout',
             quitNavigate: '/minigames_page',
-        );
-      },
-    );
+          );
+        },
+      );
+    }
   }
 
   // handle face detected into webview
   bool _isFaceDetected = false;
 
   void handleFaceDetected(bool isFaceDetected) {
+    if (!mounted) return;
     setState(() {
       _isFaceDetected = isFaceDetected;
     });
@@ -159,9 +166,8 @@ class _FaceBreakoutGamePageState extends State<FaceBreakoutGamePage> {
                         children: [
                           IconButtonWidget(
                               icon: Icons.pause_sharp,
-                              onPressed: () {
-                                showPauseMenu(context);
-                              }),
+                              onPressed: !_isOverlayVisible ? () {showPauseMenu(context);} : null
+                          )
                         ],
                       ),
                       Column(
@@ -188,13 +194,13 @@ class _FaceBreakoutGamePageState extends State<FaceBreakoutGamePage> {
                           Row(
                             children: [
                               HeaderText(text: '😊', size: HeaderText.H4),
-                              Icon(Icons.arrow_back, size: 24, color: PaletteColor.darkBlue),
+                              HeaderText(text: ' Left', size: 20.0),
                             ],
                           ),
                           Row(
                             children: [
                               HeaderText(text: '😚', size: HeaderText.H4),
-                              Icon(Icons.arrow_forward, size: 24, color: PaletteColor.darkBlue),
+                              HeaderText(text: ' Right', size: 20.0),
                             ],
                           ),
                         ],

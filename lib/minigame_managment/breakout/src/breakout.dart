@@ -9,7 +9,7 @@ import '../../../utils/view/app_palette.dart';
 import 'components/components.dart';
 import 'config.dart';
 
-enum PlayState { welcome, playing, gameOver, won, isPaused, countDown, blockCountDown}
+enum PlayState { welcome, playing, gameOver, won, isPaused}
 
 
 class Breakout extends FlameGame with HasCollisionDetection {
@@ -93,13 +93,24 @@ class Breakout extends FlameGame with HasCollisionDetection {
     ]);
   }
 
-  void startGame() {
-    if (playState == PlayState.playing) return;
+  TextComponent? _countdownText;
+  int countdownValue = 3;
+  late Ball _ball;
+  double countdownTimer = 1.0;
+  bool isCountdownActive = false;
 
-    world.removeAll(world.children.query<Ball>());
+  void startGame() {
+    _ball = Ball(radius: ballRadius, position: size / 2, velocity: Vector2(350, 350));
+
+    // Preview scene components.
     world.removeAll(world.children.query<Bat>());
     world.removeAll(world.children.query<Brick>());
 
+    if (_countdownText != null && _countdownText!.isMounted) {
+      _countdownText!.removeFromParent();
+    }
+
+    // New scene.
     world.add(
       Bat(
         size: Vector2(batWidth, batHeight),
@@ -135,11 +146,7 @@ class Breakout extends FlameGame with HasCollisionDetection {
           ),
     ]);
 
-    playState = PlayState.countDown;
-
-    int countdownValue = 3;
-
-    final countdownText = TextComponent(
+    _countdownText = TextComponent(
       text: countdownValue.toString(),
       position: Vector2(width / 2 - 35, height * 0.45),
       textRenderer: TextPaint(
@@ -147,53 +154,45 @@ class Breakout extends FlameGame with HasCollisionDetection {
           color: PaletteColor.darkBlue,
           fontSize: 150,
           fontWeight: FontWeight.bold,
-          fontFamily: 'Raleway'
+          fontFamily: 'Raleway',
         ),
       ),
     );
 
-    world.add(countdownText);
+    world.add(_countdownText!);
 
-    Future.delayed(const Duration(seconds: 0), () async {
+    // Set countdown.
+    isCountdownActive = true;
+    countdownTimer = 1.0;
+  }
 
-      while (countdownValue > 0) {
-        await Future.delayed(const Duration(seconds: 1));
-        countdownValue--;
-        countdownText.text = countdownValue.toString();
+  void updateCountdown(double dt) {
+    if (isCountdownActive) {
+      countdownTimer -= dt;   // Time passed updated.
+      if (countdownTimer <= 0) {
+        countdownValue--;     // Update countdown value.
+        countdownTimer = 1.0; // Reset timer to next second.
 
-        world.add(countdownText);
+        if (countdownValue > 0) {
+          _countdownText!.text = countdownValue.toString();
+        } else {
+          _countdownText!.removeFromParent();
+          isCountdownActive = false;
 
-        if (playState == PlayState.isPaused) {
-          playState = PlayState.blockCountDown;
-          world.remove(countdownText);
-          return;
+          playState = PlayState.playing;
+          score.value = 0;
+
+          world.add(_ball);
         }
       }
-
-      world.remove(countdownText);
-
-      playState = PlayState.playing;
-
-      score.value = 0;
-
-      world.add(
-        Ball(
-          radius: ballRadius,
-          position: size / 2,
-          velocity: Vector2(350, 350),
-        ),
-      );
-
-    });
+    }
   }
+
 
   @override
   void update(double dt) {
-    // Not update the game.
-    if (_playState == PlayState.isPaused) {
-      return;
-    }
     super.update(dt);
+    updateCountdown(dt);
   }
 
   @override
@@ -210,4 +209,27 @@ class Breakout extends FlameGame with HasCollisionDetection {
       world.children.query<Bat>().first.moveBy(batStep);
     }
   }
+
+  void resetGame(){
+    if (playState == PlayState.isPaused || playState == PlayState.gameOver || playState == PlayState.won) {
+
+      if (_ball.isMounted){
+        _ball.removeFromParent();
+      }
+
+      world.removeAll(world.children.query<Bat>());
+      world.removeAll(world.children.query<Brick>());
+
+      if(_countdownText != null && _countdownText!.isMounted) {
+        _countdownText!.removeFromParent();
+      }
+
+      // reset scores and state
+      score.value = 0;
+      countdownValue = 3;
+      resumeEngine();
+      startGame();
+    }
+  }
+
 }
