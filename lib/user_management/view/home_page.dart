@@ -1,11 +1,8 @@
-import 'package:mimix_app/minigame_managment/view/minigame_page.dart';
 import 'package:mimix_app/reward_managment/view/reward_page.dart';
 import 'package:mimix_app/task_managment/view/task_page.dart';
-import 'package:mimix_app/training_managment/view/training_page.dart';
 import 'package:mimix_app/user_management/beans/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:mimix_app/utils/view/widgets/cards/homepage_card.dart';
-import 'package:mimix_app/utils/view/widgets/footer_menu.dart';
 import 'package:mimix_app/utils/view/widgets/user_level.dart';
 import 'package:provider/provider.dart';
 
@@ -74,7 +71,6 @@ class HomePage extends StatelessWidget {
             )
         )
       ),
-      bottomNavigationBar: const FooterMenu(selectedIndex: 0),
     );
   }
 }

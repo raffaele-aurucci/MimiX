@@ -19,6 +19,12 @@ class PaletteColor {
   // For background of progress bar
   static const Color progressBarBackground = Color(0xFFF0F2F4);
 
+  // For border of notification card
+  static const Color borderCard = Color(0xFFEDECF4);
+
+  // For icon background
+  static const Color backgroundIcon = Color(0xFFFAFAFA);
+
   // For error messages
   static const Color errorMessage = Color(0xFFEB5858);
   

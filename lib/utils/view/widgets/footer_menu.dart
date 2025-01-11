@@ -2,26 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:mimix_app/utils/view/app_palette.dart';
 
 class FooterMenu extends StatelessWidget {
-  // final Function(int) onItemTapped; // Add the function to navigate in the app pages
+  final Function(int) onItemTapped; // Add the function to navigate in the app pages
   final int selectedIndex;
+
 
   const FooterMenu({
     Key? key,
     required this.selectedIndex,
-    // this.onTap,
+    required this.onItemTapped,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       currentIndex: selectedIndex,
-      // onTap: onItemTapped,
+      onTap: onItemTapped,
       type: BottomNavigationBarType.fixed, // Required to add more than 4 elements in the footer
       selectedItemColor: PaletteColor.darkBlue,
       unselectedItemColor: PaletteColor.lightSkyBlue,
       showSelectedLabels: false, // Hidden the label of selected icon
       showUnselectedLabels: false, // Hidden the label of not selected icon
-      items: [
+      items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.window_sharp),
           label: '', // Empty label

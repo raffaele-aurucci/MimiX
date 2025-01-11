@@ -7,6 +7,7 @@ import 'package:mimix_app/user_management/storage/user_dao.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:mimix_app/user_management/view/home_page.dart';
+import 'package:mimix_app/user_management/view/menu_page.dart';
 import 'package:mimix_app/utils/view/app_theme.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
@@ -57,7 +58,7 @@ class MimixApp extends StatelessWidget {
         title: 'Mimix App',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
-        home: user != null ? const HomePage() : const RegistrationPage(),
+        home: user != null ? const MenuPage() : const RegistrationPage(),
     )
     );
   }
