@@ -39,7 +39,8 @@ class TaskCard extends StatelessWidget {
               // TODO: keep the progress bar in the footer of the card
               ProgressBar(
                 progress: progress,
-                height: ProgressBar.smallCard,
+                height: ProgressBar.heightSmallCard,
+                orientation: ProgressBar.horizontal,
               ),
             ],
           ),

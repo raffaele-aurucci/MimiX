@@ -61,7 +61,8 @@ class RewardCard extends StatelessWidget {
               ),
               ProgressBar(
                   progress: progress,
-                  height: ProgressBar.bigCard,
+                  height: ProgressBar.heightBigCard,
+                  orientation: ProgressBar.horizontal,
               ),
             ],
           ),
