@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+            padding: const EdgeInsets.only(top: 40, bottom: 0, left: 20, right: 20),
             child: Center(
               child: Column(
                 children: [
@@ -31,19 +31,21 @@ class HomePage extends StatelessWidget {
                       profileImage: const AssetImage('assets/images/user.png'),
                     )
                   ],),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 40),
                   HomePageCard(
                       title: "Minigames",
                       image: const AssetImage('assets/images/minigames_icon.png'),
                       onTap: () => {
                       Navigator.pushNamed(context, '/minigames_page')
                       }),
+                  const SizedBox(height: 10),
                   HomePageCard(
                       title: "Training",
                       image: const AssetImage('assets/images/training_icon.png'),
                       onTap: () => {
                         Navigator.pushNamed(context, '/training_page')
                       }),
+                  const SizedBox(height: 10),
                   HomePageCard(
                       title: "Tasks",
                       image: const AssetImage('assets/images/tasks_icon.png'),
@@ -55,6 +57,7 @@ class HomePage extends StatelessWidget {
                           ),
                         )
                       }),
+                  const SizedBox(height: 10),
                   HomePageCard(
                       title: "Rewards",
                       image: const AssetImage('assets/images/rewards_icon.png'),

@@ -21,7 +21,6 @@ class ProfileImageWithLevel extends StatelessWidget {
         color: PaletteColor.powderBlue,
         borderRadius: BorderRadius.circular(30.0),
       ),
-      padding: const EdgeInsets.all(4.0),
       child: Row(
         mainAxisSize: MainAxisSize.min, // Adapt the witdh at the content
         children: [

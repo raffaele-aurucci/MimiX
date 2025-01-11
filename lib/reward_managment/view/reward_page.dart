@@ -109,24 +109,28 @@ class _RewardPage extends State<RewardPage> {
                       progress: 0.1,
                       image: AssetImage('assets/images/rewards_icon.png'),
                     ),
+                    const SizedBox(height: 10),
                     RewardCard(
                       title: nameRewardList[1],
                       description: nameRewardDescriptionList[1],
                       progress: 0.05,
                       image: AssetImage('assets/images/rewards_icon.png'),
                     ),
+                    const SizedBox(height: 10),
                     RewardCard(
                       title: nameRewardList[2],
                       description: nameRewardDescriptionList[2],
                       progress: 0.01,
                       image: AssetImage('assets/images/rewards_icon.png'),
                     ),
+                    const SizedBox(height: 10),
                     RewardCard(
                       title: nameRewardList[3],
                       description: nameRewardDescriptionList[3],
                       progress: 0.005,
                       image: AssetImage('assets/images/rewards_icon.png'),
                     ),
+                    const SizedBox(height: 10),
                     RewardCard(
                       title: nameRewardList[4],
                       description: nameRewardDescriptionList[4],

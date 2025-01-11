@@ -21,15 +21,21 @@ class HomePageCard extends StatelessWidget {
       // using predefined widgets such as buttons.
       GestureDetector(
         onTap: onTap,
-        child: Card(
+        child: Container(
+          padding: const EdgeInsets.all(16.0),
+          decoration: BoxDecoration(
           color: PaletteColor.powderBlue,
-          elevation: 4,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12),
+          // border: Border.all(color: PaletteColor.borderCard, width: 1)
+          boxShadow: [
+            BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            blurRadius: 5,
+            offset: Offset(0, 5),
+            ),
+          ],
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
+          child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween, // Space between two columns
               children: [
                 Expanded(
@@ -52,7 +58,6 @@ class HomePageCard extends StatelessWidget {
                 ),
               ],
             ),
-          ),
         ),
       );
   }

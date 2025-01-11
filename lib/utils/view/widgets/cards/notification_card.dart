@@ -22,7 +22,13 @@ class NotificationCard extends StatelessWidget {
       decoration: BoxDecoration(
           color: PaletteColor.whiteColor,
           borderRadius: BorderRadius.circular(12.0),
-          border: Border.all(color: PaletteColor.borderCard, width: 1)
+          // border: Border.all(color: PaletteColor.borderCard, width: 1)
+          boxShadow: [
+            BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            blurRadius: 5,
+            offset: Offset(0, 5),
+          ),]
       ),
       padding: const EdgeInsets.all(16.0),
       child: Row(

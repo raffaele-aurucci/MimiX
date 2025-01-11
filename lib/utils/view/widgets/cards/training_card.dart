@@ -18,31 +18,37 @@ class TrainingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 150, // To edit
-      height: 150, // To edit
-      child: GestureDetector(
-        onTap: onTap, // Add the function
-        child: Card(
-          color: PaletteColor.whiteColor,
-          elevation: 4,
-          shape: RoundedRectangleBorder(
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 150, // To edit
+        height: 150, // To edit
+        // Add the function
+        child: Container(
+          padding: const EdgeInsets.all(16.0),
+          decoration: BoxDecoration(
+            color: PaletteColor.whiteColor,
             borderRadius: BorderRadius.circular(12),
+            // border: Border.all(color: PaletteColor.borderCard, width: 1)
+            boxShadow: [
+              BoxShadow(
+              color: Colors.grey.withOpacity(0.3),
+              blurRadius: 5,
+              offset: Offset(0, 5),
+              ),
+            ],
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CardTitleText(text: title, size: CardTitleText.H6),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 DescriptionText(text: description, size: DescriptionText.P2,),
               ],
             ),
-          ),
-        ),
-      ),
-    );
+          )
+        )
+      );
   }
 }
 

@@ -28,29 +28,32 @@ class CardStats extends StatelessWidget {
 
 // Build weekly card
 Widget buildWeeklyCard() {
-  return _buildCard(
-    icon: Icons.calendar_today,
-    title: 'Weekly time',
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(height: 16),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _buildDayProgress('MON', 0.6),
-            _buildDayProgress('TUE', 0.4),
-            _buildDayProgress('WED', 0.8),
-            _buildDayProgress('THU', 0.2),
-            _buildDayProgress('FRI', 0.9),
-            _buildDayProgress('SAT', 0.3),
-            _buildDayProgress('SUN', 0.7),
-          ],
-        ),
-      ],
+  return Expanded(
+    child: _buildCard(
+      icon: Icons.calendar_today,
+      title: 'Weekly time',
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: 16),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _buildDayProgress('MON', 0.6),
+              _buildDayProgress('TUE', 0.4),
+              _buildDayProgress('WED', 0.8),
+              _buildDayProgress('THU', 0.2),
+              _buildDayProgress('FRI', 0.9),
+              _buildDayProgress('SAT', 0.3),
+              _buildDayProgress('SUN', 0.7),
+            ],
+          ),
+        ],
+      ),
     ),
   );
 }
+
 
 // Build progress bar vertical for weekly card
 Widget _buildDayProgress(String day, double progress) {
@@ -153,6 +156,7 @@ Widget _buildCard({
     decoration: BoxDecoration(
       color: PaletteColor.whiteColor,
       borderRadius: BorderRadius.circular(12),
+      // border: Border.all(color: PaletteColor.borderCard, width: 1)
       boxShadow: [
         BoxShadow(
           color: Colors.grey.withOpacity(0.3),

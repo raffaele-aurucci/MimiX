@@ -56,7 +56,7 @@ class _SettingsPage extends State<SettingsPage> {
                     HeaderText(text: 'Settings', size: HeaderText.H4),
                   ],),
 
-                const SizedBox(height: 30),
+                const SizedBox(height: 45),
 
                 // Profile Avatar
                 CircleAvatar(

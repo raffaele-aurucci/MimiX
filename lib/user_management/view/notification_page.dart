@@ -22,7 +22,7 @@ class NotificationsPage extends StatelessWidget {
                     HeaderText(text: 'Notification', size: HeaderText.H4),
                   ],),
 
-                SizedBox(height: 30),
+                SizedBox(height: 45),
 
                 // New Notification Card
                 NotificationCard(

@@ -29,7 +29,7 @@ class StatsPage extends StatelessWidget {
                     )
                   ],
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 40),
                 // First line: two blocks
                 const Row(
                   children: [

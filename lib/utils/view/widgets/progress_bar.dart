@@ -5,7 +5,7 @@ class ProgressBar extends StatelessWidget {
 
   static const double heightSmallCard = 7; // Height of progress bar in small cards
   static const double heightBigCard = 12; // Height of progress bar in big cards
-  static const double statsProgressBarWidth = 150; // Width of progress bar for stats page
+  static const double statsProgressBarWidth = 200; // Width of progress bar for stats page
   static const String vertical = "vertical"; // Vertical orientation of progress bar
   static const String horizontal = "horizontal"; // Horizontal orientation of progress bar
 
@@ -26,7 +26,7 @@ class ProgressBar extends StatelessWidget {
   Widget build(BuildContext context) {
     if(orientation == horizontal) {
       return Container(
-        height: height, // To edit
+        height: height, // TODO: remove fixed height
         decoration: BoxDecoration(
           color: PaletteColor.progressBarBackground,
           borderRadius: BorderRadius.circular(16.0),
@@ -37,7 +37,7 @@ class ProgressBar extends StatelessWidget {
             borderRadius: BorderRadius.circular(16.0),
             value: progress,
             backgroundColor: PaletteColor.progressBarBackground,
-            valueColor: AlwaysStoppedAnimation<Color>(
+            valueColor: const AlwaysStoppedAnimation<Color>(
               PaletteColor.lightSkyBlue, // Colore di default della barra
             ),
           ),
@@ -47,7 +47,7 @@ class ProgressBar extends StatelessWidget {
       return RotatedBox(
         quarterTurns: -1,
         child: Container(
-          height: height, // To edit
+          height: height, // TODO: remove fixed height
           width: width,
           decoration: BoxDecoration(
             color: PaletteColor.progressBarBackground,
@@ -59,7 +59,7 @@ class ProgressBar extends StatelessWidget {
               borderRadius: BorderRadius.circular(16.0),
               value: progress,
               backgroundColor: PaletteColor.progressBarBackground,
-              valueColor: AlwaysStoppedAnimation<Color>(
+              valueColor: const AlwaysStoppedAnimation<Color>(
                 PaletteColor.lightSkyBlue, // Colore di default della barra
               ),
             ),

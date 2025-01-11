@@ -117,7 +117,7 @@ class _MinigamePage extends State<MinigamePage> {
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2, // Two cards per row
                     crossAxisSpacing: 10.0, // Horizontal spacing
-                    mainAxisSpacing: 15.0, // Vertical spacing
+                    mainAxisSpacing: 10.0, // Vertical spacing
                   ),
                   itemCount: 12, // Number of TrainCards
                   itemBuilder: (context, index) {

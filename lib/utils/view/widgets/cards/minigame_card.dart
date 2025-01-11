@@ -27,6 +27,13 @@ class MinigameCard extends StatelessWidget {
             image: image,
             fit: BoxFit.cover, // To put the image in background
           ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.3),
+              blurRadius: 5,
+              offset: Offset(0, 5),
+            ),
+          ],
         ),
         child: Stack(
           children: [
@@ -35,9 +42,13 @@ class MinigameCard extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   color: PaletteColor.whiteColor,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(12),
                     bottomRight: Radius.circular(12),
+                  ),
+                  border: Border.all(
+                    color: Colors.white, // Colore del bordo
+                    width: 0.25, // Spessore del bordo
                   ),
                 ),
                 padding: const EdgeInsets.all(12.0),
