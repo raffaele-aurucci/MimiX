@@ -69,7 +69,7 @@ class _TrainingOverviewPage extends State<TrainingOverviewPage> {
                       alignment: DescriptionText.Center,
                   ),
 
-                  const SizedBox(height: 30),
+                  const Spacer(),
 
                   PrimaryButton(
                           text: "Let's go!",
@@ -79,7 +79,6 @@ class _TrainingOverviewPage extends State<TrainingOverviewPage> {
                                     TrainingSessionPage(
                                         expression: widget.expression,
                                         userLevel: context.watch<UserProvider>().user!.level,
-
                                     )))
                           }
                       )
