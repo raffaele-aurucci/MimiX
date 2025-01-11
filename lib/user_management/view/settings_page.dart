@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:provider/provider.dart';
 
 import '../../utils/view/app_palette.dart';
 import '../../utils/view/widgets/texts/description_text.dart';
 import '../../utils/view/widgets/texts/header_text.dart';
+import '../beans/user_provider.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -57,20 +59,16 @@ class _SettingsPage extends State<SettingsPage> {
                 const SizedBox(height: 30),
 
                 // Profile Avatar
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 50,
                   backgroundColor: PaletteColor.progressBarBackground,
-                  child: Icon(
-                    Icons.person,
-                    size: 50,
-                    color: PaletteColor.darkBlue,
-                  ),
+                  child: Image.asset('assets/images/user.png')
                 ),
                 SizedBox(height: 8),
 
                 // Profile Name
                 HeaderText(
-                    text: 'John Doe',
+                    text: '${context.watch<UserProvider>().user!.username}',
                     size: HeaderText.H4
                 ),
                 SizedBox(height: 24),

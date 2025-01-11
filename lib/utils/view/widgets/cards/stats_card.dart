@@ -3,7 +3,7 @@ import 'package:mimix_app/utils/view/widgets/progress_bar.dart';
 import 'package:mimix_app/utils/view/widgets/texts/card_title_text.dart';
 import 'package:mimix_app/utils/view/widgets/texts/description_text.dart';
 
-import '../app_palette.dart';
+import '../../app_palette.dart';
 
 class CardStats extends StatelessWidget {
 

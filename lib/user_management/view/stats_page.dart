@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../utils/view/widgets/card_stats.dart';
+import '../../utils/view/widgets/cards/stats_card.dart';
 import '../../utils/view/widgets/texts/header_text.dart';
 import '../../utils/view/widgets/user_level.dart';
 import '../beans/user_provider.dart';
