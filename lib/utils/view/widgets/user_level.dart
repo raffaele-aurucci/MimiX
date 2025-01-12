@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mimix_app/utils/view/app_palette.dart';
+import 'package:mimix_app/utils/view/widgets/circular_progress_bar.dart';
 import 'package:mimix_app/utils/view/widgets/texts/card_title_text.dart';
 
 class ProfileImageWithLevel extends StatelessWidget {
@@ -46,9 +47,8 @@ class ProfileImageWithLevel extends StatelessWidget {
             children: [
               CustomPaint(
                 size: const Size(35, 35),
-                painter: RoundedCircularProgressPainter(
+                painter: CircularProgressBar(
                   progress: experienceProgress,
-                  progressColor: PaletteColor.darkBlue,
                   strokeWidth: 3.5,
                 ),
               ),
@@ -59,49 +59,5 @@ class ProfileImageWithLevel extends StatelessWidget {
         ],
       ),
     );
-  }
-}
-
-class RoundedCircularProgressPainter extends CustomPainter {
-  final double progress;
-  final Color progressColor;
-  final double strokeWidth;
-
-  RoundedCircularProgressPainter({
-    required this.progress,
-    required this.progressColor,
-    this.strokeWidth = 4.0,
-  });
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final center = Offset(size.width / 2, size.height / 2);
-    final radius = (size.width - strokeWidth) / 2;
-
-    final backgroundPaint = Paint()
-      ..color = PaletteColor.progressBarBackground
-      ..strokeWidth = strokeWidth
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round;
-    canvas.drawCircle(center, radius, backgroundPaint);
-
-    final progressPaint = Paint()
-      ..color = progressColor
-      ..strokeWidth = strokeWidth
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round;
-    final sweepAngle = 2 * 3.141592653589793 * progress;
-    canvas.drawArc(
-      Rect.fromCircle(center: center, radius: radius),
-      -3.141592653589793 / 2,
-      sweepAngle,
-      false,
-      progressPaint,
-    );
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
   }
 }
