@@ -31,14 +31,14 @@ class _RewardPage extends State<RewardPage> {
   ];
 
   List<String> nameRewardDescriptionList = [
-    "Reach 5 level!",
-    "Reach 10 level!",
-    "Reach 15 level!",
-    "Reach 20 level!",
-    "Reach 25 level!",
-    "Reach 30 level!",
-    "Reach 35 level!",
-    "Reach 40 level!",
+    "Reach Level 5 to earn the trophy!",
+    "Reach Level 10 to earn the trophy!",
+    "Reach Level 15 to earn the trophy!",
+    "Reach Level 20 to earn the trophy!",
+    "Reach Level 25 to earn the trophy!",
+    "Reach Level 30 to earn the trophy!",
+    "Reach Level 35 to earn the trophy!",
+    "Reach Level 40 to earn the trophy!",
   ];
 
   // To change the visibility of the text when you scroll
@@ -85,7 +85,7 @@ class _RewardPage extends State<RewardPage> {
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 child: HomePageCard(
                   title: 'Rewards',
-                  image: AssetImage('assets/images/rewards_icon.png'),
+                  image: const AssetImage('assets/images/rewards_icon.png'),
                   onTap: () => print('Home page card'),
                 ),
               ),
@@ -102,48 +102,26 @@ class _RewardPage extends State<RewardPage> {
                 padding: const EdgeInsets.all(20.0), // Padding for the grid
                 child: Column(
                   children: [
-                    // TODO: find a way to build automatically the Reaward Card in the list
-                    RewardCard(
-                      title: nameRewardList[0],
-                      description: nameRewardDescriptionList[0],
-                      progress: 0.1,
-                      image: AssetImage('assets/images/rewards_icon.png'),
-                    ),
-                    const SizedBox(height: 10),
-                    RewardCard(
-                      title: nameRewardList[1],
-                      description: nameRewardDescriptionList[1],
-                      progress: 0.05,
-                      image: AssetImage('assets/images/rewards_icon.png'),
-                    ),
-                    const SizedBox(height: 10),
-                    RewardCard(
-                      title: nameRewardList[2],
-                      description: nameRewardDescriptionList[2],
-                      progress: 0.01,
-                      image: AssetImage('assets/images/rewards_icon.png'),
-                    ),
-                    const SizedBox(height: 10),
-                    RewardCard(
-                      title: nameRewardList[3],
-                      description: nameRewardDescriptionList[3],
-                      progress: 0.005,
-                      image: AssetImage('assets/images/rewards_icon.png'),
-                    ),
-                    const SizedBox(height: 10),
-                    RewardCard(
-                      title: nameRewardList[4],
-                      description: nameRewardDescriptionList[4],
-                      progress: 0.001,
-                      image: AssetImage('assets/images/rewards_icon.png'),
-                    ),
+                    ...List.generate(nameRewardList.length, (index) {
+                      return Column(
+                        children: [
+                          RewardCard(
+                            title: nameRewardList[index],
+                            description: nameRewardDescriptionList[index],
+                            progress: (nameRewardList.length - index) * 0.03,
+                            image: const AssetImage('assets/images/rewards_icon.png'),
+                          ),
+                          const SizedBox(height: 10),
+                        ],
+                      );
+                    }),
                   ],
-                )
+                ),
               ),
-            ],
+            ]
           ),
         ),
-      ),
+      )
     );
   }
 }

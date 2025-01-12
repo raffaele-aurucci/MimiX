@@ -21,51 +21,58 @@ class RewardCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 145,
-      child: Card(
-        color: PaletteColor.whiteColor,
-        elevation: 4,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CardTitleText(text: title, size: CardTitleText.H5),
-                        SizedBox(height: 8),
-                        DescriptionText(text: description, size: DescriptionText.P1),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: 110,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      image: DecorationImage(
-                        image: image,
-                        opacity: 0.5
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              ProgressBar(
-                  progress: progress,
-                  height: ProgressBar.heightBigCard,
-                  orientation: ProgressBar.horizontal,
+      height: 150,
+      child: Container(
+        padding: const EdgeInsets.all(12.0),
+        decoration: BoxDecoration(
+            color: PaletteColor.whiteColor,
+            borderRadius: BorderRadius.circular(12),
+            // border: Border.all(color: PaletteColor.borderCard, width: 1)
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                blurRadius: 5,
+                offset: Offset(0, 5),
               ),
             ],
           ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CardTitleText(text: title, size: CardTitleText.H5),
+                      SizedBox(height: 8),
+                      DescriptionText(text: description, size: DescriptionText.P1),
+                    ],
+                  ),
+                ),
+                Container(
+                  width: 110,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    image: DecorationImage(
+                      image: image,
+                      opacity: 0.5
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const Spacer(),
+
+            ProgressBar(
+                progress: progress,
+                height: ProgressBar.heightBigCard,
+                orientation: ProgressBar.horizontal,
+            ),
+          ],
         ),
       ),
     );

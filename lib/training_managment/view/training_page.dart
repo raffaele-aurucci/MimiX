@@ -28,6 +28,8 @@ class _TrainingPage extends State<TrainingPage> {
     "Mouth Smile",
     "Mouth Pucker",
     "Mouth Lower",
+    "Stay tuned",
+    "Stay tuned",
   ];
 
   List<String> nameTrainingDescriptionList = [
@@ -36,7 +38,9 @@ class _TrainingPage extends State<TrainingPage> {
     "Practice opening your mouth naturally",
     "Learn to form a natural smile",
     "Master puckering your lips for focused gestures",
-    "Practice lowering your bottom lip"
+    "Practice lowering your bottom lip",
+    "Lorem ipsum dolor sit amen, consec...",
+    "Lorem ipsum dolor sit amen, consec...",
   ];
 
   List<String> nameTrainingOverviewDescriptionList = [
@@ -45,7 +49,9 @@ class _TrainingPage extends State<TrainingPage> {
     "Open your mouth naturally to train and relax the orbicularis oris and other muscles.",
     "Smile naturally to engage and strengthen the zygomatic muscles for better expressions.",
     "Pucker your lips tightly to improve the strength and focus of the orbicularis oris.",
-    "Lower your bottom lip to refine control of the depressor labii and related muscles."
+    "Lower your bottom lip to refine control of the depressor labii and related muscles.",
+    "",
+    ""
   ];
 
   // To change the visibility of the text when you scroll
@@ -87,6 +93,7 @@ class _TrainingPage extends State<TrainingPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+
               // HomePageCard at the top
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -96,7 +103,9 @@ class _TrainingPage extends State<TrainingPage> {
                   onTap: () => print('Home page card'),
                 ),
               ),
+
               const SizedBox(height: 8.0),
+
               // Grid of TrainCards
               Container(
                 decoration: const BoxDecoration(
@@ -115,25 +124,35 @@ class _TrainingPage extends State<TrainingPage> {
                     crossAxisSpacing: 10.0, // Horizontal spacing
                     mainAxisSpacing: 10.0, // Vertical spacing
                   ),
-                  itemCount: 6, // Number of TrainCards
+                  itemCount: 8, // Number of TrainCards
                   itemBuilder: (context, index) {
-                    return TrainingCard(
-                      title: nameTrainingList[index],
-                      description: nameTrainingDescriptionList[index],
-                      onTap: () => {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              // Passes the expression to be trained to the training session page
-                              builder: (context) =>
-                                  TrainingOverviewPage(
-                                      expression: nameTrainingList[index],
-                                      description: nameTrainingOverviewDescriptionList[index],
-                                  )
+                    if(index > 6) {
+                      return TrainingCard(
+                        title: nameTrainingList[index],
+                        description: nameTrainingDescriptionList[index],
+                        onTap: () => {},
+                      );
+                    }
+                    else {
+                      return TrainingCard(
+                        title: nameTrainingList[index],
+                        description: nameTrainingDescriptionList[index],
+                        onTap: () =>
+                        {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                // Passes the expression to be trained to the training session page
+                                  builder: (context) =>
+                                      TrainingOverviewPage(
+                                        expression: nameTrainingList[index],
+                                        description: nameTrainingOverviewDescriptionList[index],
+                                      )
+                              )
                           )
-                        )
-                      },
-                    );
+                        },
+                      );
+                    }
                   },
                 ),
               ),

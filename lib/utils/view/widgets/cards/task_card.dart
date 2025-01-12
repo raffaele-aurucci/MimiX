@@ -21,29 +21,35 @@ class TaskCard extends StatelessWidget {
     return Container(
       width: 150, // To edit
       height: 150, // To edit
-      child: Card(
-        color: PaletteColor.whiteColor,
-        elevation: 4,
-        shape: RoundedRectangleBorder(
+      child: Container(
+        padding: const EdgeInsets.all(16.0),
+        decoration: BoxDecoration(
+          color: PaletteColor.whiteColor,
           borderRadius: BorderRadius.circular(12),
+          // border: Border.all(color: PaletteColor.borderCard, width: 1)
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.3),
+              blurRadius: 5,
+              offset: Offset(0, 5),
+            ),
+          ],
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CardTitleText(text: title, size: CardTitleText.H6,),
-              SizedBox(height: 8),
-              DescriptionText(text: description, size: DescriptionText.P2),
-              SizedBox(height: 8),
-              // TODO: keep the progress bar in the footer of the card
-              ProgressBar(
-                progress: progress,
-                height: ProgressBar.heightSmallCard,
-                orientation: ProgressBar.horizontal,
-              ),
-            ],
-          ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CardTitleText(text: title, size: CardTitleText.H6,),
+            const SizedBox(height: 8),
+            DescriptionText(text: description, size: DescriptionText.P2),
+            const SizedBox(height: 8),
+            // TODO: keep the progress bar in the footer of the card
+            const Spacer(),
+            ProgressBar(
+              progress: progress,
+              height: ProgressBar.heightSmallCard,
+              orientation: ProgressBar.horizontal,
+            ),
+          ],
         ),
       ),
     );
