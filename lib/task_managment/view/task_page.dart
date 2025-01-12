@@ -1,8 +1,11 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../user_management/beans/user_provider.dart';
 import '../../utils/view/app_palette.dart';
 import '../../utils/view/widgets/buttons/icon_button.dart';
+import '../../utils/view/widgets/cards/general_task_card.dart';
 import '../../utils/view/widgets/cards/homepage_card.dart';
 import '../../utils/view/widgets/cards/task_card.dart';
 import '../../utils/view/widgets/texts/header_text.dart';
@@ -43,6 +46,8 @@ class _TaskPage extends State<TaskPage> {
     "Lorem ipsum dolor sit amen, consec...",
     "Lorem ipsum dolor sit amen, consec..."
   ];
+
+  List<double> progressValue = [1, 0.4, 0.3, 0.2, 1, 0.6, 0, 0];
 
   // To change the visibility of the text when you scroll
   bool _onScroll(ScrollNotification notification) {
@@ -102,23 +107,42 @@ class _TaskPage extends State<TaskPage> {
                     topRight: Radius.circular(20),
                   ),
                 ),
-                padding: const EdgeInsets.all(20.0), // Padding for the grid
-                child: GridView.builder(
-                  physics: const NeverScrollableScrollPhysics(), // Disable inner scrolling
-                  shrinkWrap: true, // Let GridView size itself within the scrollable column
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, // Two cards per row
-                    crossAxisSpacing: 10.0, // Horizontal spacing
-                    mainAxisSpacing: 10.0, // Vertical spacing
-                  ),
-                  itemCount: 8, // Number of TrainCards
-                  itemBuilder: (context, index) {
-                    return TaskCard(
-                      title: nameTaskList[index],
-                      description: nameTaskDescriptionList[index],
-                      progress: random.nextDouble(),
-                    );
-                  },
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    // General card at the top of list of tasks
+                    //TODO: make the task dynamic: add the last three best tasks based on their progress.
+                    GeneralTaskCard(
+                        experienceLevel: context.watch<UserProvider>().user!.level,
+                        experienceProgress: context.watch<UserProvider>().user!.levelProgress + 0.2,
+                        firstProgress: progressValue[0],
+                        firstTaskName: nameTaskList[0],
+                        secondProgress: progressValue[4],
+                        secondTaskName: nameTaskList[4],
+                        thirdProgress: progressValue[5],
+                        thirdTaskName: nameTaskList[5],
+                    ),
+                    const SizedBox(height: 10),
+                    // GridView of tasks
+                    GridView.builder(
+                      physics: const NeverScrollableScrollPhysics(), // Disable inner scrolling
+                      shrinkWrap: true, // Let GridView size itself within the scrollable column
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, // Two cards per row
+                        crossAxisSpacing: 10.0, // Horizontal spacing
+                        mainAxisSpacing: 10.0, // Vertical spacing
+                      ),
+                      itemCount: 8, // Number of TrainCards
+                      itemBuilder: (context, index) {
+                        return TaskCard(
+                          title: nameTaskList[index],
+                          description: nameTaskDescriptionList[index],
+                          progress: progressValue[index],
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ),
             ],
