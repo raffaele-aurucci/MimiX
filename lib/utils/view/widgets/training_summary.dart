@@ -35,12 +35,14 @@ class TrainingSummary extends StatelessWidget {
         children: [
           Icon(Icons.check_circle_outline, color: PaletteColor.darkBlue, size: 28),
 
-          SizedBox(width: 10),
+          SizedBox(width: 5),
 
-          HeaderText(
-            text: "Training Summary",
-            size: HeaderText.H4,
-          ),
+          Expanded(child:
+            HeaderText(
+              text: "Training Summary",
+              size: HeaderText.H4,
+            ),
+          )
         ],
       ),
       content: Column(
