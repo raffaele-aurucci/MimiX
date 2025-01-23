@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mimix_app/minigame_managment/dino_run/face_run_page.dart';
+import 'package:mimix_app/minigame_managment/face_ski/face_ski_page.dart';
 import 'package:mimix_app/utils/view/app_palette.dart';
 import 'package:mimix_app/utils/view/widgets/cards/homepage_card.dart';
 import 'package:mimix_app/utils/view/widgets/cards/minigame_card.dart';
@@ -24,7 +25,7 @@ class _MinigamePage extends State<MinigamePage> {
   List<String> nameGameList = [
     "Face Breakout",
     "Face Run",
-    "Face Labyrinth",
+    "Face Ski",
     "Face Kick",
     "Stay Tuned",
     "Stay Tuned",
@@ -40,7 +41,7 @@ class _MinigamePage extends State<MinigamePage> {
   List<AssetImage> imageGameList = [
     const AssetImage('assets/images/breakout.png'),
     const AssetImage('assets/images/dino_run.jpg'),
-    const AssetImage('assets/images/question_mark.jpg'),
+    const AssetImage('assets/images/ski_master_card_image.png'),
     const AssetImage('assets/images/question_mark.jpg'),
     const AssetImage('assets/images/question_mark.jpg'),
     const AssetImage('assets/images/question_mark.jpg'),
@@ -138,6 +139,16 @@ class _MinigamePage extends State<MinigamePage> {
                         onTap: () => {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) => const FaceRunPage())
+                          )},
+                      );
+                    }
+                    else if (index == 2){
+                      return MinigameCard(
+                        title: nameGameList[index],
+                        image: imageGameList[index],
+                        onTap: () => {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => const FaceSkiPage())
                           )},
                       );
                     }
