@@ -126,7 +126,7 @@ class _TrainingPage extends State<TrainingPage> {
                   ),
                   itemCount: 8, // Number of TrainCards
                   itemBuilder: (context, index) {
-                    if(index > 6) {
+                    if(index >= 6) {
                       return TrainingCard(
                         title: nameTrainingList[index],
                         description: nameTrainingDescriptionList[index],

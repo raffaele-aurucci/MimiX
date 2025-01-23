@@ -92,7 +92,7 @@ class _TrainingSessionPageState extends State<TrainingSessionPage> {
         var facialExpression = _expressionScores?.getScore(firstExpression) ?? 0.0;
 
         if(facialExpression > _maxValueOfExpression)
-          _maxValueOfExpression = double.parse(facialExpression.toStringAsFixed(2));;
+          _maxValueOfExpression = double.parse(facialExpression.toStringAsFixed(2));
 
         if (facialExpression > 0.50) {
           if (!_isDone) {

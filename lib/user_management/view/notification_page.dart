@@ -27,24 +27,24 @@ class NotificationsPage extends StatelessWidget {
                 // New Notification Card
                 NotificationCard(
                   isNew: true,
-                  title: 'New notification',
+                  title: 'Daily Training Reminder',
                   content:
-                  'Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, ipsum dolor',
+                  "Time to train your facial expressions! Take 5 minutes for today's exercise.",
                 ),
                 SizedBox(height: 16),
                 // Other Notifications
                 NotificationCard(
                   isNew: false,
-                  title: 'Notification',
+                  title: 'Feedback on Results',
                   content:
-                  'Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, ipsum dolor',
+                  "You've improved eyebrow movement by 15% compared to last week!",
                 ),
                 SizedBox(height: 16),
                 NotificationCard(
                   isNew: false,
-                  title: 'Notification',
+                  title: 'Virtual Rewards',
                   content:
-                  'Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, ipsum dolor',
+                  "Congratulations! You've completed 7 consecutive days of training. Keep it going!",
                 ),
               ],
             ),
