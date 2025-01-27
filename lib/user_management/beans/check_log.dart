@@ -1,7 +1,7 @@
 class CheckLog {
   int? id;
-  int date; // Timestamp (int)
-  int userId; // Foreign key referencing user
+  DateTime date;
+  int userId;
 
   CheckLog({
     this.id,
@@ -12,7 +12,7 @@ class CheckLog {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'date': date,
+      'date': date.millisecondsSinceEpoch,
       'user_id': userId,
     };
   }
@@ -20,7 +20,7 @@ class CheckLog {
   factory CheckLog.fromJson(Map<String, dynamic> json) {
     return CheckLog(
       id: json['id'],
-      date: json['date'],
+      date: DateTime.fromMillisecondsSinceEpoch(json['date']),
       userId: json['user_id'],
     );
   }

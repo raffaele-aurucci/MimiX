@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mimix_app/expression_management/beans/facial_expression.dart';
+import 'package:mimix_app/expression_management/dao/facial_expression_dao.dart';
+import 'package:mimix_app/user_management/beans/check_log.dart';
 import 'package:mimix_app/user_management/beans/user.dart';
+import 'package:mimix_app/user_management/storage/check_log_dao.dart';
 import 'package:mimix_app/user_management/storage/user_dao.dart';
 import 'package:provider/provider.dart';
 
@@ -54,3 +58,42 @@ Future<bool?> registerUser(GlobalKey<FormState> formKey, String username,
 
   return null;
 }
+
+// Incremental average function.
+double incrementalAvg(double oldAvg, double newValue, int count){
+  return oldAvg + ((newValue - oldAvg) / count);
+}
+
+
+Future<bool?> insertCheckAbilityByUserId(List<Map<String, double>> expressionAvgScores, int userId) async {
+
+  CheckLog checkLog = CheckLog(date: DateTime.now(), userId: userId);
+  CheckLogDao checkLogDao = CheckLogDao();
+  int checkId;
+
+  FacialExpressionDao facialExpressionDao = FacialExpressionDao();
+
+  try {
+    checkId = await checkLogDao.insertCheckLog(checkLog);
+    checkLog.id = checkId;
+
+    for (int index = 0; index < expressionAvgScores.length; index++){
+      FacialExpression facialExpression = FacialExpression(
+          name: expressionAvgScores[index].keys.first,
+          description: '',
+          parameter: expressionAvgScores[index].keys.first,
+          value: expressionAvgScores[index].values.first
+      );
+
+      facialExpressionDao.insertFacialExpression(facialExpression);
+    }
+
+    return true;
+
+  } catch (e) {
+    print(e);
+    return false;
+  }
+
+}
+

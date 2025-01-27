@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mimix_app/user_management/view/check_ability_page.dart';
 import 'package:mimix_app/user_management/view/widget/input_field.dart';
 import 'package:mimix_app/utils/view/widgets/buttons/primary_button.dart';
 import 'package:mimix_app/user_management/logic/user_logic.dart';
@@ -56,7 +57,7 @@ class _FormWidgetState extends State<FormWidget> {
       // navigate to HomePage
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(builder: (context) => const CheckAbilityPage()),
       );
     }
 
