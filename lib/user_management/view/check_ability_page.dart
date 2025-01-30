@@ -331,7 +331,7 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
               const SizedBox(height: 10),
 
               Container(
-                width: screenWidth * 0.6,
+                width: screenWidth * 0.65,
                 child: TrainingProgressBar(
                   progress: _facialExpressionCount / _GOAL,
                   height: TrainingProgressBar.trainingBar,
