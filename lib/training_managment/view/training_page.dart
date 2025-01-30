@@ -22,14 +22,16 @@ class _TrainingPage extends State<TrainingPage> {
 
   // List names of games
   List<String> nameTrainingList = [
-    "Brow Down",
-    "Brow Up",
-    "Mouth Open",
-    "Mouth Smile",
-    "Mouth Pucker",
-    "Mouth Lower",
-    "Stay tuned",
-    "Stay tuned",
+    "😣 Brow Down ",
+    "🤨 Brow Up ",
+    "😮 Mouth Open ",
+    "😊 Mouth Smile ",
+    "😚 Mouth Pucker ",
+    "🙁 Mouth Lower ",
+    "Premium Training",
+    "Premium Training",
+    "Premium Training",
+    "Premium Training",
   ];
 
   List<String> nameTrainingDescriptionList = [
