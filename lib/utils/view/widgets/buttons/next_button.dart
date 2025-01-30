@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../app_palette.dart';
+
 class NextButton extends StatelessWidget {
 
   final String text;
@@ -13,7 +15,12 @@ class NextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       style: TextButton.styleFrom(
-        textStyle: const TextStyle(fontFamily: 'Raleway', fontSize: 16, fontWeight: FontWeight.w500),
+        textStyle: const TextStyle(
+            fontFamily: 'Raleway',
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            color: PaletteColor.darkBlue,
+        ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mimix_app/user_management/logic/user_logic.dart';
 import 'package:mimix_app/user_management/view/home_page.dart';
 import 'package:mimix_app/utils/view/widgets/buttons/next_button.dart';
+import 'package:mimix_app/utils/view/widgets/buttons/secondary_button.dart';
 import 'package:provider/provider.dart';
 
 import '../../expression_management/beans/expression_scores.dart';
@@ -330,23 +331,36 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
 
               const SizedBox(height: 10),
 
-              Container(
-                width: screenWidth * 0.65,
-                child: TrainingProgressBar(
-                  progress: _facialExpressionCount / _GOAL,
-                  height: TrainingProgressBar.trainingBar,
-                  expressionCount: _facialExpressionCount,
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: screenWidth * 0.65,
+                      child: TrainingProgressBar(
+                        progress: _facialExpressionCount / _GOAL,
+                        height: TrainingProgressBar.trainingBar,
+                        expressionCount: _facialExpressionCount,
+                      ),
+                    ),
+
+                    Spacer(), // Ora funziona perché la Column è in un Expanded
+
+                    HeaderText(
+                      text: emojiExpression[_indexCheckedExpression],
+                      size: 45,
+                    ),
+
+                    Spacer(),
+
+                    NextButton(
+                      text: 'Next',
+                      onPressed: _facialExpressionCount == _GOAL ? handleNextButton : null,
+                    ),
+                  ],
                 ),
-              ),
+              )
 
-              const SizedBox(height: 75),
-
-              HeaderText(text: emojiExpression[_indexCheckedExpression], size: 45),
-
-              const Spacer(),
-
-              NextButton(text: 'Next',
-                  onPressed: _facialExpressionCount == _GOAL ? handleNextButton : null)
             ],
           ),
         ),
