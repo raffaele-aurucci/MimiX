@@ -276,7 +276,7 @@ class _TrainingSessionPageState extends State<TrainingSessionPage> {
               const SizedBox(height: 10),
 
               Container(
-                width: screenWidth * 0.6,
+                width: screenWidth * 0.65,
                 child: TrainingProgressBar(
                   progress: _facialExpressionCount / _goal,
                   height: TrainingProgressBar.trainingBar,

@@ -26,31 +26,23 @@ class _MinigamePage extends State<MinigamePage> {
     "Face Breakout",
     "Face Run",
     "Face Ski",
-    "Face Kick",
-    "Stay Tuned",
-    "Stay Tuned",
-    "Stay Tuned",
-    "Stay Tuned",
-    "Stay Tuned",
-    "Stay Tuned",
-    "Stay Tuned",
-    "Stay Tuned"
+    "Pay to Unlock",
+    "Pay to Unlock",
+    "Pay to Unlock",
+    "Pay to Unlock",
+    "Pay to Unlock",
   ];
 
   // List image of games
   List<AssetImage> imageGameList = [
-    const AssetImage('assets/images/breakout.png'),
+    const AssetImage('assets/images/face_breakout.jpg'),
     const AssetImage('assets/images/dino_run.jpg'),
     const AssetImage('assets/images/ski_master_card_image.png'),
-    const AssetImage('assets/images/question_mark.jpg'),
-    const AssetImage('assets/images/question_mark.jpg'),
-    const AssetImage('assets/images/question_mark.jpg'),
-    const AssetImage('assets/images/question_mark.jpg'),
-    const AssetImage('assets/images/question_mark.jpg'),
-    const AssetImage('assets/images/question_mark.jpg'),
-    const AssetImage('assets/images/question_mark.jpg'),
-    const AssetImage('assets/images/question_mark.jpg'),
-    const AssetImage('assets/images/question_mark.jpg'),
+    const AssetImage('assets/images/lock_game.png'),
+    const AssetImage('assets/images/lock_game.png'),
+    const AssetImage('assets/images/lock_game.png'),
+    const AssetImage('assets/images/lock_game.png'),
+    const AssetImage('assets/images/lock_game.png'),
   ];
 
   // To change the visibility of the text when you scroll
@@ -120,7 +112,7 @@ class _MinigamePage extends State<MinigamePage> {
                     crossAxisSpacing: 10.0, // Horizontal spacing
                     mainAxisSpacing: 10.0, // Vertical spacing
                   ),
-                  itemCount: 12, // Number of TrainCards
+                  itemCount: 8, // Number of TrainCards
                   itemBuilder: (context, index) {
                     if(index == 0){
                       return MinigameCard(

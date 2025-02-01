@@ -1,4 +1,4 @@
-import 'package:mimix_app/persistence/bean/check_log.dart';
+import 'package:mimix_app/user_management/beans/check_log.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:mimix_app/utils/storage/database_helper.dart';
 

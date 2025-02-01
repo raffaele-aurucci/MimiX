@@ -1,4 +1,4 @@
-import 'package:mimix_app/persistence/bean/facial_expression.dart';
+import 'package:mimix_app/expression_management/beans/facial_expression.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:mimix_app/utils/storage/database_helper.dart';
 

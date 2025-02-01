@@ -1,11 +1,14 @@
 // Start application
 import 'package:mimix_app/minigame_managment/view/minigame_page.dart';
 import 'package:mimix_app/training_managment/view/training_page.dart';
+import 'package:mimix_app/user_management/beans/check_log.dart';
 import 'package:mimix_app/user_management/beans/user.dart';
 import 'package:mimix_app/user_management/beans/user_provider.dart';
+import 'package:mimix_app/user_management/storage/check_log_dao.dart';
 import 'package:mimix_app/user_management/storage/user_dao.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:mimix_app/user_management/view/check_ability_page.dart';
 import 'package:mimix_app/user_management/view/menu_page.dart';
 import 'package:mimix_app/utils/view/app_theme.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -19,15 +22,15 @@ void main() async {
   await Permission.microphone.request();
 
   // Simulate initialization
-  final user = await _simulateInitialization();
+  final objects = await _simulateInitialization();
 
   FlutterNativeSplash.remove();
 
-  runApp(MimixApp(user: user));
+  runApp(MimixApp(objects: objects));
 }
 
 // TODO: Initialize the resources needed by app while the splash screen is displayed.
-Future<User?> _simulateInitialization() async {
+Future<Map<String, Object?>> _simulateInitialization() async {
   // final dbHelper = DatabaseHelper();
   // Database db = await dbHelper.database;
   // print('database: $db');
@@ -36,19 +39,30 @@ Future<User?> _simulateInitialization() async {
   UserDao userDao = UserDao();
   User? user = await userDao.getUserById(1);
 
-  return user;
+  // last check ability log
+  CheckLog? checkLog;
+
+  if (user != null){
+    CheckLogDao checkLogDao = CheckLogDao();
+    List<CheckLog> checkLogs = await checkLogDao.getCheckLogsByUserId(user.id!);
+    if (checkLogs.isNotEmpty){
+      checkLog = checkLogs[checkLogs.length - 1];
+    }
+  }
+
+  return {'user': user, 'checkLog': checkLog};
 }
 
 class MimixApp extends StatelessWidget {
 
-  final User? user;
+  final Map<String, Object?> objects;
 
-  const MimixApp({super.key, required this.user});
+  const MimixApp({super.key, required this.objects});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider( // initialize provider for all application
-        create: (_) => UserProvider(user),
+        create: (_) => UserProvider(objects['user'] as User?),
         child: MaterialApp(
           routes: {
             '/minigames_page': (context) => const MinigamePage(title: 'Minigames'),
@@ -57,7 +71,9 @@ class MimixApp extends StatelessWidget {
         title: 'Mimix App',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
-        home: user != null ? const MenuPage() : const RegistrationPage(),
+        home: objects['user'] != null && objects['checkLog'] != null ? const MenuPage()
+            : objects['user'] != null && objects['checkLog'] == null ? const CheckAbilityPage()
+            : const RegistrationPage()
     )
     );
   }

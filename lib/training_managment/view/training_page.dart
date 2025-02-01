@@ -22,14 +22,16 @@ class _TrainingPage extends State<TrainingPage> {
 
   // List names of games
   List<String> nameTrainingList = [
-    "Brow Down",
-    "Brow Up",
-    "Mouth Open",
-    "Mouth Smile",
-    "Mouth Pucker",
-    "Mouth Lower",
-    "Stay tuned",
-    "Stay tuned",
+    "😣 Brow Down ",
+    "🤨 Brow Up ",
+    "😮 Mouth Open ",
+    "😊 Mouth Smile ",
+    "😚 Mouth Pucker ",
+    "🙁 Mouth Lower ",
+    "Premium Training",
+    "Premium Training",
+    "Premium Training",
+    "Premium Training",
   ];
 
   List<String> nameTrainingDescriptionList = [
@@ -39,8 +41,10 @@ class _TrainingPage extends State<TrainingPage> {
     "Learn to form a natural smile",
     "Master puckering your lips for focused gestures",
     "Practice lowering your bottom lip",
-    "Lorem ipsum dolor sit amen, consec...",
-    "Lorem ipsum dolor sit amen, consec...",
+    "Upgrade now to access this session!",
+    "Upgrade now to access this session!",
+    "Upgrade now to access this session!",
+    "Upgrade now to access this session!",
   ];
 
   List<String> nameTrainingOverviewDescriptionList = [
@@ -50,6 +54,8 @@ class _TrainingPage extends State<TrainingPage> {
     "Smile naturally to engage and strengthen the zygomatic muscles for better expressions.",
     "Pucker your lips tightly to improve the strength and focus of the orbicularis oris.",
     "Lower your bottom lip to refine control of the depressor labii and related muscles.",
+    "",
+    "",
     "",
     ""
   ];

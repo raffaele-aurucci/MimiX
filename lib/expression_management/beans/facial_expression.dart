@@ -4,13 +4,15 @@ class FacialExpression {
   String description;
   String parameter;
   double value;
+  int? checkId;
 
   FacialExpression({
     this.id,
     required this.name,
     required this.description,
     required this.parameter,
-    required this.value
+    required this.value,
+    this.checkId
   });
 
   Map<String, dynamic> toJson() {
@@ -19,7 +21,8 @@ class FacialExpression {
       'name' : name,
       'description' : description,
       'parameter' : parameter,
-      'value' : value
+      'value' : value,
+      'check_id' : checkId
     };
   }
 
@@ -30,12 +33,13 @@ class FacialExpression {
       description: json['description'],
       parameter: json['parameter'],
       value: json['value'],
+      checkId: json['check_id']
     );
   }
 
   @override
   String toString() {
     return 'FacialExpression{id: $id, name: $name, description: $description, parameter: $parameter, '
-        'value: $value}';
+        'value: $value, checkId: $checkId}';
   }
 }

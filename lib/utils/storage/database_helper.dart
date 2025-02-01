@@ -79,17 +79,21 @@ class DatabaseHelper {
     await db.execute(todoSql);
   }
 
+  // Table used to stored value of different execution of facial expression.
   Future<void> _createFacialExpressionTable(Database db) async {
     const todoSql = '''CREATE TABLE facial_expression (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL,
       description TEXT NOT NULL,
       parameter TEXT NOT NULL,
-      value REAL NOT NULL
+      value REAL NOT NULL, 
+      check_id INTEGER,
+      FOREIGN KEY (check_id) REFERENCES check_log(id)
       )''';
     await db.execute(todoSql);
   }
 
+  // Table used to store value of check ability.
   Future<void> _createCheckLogTable(Database db) async {
     const todoSql = '''CREATE TABLE check_log (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
