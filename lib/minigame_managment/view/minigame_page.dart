@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mimix_app/minigame_managment/dino_run/face_run_page.dart';
-import 'package:mimix_app/minigame_managment/face_ski/face_ski_page.dart';
 import 'package:mimix_app/utils/view/app_palette.dart';
 import 'package:mimix_app/utils/view/widgets/cards/homepage_card.dart';
 import 'package:mimix_app/utils/view/widgets/cards/minigame_card.dart';
@@ -8,6 +7,7 @@ import 'package:mimix_app/utils/view/widgets/buttons/icon_button.dart';
 import 'package:mimix_app/utils/view/widgets/texts/header_text.dart';
 
 import '../breakout/face_breakout_page.dart';
+import '../face_ski/face_ski_page.dart';
 
 class MinigamePage extends StatefulWidget {
   const MinigamePage({super.key, required this.title});

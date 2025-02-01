@@ -1,22 +1,17 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:mimix_app/minigame_managment/dino_run/face_run_game_page.dart';
 import 'package:mimix_app/minigame_managment/dino_run/src/dino_run.dart';
 import 'package:mimix_app/utils/view/widgets/buttons/primary_button.dart';
 
 import 'package:mimix_app/utils/view/app_palette.dart';
-import 'package:permission_handler/permission_handler.dart';
 
-import '../../utils/view/app_theme.dart';
 import '../../utils/view/widgets/buttons/icon_button.dart';
 import '../../utils/view/widgets/texts/description_text.dart';
 import '../../utils/view/widgets/texts/header_text.dart';
-import '../../utils/view/widgets/alert_dialog.dart';
+import 'face_ski_game_page.dart';
 
 class FaceSkiPage extends StatefulWidget {
   const FaceSkiPage({super.key});
-
   @override
   State<FaceSkiPage> createState() => _FaceBreakoutOverviewPageState();
 }
@@ -109,7 +104,7 @@ class _FaceBreakoutOverviewPageState extends State<FaceSkiPage> {
                       text: 'Play',
                       onPressed: () => {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => const FaceRunGamePage()))
+                            MaterialPageRoute(builder: (context) => const FaceSkiGamePage()))
                       }
                   )
                 ]

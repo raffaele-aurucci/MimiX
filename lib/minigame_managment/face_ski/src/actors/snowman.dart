@@ -5,12 +5,11 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/particles.dart';
-import 'package:flame_audio/flame_audio.dart';
-import 'package:mimix_app/minigame_managment/face_ski/actors/player.dart';
-import 'package:mimix_app/minigame_managment/face_ski/game.dart';
+import 'package:mimix_app/minigame_managment/face_ski/src/actors/player.dart';
+import 'package:mimix_app/minigame_managment/face_ski/src/game.dart';
 
 class Snowman extends PositionComponent
-    with CollisionCallbacks, HasGameReference<SkiMasterGame> {
+    with CollisionCallbacks, HasGameReference<FaceSkiGame> {
   Snowman({super.position, required Sprite sprite, this.onCollected})
       : _body = SpriteComponent(sprite: sprite, anchor: Anchor.center);
 
@@ -51,9 +50,12 @@ class Snowman extends PositionComponent
   }
 
   void _collect() {
+
+    /*
     if (game.sfxValueNotifier.value) {
       FlameAudio.play(SkiMasterGame.collectSfx);
     }
+    */
 
     addAll([
       OpacityEffect.fadeOut(

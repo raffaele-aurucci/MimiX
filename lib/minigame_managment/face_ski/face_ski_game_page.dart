@@ -1,7 +1,7 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:mimix_app/minigame_managment/dino_run/src/dino_run.dart';
+import 'package:mimix_app/minigame_managment/face_ski/src/game.dart';
 
 import 'package:mimix_app/utils/view/app_palette.dart';
 
@@ -14,22 +14,21 @@ import 'package:mimix_app/utils/view/widgets/texts/header_text.dart';
 import 'package:mimix_app/utils/view/widgets/user_level.dart';
 
 import 'package:mimix_app/utils/view/widgets/pause_menu.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 import '../../user_management/beans/user_provider.dart';
 
-class FaceRunGamePage extends StatefulWidget {
-  const FaceRunGamePage({super.key});
+class FaceSkiGamePage extends StatefulWidget {
+  const FaceSkiGamePage({super.key});
 
   @override
-  State<FaceRunGamePage> createState() => _FaceRunGamePageState();
+  State<FaceSkiGamePage> createState() => _FaceSkiGamePageState();
 }
 
-class _FaceRunGamePageState extends State<FaceRunGamePage> {
+class _FaceSkiGamePageState extends State<FaceSkiGamePage> {
 
   // instance of game
-  late final DinoRun game;
+  late final FaceSkiGame game;
 
   // start game when camera is ready
   bool startGame = false;
@@ -47,6 +46,7 @@ class _FaceRunGamePageState extends State<FaceRunGamePage> {
       if (startGame == false) {
         game.startGame();
         startGame = true;
+        print("Game started");
       }
     });
   }
@@ -69,7 +69,7 @@ class _FaceRunGamePageState extends State<FaceRunGamePage> {
   void handleResume() {
     if (game.playState == PlayState.isPaused) {
       game.resumeEngine();
-      game.playState = PlayState.playing;
+      game.playState = FaceSkiPlayState.playing;
     }
   }
 
@@ -79,7 +79,7 @@ class _FaceRunGamePageState extends State<FaceRunGamePage> {
 
   void showPauseMenu(BuildContext context) {
     if (_isOverlayVisible == false) {
-      game.playState = PlayState.isPaused;
+      game.playState = FaceSkiPlayState.isPaused;
       game.pauseEngine();
       showDialog(
         barrierDismissible: false,
@@ -119,10 +119,10 @@ class _FaceRunGamePageState extends State<FaceRunGamePage> {
     if (mouthSmileLeft != null && mouthSmileRight != null && jawOpen != null) {
       if (mouthSmileLeft > 0.7 && mouthSmileRight > 0.7
           && jawOpen < mouthSmileLeft && jawOpen < mouthSmileRight) {
-        game.jumpDino();
+        game.gameplay.turnLeft();
       } else if (jawOpen >= 0.5 && mouthSmileLeft < jawOpen
           && mouthSmileRight < jawOpen) {
-        game.superJumpDino();
+        game.gameplay.turnRight();
       }
     }
   }
@@ -130,7 +130,7 @@ class _FaceRunGamePageState extends State<FaceRunGamePage> {
   @override
   void initState() {
     super.initState();
-    game = DinoRun(handleGameOver: handleGameOver);
+    game = FaceSkiGame();
   }
 
   @override
@@ -214,12 +214,12 @@ class _FaceRunGamePageState extends State<FaceRunGamePage> {
                   // Game
                   Expanded(
                     child: Container(
-                      margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                      margin: const EdgeInsets.fromLTRB(0, 15, 0, 15), // Margini opzionali
                       decoration: BoxDecoration(
-                          border: Border.all(color: PaletteColor.darkBlue, width: 2)
+                        border: Border.all(color: PaletteColor.darkBlue, width: 2),
                       ),
-                      child: GameWidget.controlled(
-                        gameFactory: () => game,
+                      child: const GameWidget.controlled(
+                        gameFactory: FaceSkiGame.new,
                       ),
                     ),
                   ),

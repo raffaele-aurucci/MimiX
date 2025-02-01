@@ -1,30 +1,25 @@
 import 'dart:async';
 import 'dart:math';
-import 'dart:ui';
-
 import 'package:flame/camera.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/input.dart';
 import 'package:flutter/material.dart' hide Viewport;
-import 'package:mimix_app/minigame_managment/face_ski/game.dart';
-import 'package:mimix_app/minigame_managment/face_ski/input.dart';
 
 class Hud extends PositionComponent with ParentIsA<Viewport>, HasGameReference {
   Hud({
     required Sprite playerSprite,
     required Sprite snowmanSprite,
-    this.input,
     this.onPausePressed,
   })  : _player = SpriteComponent(
           sprite: playerSprite,
           anchor: Anchor.center,
-          scale: Vector2.all(SkiMasterGame.isMobile ? 0.6 : 1.0),
+          scale: Vector2.all(0.6),
         ),
         _snowman = SpriteComponent(
           sprite: snowmanSprite,
           anchor: Anchor.center,
-          scale: Vector2.all(SkiMasterGame.isMobile ? 0.6 : 1.0),
+          scale: Vector2.all(0.6),
         );
 
   final _life = TextComponent(
@@ -51,16 +46,13 @@ class Hud extends PositionComponent with ParentIsA<Viewport>, HasGameReference {
 
   final SpriteComponent _player;
   final SpriteComponent _snowman;
-
-  late final JoystickComponent? _joystick;
-  final Input? input;
   final VoidCallback? onPausePressed;
 
   @override
   Future<void> onLoad() async {
     _player.position.setValues(
       16,
-      SkiMasterGame.isMobile ? 10 : parent.virtualSize.y - 20,
+      10,
     );
 
     _life.position.setValues(
@@ -80,26 +72,6 @@ class Hud extends PositionComponent with ParentIsA<Viewport>, HasGameReference {
 
     await addAll([_player, _life, _snowman, _score]);
 
-    if (SkiMasterGame.isMobile) {
-      _joystick = JoystickComponent(
-        anchor: Anchor.center,
-        position: parent.virtualSize * 0.5,
-        knob: CircleComponent(
-          radius: 10,
-          paint: Paint()..color = Colors.green.withOpacity(0.08),
-        ),
-        background: CircleComponent(
-          radius: 20,
-          paint: Paint()
-            ..color = Colors.black.withOpacity(0.05)
-            ..style = PaintingStyle.stroke
-            ..strokeWidth = 4,
-        ),
-      );
-
-      _joystick?.position.y =
-          parent.virtualSize.y - _joystick!.knobRadius * 1.5;
-      await _joystick?.addToParent(this);
 
       final pauseButton = HudButtonComponent(
         button: SpriteComponent.fromImage(
@@ -111,18 +83,7 @@ class Hud extends PositionComponent with ParentIsA<Viewport>, HasGameReference {
         onPressed: onPausePressed,
       );
       await add(pauseButton);
-    }
-  }
 
-  @override
-  void update(double dt) {
-    if (input?.active ?? false) {
-      input?.hAxis = lerpDouble(
-        input!.hAxis,
-        _joystick!.isDragged ? _joystick!.relativeDelta.x * input!.maxHAxis : 0,
-        input!.sensitivity * dt,
-      )!;
-    }
   }
 
   void updateSnowmanCount(int count) {

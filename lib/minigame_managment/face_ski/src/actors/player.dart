@@ -6,15 +6,18 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/particles.dart';
-import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/widgets.dart';
-import 'package:mimix_app/minigame_managment/face_ski/game.dart';
-import 'package:mimix_app/minigame_managment/face_ski/routes/gameplay.dart';
+import 'package:mimix_app/minigame_managment/face_ski/src/game.dart';
+import 'package:mimix_app/minigame_managment/face_ski/src/globals.dart';
+
+import '../routes/gameplay.dart';
 
 class Player extends PositionComponent
-    with HasGameReference<SkiMasterGame>, HasAncestor<Gameplay>, HasTimeScale {
+    with HasGameReference<FaceSkiGame>, HasAncestor<Gameplay>, HasTimeScale {
   Player({super.position, required Sprite sprite, super.priority})
       : _body = SpriteComponent(sprite: sprite, anchor: Anchor.center);
+
+  late double orientation = 0.0;
 
   final SpriteComponent _body;
   final _moveDirection = Vector2(0, 1);
@@ -22,8 +25,9 @@ class Player extends PositionComponent
   late final _trailParticlePaint = Paint()..color = game.backgroundColor();
   late final _offsetLeft = Vector2(-_body.width * 0.25, 0);
   late final _offsetRight = Vector2(_body.width * 0.25, 0);
+  bool left = false;
 
-  static const _maxSpeed = 80;
+  static const _maxSpeed = 40;
   static const _acceleration = 0.5;
   var _speed = 0.0;
   var _isOnGround = true;
@@ -38,7 +42,8 @@ class Player extends PositionComponent
 
   @override
   void update(double dt) {
-    _moveDirection.x = ancestor.input.hAxis;
+
+    _moveDirection.x = GlobalState.playerOrientation;
     _moveDirection.y = 1;
 
     _moveDirection.normalize();
@@ -70,17 +75,12 @@ class Player extends PositionComponent
   }
 
   void resetTo(Vector2 resetPosition) {
-    if (game.sfxValueNotifier.value) {
-      FlameAudio.play(SkiMasterGame.hurtSfx);
-    }
     position.setFrom(resetPosition);
     _speed *= 0.5;
   }
 
   double jump() {
-    if (game.sfxValueNotifier.value) {
-      FlameAudio.play(SkiMasterGame.jumpSfx);
-    }
+
     _isOnGround = false;
     final jumpFactor = _speed / _maxSpeed;
     final jumpScale = lerpDouble(1, 1.2, jumpFactor)!;

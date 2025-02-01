@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mimix_app/minigame_managment/face_ski/game.dart';
 
 class LevelSelection extends StatelessWidget {
   const LevelSelection({

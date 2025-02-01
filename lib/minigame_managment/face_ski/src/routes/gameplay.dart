@@ -7,15 +7,14 @@ import 'package:flame/effects.dart';
 import 'package:flame/sprite.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_tiled/flame_tiled.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:mimix_app/minigame_managment/face_ski/actors/snowman.dart';
-import 'package:mimix_app/minigame_managment/face_ski/game.dart';
-import 'package:mimix_app/minigame_managment/face_ski/hud.dart';
-import 'package:mimix_app/minigame_managment/face_ski/input.dart';
-import 'package:mimix_app/minigame_managment/face_ski/actors/player.dart';
+import 'package:mimix_app/minigame_managment/face_ski/src/actors/snowman.dart';
+import 'package:mimix_app/minigame_managment/face_ski/src/game.dart';
+import 'package:mimix_app/minigame_managment/face_ski/src/hud.dart';
+import 'package:mimix_app/minigame_managment/face_ski/src/actors/player.dart';
+import 'package:mimix_app/minigame_managment/face_ski/src/globals.dart';
 
-class Gameplay extends Component with HasGameReference<SkiMasterGame> {
+class Gameplay extends Component with HasGameReference<FaceSkiGame> {
   Gameplay(
       this.currentLevel, {
         super.key,
@@ -35,14 +34,6 @@ class Gameplay extends Component with HasGameReference<SkiMasterGame> {
   final ValueChanged<int> onLevelCompleted;
   final VoidCallback onGameOver;
 
-  late final input = Input(
-    keyCallbacks: {
-      LogicalKeyboardKey.keyP: onPausePressed,
-      LogicalKeyboardKey.keyC: () => onLevelCompleted.call(3),
-      LogicalKeyboardKey.keyO: onGameOver,
-    },
-  );
-
   late final _resetTimer = Timer(1, autoStart: false, onTick: _resetPlayer);
   late final _cameraShake = MoveEffect.by(
     Vector2(0, 3),
@@ -51,7 +42,7 @@ class Gameplay extends Component with HasGameReference<SkiMasterGame> {
 
   late final World _world;
   late final CameraComponent _camera;
-  late final Player _player;
+  late Player player;
   late final Vector2 _lastSafePosition;
   late final RectangleComponent _fader;
   late final Hud _hud;
@@ -74,16 +65,11 @@ class Gameplay extends Component with HasGameReference<SkiMasterGame> {
 
   @override
   Future<void> onLoad() async {
-    if (game.musicValueNotifier.value) {
-      _bgmPlayer = await FlameAudio.loopLongAudio(SkiMasterGame.bgm, volume: 0);
-    }
-
     final map = await TiledComponent.load(
       'Level$currentLevel.tmx',
       Vector2.all(16),
     );
 
-    // Carica l'immagine nella cache
     await game.images.load('tilemap_packed.png');
 
     final tiles = game.images.fromCache('tilemap_packed.png');
@@ -107,8 +93,7 @@ class Gameplay extends Component with HasGameReference<SkiMasterGame> {
     _hud = Hud(
       playerSprite: _spriteSheet.getSprite(5, 10),
       snowmanSprite: _spriteSheet.getSprite(5, 9),
-      input: SkiMasterGame.isMobile ? input : null,
-      onPausePressed: SkiMasterGame.isMobile ? onPausePressed : null,
+      onPausePressed: onPausePressed,
     );
 
     await _camera.viewport.addAll([_fader, _hud]);
@@ -118,14 +103,15 @@ class Gameplay extends Component with HasGameReference<SkiMasterGame> {
 
   @override
   void update(double dt) {
+
     if (_levelCompleted || _gameOver) {
-      _player.timeScale = lerpDouble(
-        _player.timeScale,
+      player.timeScale = lerpDouble(
+        player.timeScale,
         0,
         _timeScaleRate * dt,
       )!;
     } else {
-      if (_isOffTrail && input.active) {
+      if (_isOffTrail && GlobalState.active) {
         _resetTimer.update(dt);
 
         if (!_resetTimer.isRunning()) {
@@ -170,12 +156,11 @@ class Gameplay extends Component with HasGameReference<SkiMasterGame> {
   }
 
   Future<void> _setupWorldAndCamera(TiledComponent map) async {
-    _world = World(children: [map, input]);
+    _world = World(children: [map]);
     await add(_world);
 
-    final aspectRatio = MediaQuery.of(game.buildContext!).size.aspectRatio;
     const height = 200.0;
-    final width = SkiMasterGame.isMobile ? height * aspectRatio : 320.0;
+    const width = 130.0;
 
     _camera = CameraComponent.withFixedResolution(
       width: width,
@@ -193,13 +178,13 @@ class Gameplay extends Component with HasGameReference<SkiMasterGame> {
       for (final object in objects) {
         switch (object.class_) {
           case 'Player':
-            _player = Player(
+            player = Player(
               position: Vector2(object.x, object.y),
               sprite: _spriteSheet.getSprite(5, 10),
               priority: 1,
             );
-            await _world.add(_player);
-            _camera.follow(_player);
+            await _world.add(player);
+            _camera.follow(player);
             _lastSafePosition = Vector2(object.x, object.y);
             break;
           case 'Snowman':
@@ -307,7 +292,7 @@ class Gameplay extends Component with HasGameReference<SkiMasterGame> {
   }
 
   void _onRamp() {
-    final jumpFactor = _player.jump();
+    final jumpFactor = player.jump();
     final jumpScale = lerpDouble(1, 1.08, jumpFactor)!;
     final jumpDuration = lerpDouble(0, 0.8, jumpFactor)!;
 
@@ -324,13 +309,13 @@ class Gameplay extends Component with HasGameReference<SkiMasterGame> {
   }
 
   void _onTrailStart() {
-    input.active = true;
-    _lastSafePosition.setFrom(_player.position);
+    GlobalState.active = true;
+    _lastSafePosition.setFrom(player.position);
   }
 
   void _onTrailEnd() {
     _fader.add(OpacityEffect.fadeIn(LinearEffectController(1.5)));
-    input.active = false;
+    GlobalState.active = false;
     _levelCompleted = true;
 
     if (_nSnowmanCollected >= _star3) {
@@ -354,11 +339,22 @@ class Gameplay extends Component with HasGameReference<SkiMasterGame> {
     _hud.updateLifeCount(_nLives);
 
     if (_nLives > 0) {
-      _player.resetTo(_lastSafePosition);
+      player.resetTo(_lastSafePosition);
     } else {
       _gameOver = true;
       _fader.add(OpacityEffect.fadeIn(LinearEffectController(1.5)));
       onGameOver.call();
     }
   }
+
+  // Crea un'istanza di PlayerController
+  PlayerController playerController = PlayerController();
+
+  void turnLeft() {
+    playerController.turnLeft();
+  }
+  void turnRight() {
+    playerController.turnRight();
+  }
+
 }

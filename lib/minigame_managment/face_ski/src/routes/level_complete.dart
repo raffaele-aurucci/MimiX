@@ -50,28 +50,12 @@ class LevelComplete extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 15),
-            SizedBox(
-              width: 150,
-              child: OutlinedButton(
-                onPressed: nStars != 0 ? onNextPressed : null,
-                child: const Text('Next'),
-              ),
-            ),
             const SizedBox(height: 5),
             SizedBox(
               width: 150,
               child: OutlinedButton(
                 onPressed: onRetryPressed,
                 child: const Text('Retry'),
-              ),
-            ),
-            const SizedBox(height: 5),
-            SizedBox(
-              width: 150,
-              child: OutlinedButton(
-                onPressed: onExitPressed,
-                child: const Text('Exit'),
               ),
             ),
           ],
