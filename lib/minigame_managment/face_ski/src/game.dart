@@ -74,6 +74,7 @@ class FaceSkiGame extends FlameGame with HasCollisionDetection {
       onGameOver: _handleGameOver,
     );
     add(gameplay);
+    resumeEngine();
   }
 
   // TODO
