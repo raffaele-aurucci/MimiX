@@ -1,7 +1,7 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:mimix_app/minigame_managment/dino_run/src/dino_run.dart';
 import 'package:mimix_app/minigame_managment/face_ski/src/game.dart';
+import 'package:mimix_app/minigame_managment/face_ski/src/globals.dart';
 
 import 'package:mimix_app/utils/view/app_palette.dart';
 
@@ -46,7 +46,6 @@ class _FaceSkiGamePageState extends State<FaceSkiGamePage> {
       if (startGame == false) {
         game.startGame();
         startGame = true;
-        print("Game started");
       }
     });
   }
@@ -60,27 +59,28 @@ class _FaceSkiGamePageState extends State<FaceSkiGamePage> {
           buttonMessage: 'Restart',
           onTap: () {
             Navigator.of(context).pop();
-            game.resetGame();
           }
       );
     });
   }
 
   void handleResume() {
-    if (game.playState == PlayState.isPaused) {
-      game.resumeEngine();
-      game.playState = FaceSkiPlayState.playing;
-    }
+    setState(() {
+      game.resumeGame();
+    });
   }
 
+
   void handleRestart() {
-    game.resetGame();
+    Navigator.of(context).pop();
+    setState(() {
+      game.restartGame();
+    });
   }
 
   void showPauseMenu(BuildContext context) {
     if (_isOverlayVisible == false) {
-      game.playState = FaceSkiPlayState.isPaused;
-      game.pauseEngine();
+      GlobalState.isPaused = true;
       showDialog(
         barrierDismissible: false,
         context: context,
@@ -180,13 +180,13 @@ class _FaceSkiGamePageState extends State<FaceSkiGamePage> {
                           Row(
                             children: [
                               HeaderText(text: '😊', size: HeaderText.H4),
-                              HeaderText(text: ' Jump', size: 20.0),
+                              HeaderText(text: ' Right', size: 20.0),
                             ],
                           ),
                           Row(
                             children: [
                               HeaderText(text: '😮', size: HeaderText.H4),
-                              HeaderText(text: ' Super Jump', size: 20.0),
+                              HeaderText(text: ' Left', size: 20.0),
                             ],
                           ),
                         ],
@@ -218,9 +218,9 @@ class _FaceSkiGamePageState extends State<FaceSkiGamePage> {
                       decoration: BoxDecoration(
                         border: Border.all(color: PaletteColor.darkBlue, width: 2),
                       ),
-                      child: const GameWidget.controlled(
-                        gameFactory: FaceSkiGame.new,
-                      ),
+                      child: GameWidget(
+                        game: game,
+                      )
                     ),
                   ),
 

@@ -1,4 +1,3 @@
-import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:mimix_app/minigame_managment/dino_run/src/dino_run.dart';
 import 'package:mimix_app/utils/view/widgets/buttons/primary_button.dart';
@@ -47,7 +46,7 @@ class _FaceBreakoutOverviewPageState extends State<FaceSkiPage> {
             margin: const EdgeInsets.only(top: 0, bottom: 40, left: 20, right: 20),
             child: Column(
                 children: [
-                  const HeaderText(text: 'Face Run', size: HeaderText.H3),
+                  const HeaderText(text: 'Face Ski', size: HeaderText.H3),
                   const SizedBox(height: 8),
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -59,13 +58,13 @@ class _FaceBreakoutOverviewPageState extends State<FaceSkiPage> {
                           Row(
                             children: [
                               HeaderText(text: '😊', size: HeaderText.H4),
-                              HeaderText(text: ' Jump', size: 20.0),
+                              HeaderText(text: ' Right', size: 20.0),
                             ],
                           ),
                           Row(
                             children: [
                               HeaderText(text: '😮', size: HeaderText.H4),
-                              HeaderText(text: ' Super Jump', size: 20.0),
+                              HeaderText(text: ' Left', size: 20.0),
                             ],
                           ),
                         ],
@@ -85,9 +84,6 @@ class _FaceBreakoutOverviewPageState extends State<FaceSkiPage> {
                       margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
                       decoration: BoxDecoration(
                           border: Border.all(color: PaletteColor.darkBlue, width: 2)
-                      ),
-                      child: GameWidget.controlled(
-                        gameFactory: () => game,
                       ),
                   )),
 

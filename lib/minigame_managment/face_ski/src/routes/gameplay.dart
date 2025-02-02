@@ -15,10 +15,7 @@ import 'package:mimix_app/minigame_managment/face_ski/src/actors/player.dart';
 import 'package:mimix_app/minigame_managment/face_ski/src/globals.dart';
 
 class Gameplay extends Component with HasGameReference<FaceSkiGame> {
-  Gameplay(
-      this.currentLevel, {
-        super.key,
-        required this.onPausePressed,
+  Gameplay({
         required this.onLevelCompleted,
         required this.onGameOver,
       });
@@ -29,8 +26,6 @@ class Gameplay extends Component with HasGameReference<FaceSkiGame> {
   static const _bgmMinVol = 0;
   static const _bgmMaxVol = 0.6;
 
-  final int currentLevel;
-  final VoidCallback onPausePressed;
   final ValueChanged<int> onLevelCompleted;
   final VoidCallback onGameOver;
 
@@ -66,7 +61,7 @@ class Gameplay extends Component with HasGameReference<FaceSkiGame> {
   @override
   Future<void> onLoad() async {
     final map = await TiledComponent.load(
-      'Level$currentLevel.tmx',
+      'Level3.tmx',
       Vector2.all(16),
     );
 
@@ -93,7 +88,6 @@ class Gameplay extends Component with HasGameReference<FaceSkiGame> {
     _hud = Hud(
       playerSprite: _spriteSheet.getSprite(5, 10),
       snowmanSprite: _spriteSheet.getSprite(5, 9),
-      onPausePressed: onPausePressed,
     );
 
     await _camera.viewport.addAll([_fader, _hud]);

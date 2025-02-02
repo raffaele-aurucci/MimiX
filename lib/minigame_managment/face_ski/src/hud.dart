@@ -10,7 +10,6 @@ class Hud extends PositionComponent with ParentIsA<Viewport>, HasGameReference {
   Hud({
     required Sprite playerSprite,
     required Sprite snowmanSprite,
-    this.onPausePressed,
   })  : _player = SpriteComponent(
           sprite: playerSprite,
           anchor: Anchor.center,
@@ -46,7 +45,6 @@ class Hud extends PositionComponent with ParentIsA<Viewport>, HasGameReference {
 
   final SpriteComponent _player;
   final SpriteComponent _snowman;
-  final VoidCallback? onPausePressed;
 
   @override
   Future<void> onLoad() async {
@@ -71,19 +69,6 @@ class Hud extends PositionComponent with ParentIsA<Viewport>, HasGameReference {
     );
 
     await addAll([_player, _life, _snowman, _score]);
-
-
-      final pauseButton = HudButtonComponent(
-        button: SpriteComponent.fromImage(
-          await game.images.load('pause.png'),
-          size: Vector2.all(12),
-        ),
-        anchor: Anchor.bottomRight,
-        position: parent.virtualSize,
-        onPressed: onPausePressed,
-      );
-      await add(pauseButton);
-
   }
 
   void updateSnowmanCount(int count) {
