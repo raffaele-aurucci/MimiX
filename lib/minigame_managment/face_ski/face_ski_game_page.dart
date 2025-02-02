@@ -30,9 +30,6 @@ class _FaceSkiGamePageState extends State<FaceSkiGamePage> {
   // instance of game
   late final FaceSkiGame game;
 
-  // start game when camera is ready
-  bool startGame = false;
-
   // save the local high score
   int highScore = 0;
 
@@ -43,9 +40,11 @@ class _FaceSkiGamePageState extends State<FaceSkiGamePage> {
   void handleOverlay(bool hidden) {
     setState(() {
       _isOverlayVisible = hidden;
-      if (startGame == false) {
+      if (GlobalState.startGame == false) {
         game.startGame();
-        startGame = true;
+        GlobalState.startGame = true;
+      }else{
+        game.startGame();
       }
     });
   }
@@ -96,14 +95,9 @@ class _FaceSkiGamePageState extends State<FaceSkiGamePage> {
     }
   }
 
-  // handle face detected into webview
-  bool _isFaceDetected = false;
 
   void handleFaceDetected(bool isFaceDetected) {
     if (!mounted) return;
-    setState(() {
-      _isFaceDetected = isFaceDetected;
-    });
   }
 
   // handle expression scores from webview in order to manage input of game

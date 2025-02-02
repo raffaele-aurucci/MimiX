@@ -4,6 +4,7 @@ class GlobalState {
   static double playerOrientation = 0.0;
   static bool active = false;
   static bool isPaused = false;
+  static bool startGame = false;
 }
 
 class PlayerController {

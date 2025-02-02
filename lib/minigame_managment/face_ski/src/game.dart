@@ -35,8 +35,7 @@ class FaceSkiGame extends FlameGame with HasCollisionDetection {
     lives.value = 5;
     GlobalState.isPaused = false;
 
-    // Rimuoviamo tutti i componenti precedenti per evitare riferimenti vecchi
-    children.clear();
+    GlobalState.active = false;
 
     // Ricreiamo il gameplay da zero
     gameplay = Gameplay(
