@@ -46,7 +46,11 @@ class FaceSkiGame extends FlameGame with HasCollisionDetection {
 
     // Aggiungiamo il nuovo gameplay pulito
     add(gameplay);
+
+    // Forza un'avvio completo del gioco, senza pause
+    resumeGame();
   }
+
 
   void resumeGame() {
     GlobalState.isPaused = false;
@@ -61,6 +65,9 @@ class FaceSkiGame extends FlameGame with HasCollisionDetection {
     lives.value = 5;
     GlobalState.isPaused = false;
 
+    // Reset dei trigger della pista e altre variabili globali
+    GlobalState.active = false;
+
     // Rimuove il vecchio gameplay e ne crea uno nuovo
     remove(gameplay);
     gameplay = Gameplay(
@@ -70,18 +77,13 @@ class FaceSkiGame extends FlameGame with HasCollisionDetection {
     add(gameplay);
   }
 
-
   // TODO
   void _handleLevelCompleted(int stars) {
-    // Logica per il completamento del livello
-    overlays.add('LevelComplete');
-    startGame();
   }
 
   // TODO
   void _handleGameOver() {
   }
-
 
 }
 
