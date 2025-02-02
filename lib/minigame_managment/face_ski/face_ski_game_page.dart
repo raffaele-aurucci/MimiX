@@ -71,7 +71,6 @@ class _FaceSkiGamePageState extends State<FaceSkiGamePage> {
 
 
   void handleRestart() {
-    Navigator.of(context).pop();
     setState(() {
       game.restartGame();
     });
