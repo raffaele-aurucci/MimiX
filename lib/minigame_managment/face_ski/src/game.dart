@@ -57,7 +57,6 @@ class FaceSkiGame extends FlameGame with HasCollisionDetection {
   }
 
   void restartGame() {
-    print("Riavvio del gioco...");
 
     // Reset delle variabili di stato
     score.value = 0;
@@ -79,12 +78,23 @@ class FaceSkiGame extends FlameGame with HasCollisionDetection {
 
   // TODO
   void _handleLevelCompleted(int stars) {
+    print("Livello Completato");
   }
 
-  // TODO
   void _handleGameOver() {
+    callGamePageMethod();
   }
 
+  // Callback per chiamare un metodo di FaceSkiGamePage
+  final VoidCallback? onGameOverMethodCalled;
+
+  FaceSkiGame({this.onGameOverMethodCalled});
+
+  void callGamePageMethod() {
+    if (onGameOverMethodCalled != null) {
+      onGameOverMethodCalled!(); // Chiamata al metodo di FaceSkiGamePage
+    }
+  }
 }
 
 

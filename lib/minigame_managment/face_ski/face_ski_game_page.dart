@@ -7,7 +7,6 @@ import 'package:mimix_app/utils/view/app_palette.dart';
 
 import 'package:mimix_app/expression_management/beans/expression_scores.dart';
 import 'package:mimix_app/expression_management/view/web_view.dart';
-import 'package:mimix_app/utils/view/widgets/alert_dialog.dart';
 import 'package:mimix_app/utils/view/widgets/buttons/icon_button.dart';
 import 'package:mimix_app/utils/view/widgets/texts/description_text.dart';
 import 'package:mimix_app/utils/view/widgets/texts/header_text.dart';
@@ -17,6 +16,7 @@ import 'package:mimix_app/utils/view/widgets/pause_menu.dart';
 import 'package:provider/provider.dart';
 
 import '../../user_management/beans/user_provider.dart';
+import '../../utils/view/widgets/gameover_menu.dart';
 
 class FaceSkiGamePage extends StatefulWidget {
   const FaceSkiGamePage({super.key});
@@ -49,20 +49,6 @@ class _FaceSkiGamePageState extends State<FaceSkiGamePage> {
     });
   }
 
-  void handleGameOver() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      DialogUtils.showErrorDialog(
-          context: context,
-          title: "Game Over",
-          message: "Please try again.",
-          buttonMessage: 'Restart',
-          onTap: () {
-            Navigator.of(context).pop();
-          }
-      );
-    });
-  }
-
   void handleResume() {
     setState(() {
       game.resumeGame();
@@ -86,7 +72,7 @@ class _FaceSkiGamePageState extends State<FaceSkiGamePage> {
           return PauseMenu(
             handleResume: handleResume,
             handleRestart: handleRestart,
-            gameName: 'Face Run',
+            gameName: 'Face Ski',
             quitNavigate: '/minigames_page',
           );
         },
@@ -123,7 +109,21 @@ class _FaceSkiGamePageState extends State<FaceSkiGamePage> {
   @override
   void initState() {
     super.initState();
-    game = FaceSkiGame();
+    game = FaceSkiGame(onGameOverMethodCalled: showGameOverMenu);
+  }
+
+  void showGameOverMenu() {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return GameOverMenu(
+          handleRestart: handleRestart,
+          gameName: 'Face Ski',
+          quitNavigate: '/minigames_page',
+        );
+      },
+    );
   }
 
   @override
@@ -218,7 +218,7 @@ class _FaceSkiGamePageState extends State<FaceSkiGamePage> {
                   ),
 
                   // Webview
-                  Container(
+                  SizedBox(
                       height: 130,
                       width: 100,
                       child: Stack(
