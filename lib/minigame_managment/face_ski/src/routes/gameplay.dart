@@ -154,7 +154,7 @@ class Gameplay extends Component with HasGameReference<FaceSkiGame> {
     await add(_world);
 
     const height = 200.0;
-    const width = 130.0;
+    const width = 135.0;
 
     _camera = CameraComponent.withFixedResolution(
       width: width,

@@ -1,23 +1,21 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:mimix_app/minigame_managment/dino_run/src/dino_run.dart';
 
 import 'package:mimix_app/utils/view/app_palette.dart';
 
 import 'package:mimix_app/expression_management/beans/expression_scores.dart';
 import 'package:mimix_app/expression_management/view/web_view.dart';
-import 'package:mimix_app/utils/view/widgets/alert_dialog.dart';
 import 'package:mimix_app/utils/view/widgets/buttons/icon_button.dart';
 import 'package:mimix_app/utils/view/widgets/texts/description_text.dart';
 import 'package:mimix_app/utils/view/widgets/texts/header_text.dart';
 import 'package:mimix_app/utils/view/widgets/user_level.dart';
 
 import 'package:mimix_app/utils/view/widgets/pause_menu.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 import '../../user_management/beans/user_provider.dart';
+import '../../utils/view/widgets/gameover_menu.dart';
 
 class FaceRunGamePage extends StatefulWidget {
   const FaceRunGamePage({super.key});
@@ -52,18 +50,17 @@ class _FaceRunGamePageState extends State<FaceRunGamePage> {
   }
 
   void handleGameOver() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      DialogUtils.showErrorDialog(
-          context: context,
-          title: "Game Over",
-          message: "Please try again.",
-          buttonMessage: 'Restart',
-          onTap: () {
-            Navigator.of(context).pop();
-            game.resetGame();
-          }
-      );
-    });
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return GameOverMenu(
+          handleRestart: handleRestart,
+          gameName: 'Game Over',
+          quitNavigate: '/minigames_page',
+        );
+      },
+    );
   }
 
   void handleResume() {

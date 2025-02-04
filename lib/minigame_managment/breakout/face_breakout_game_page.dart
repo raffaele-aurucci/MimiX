@@ -16,6 +16,7 @@ import 'package:mimix_app/utils/view/widgets/pause_menu.dart';
 import 'package:provider/provider.dart';
 
 import '../../user_management/beans/user_provider.dart';
+import '../../utils/view/widgets/gameover_menu.dart';
 
 class FaceBreakoutGamePage extends StatefulWidget {
   const FaceBreakoutGamePage({super.key});
@@ -50,18 +51,17 @@ class _FaceBreakoutGamePageState extends State<FaceBreakoutGamePage> {
   }
 
   void handleGameOver() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      DialogUtils.showErrorDialog(
-          context: context,
-          title: "Game Over",
-          message: "Please try again.",
-          buttonMessage: 'Restart',
-          onTap: () {
-            Navigator.of(context).pop();
-            game.resetGame();
-          }
-      );
-    });
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return GameOverMenu(
+          handleRestart: handleRestart,
+          gameName: 'Game Over',
+          quitNavigate: '/minigames_page',
+        );
+      },
+    );
   }
 
   void handleWon() {
