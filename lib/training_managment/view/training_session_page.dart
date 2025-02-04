@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -61,7 +63,37 @@ class _TrainingSessionPageState extends State<TrainingSessionPage> {
     });
   }
 
+  // Flag to confirm face detection
+  bool _confirmFaceDetection = false;
+  Timer? _faceDetectionTimer;
+  bool _isDoneCheckFaceDetect = false;
+
   void handleFaceDetected(bool isFaceDetected) {
+
+    // Check isFaceDetected == true && preceded value == false && check not is done
+    if (isFaceDetected && !_isFaceDetected && !_isDoneCheckFaceDetect) {
+
+      _faceDetectionTimer?.cancel();
+
+      // Set a timer for confirm face detection and check expressions
+      _faceDetectionTimer = Timer(const Duration(milliseconds: 500), () {
+        if (_isFaceDetected) {
+          setState(() {
+            _confirmFaceDetection = true;
+            _isDoneCheckFaceDetect = true;
+          });
+        }
+      });
+    }
+    // Check if isFaceDetected == false and preceded value == true
+    else if (!isFaceDetected && _isFaceDetected) {
+      setState(() {
+        _confirmFaceDetection = false;
+        _isDoneCheckFaceDetect = false;
+      });
+    }
+
+    // Change value of _isFaceDetected
     setState(() {
       _isFaceDetected = isFaceDetected;
     });
@@ -81,25 +113,31 @@ class _TrainingSessionPageState extends State<TrainingSessionPage> {
     }
   }
 
+
   void handleExpressionScore(ExpressionScores? expressionScores) {
     _expressionScores = expressionScores;
 
-    if(!_goalSucces && _numberOfExpressionToTraining != 0 && !_isPaused) {
+    if (!_goalSucces && _numberOfExpressionToTraining != 0 && !_isPaused) {
       handleGoalSuccess();
 
       if (_numberOfExpressionToTraining == 1) {
-        // Get the value of the expression
         var facialExpression = _expressionScores?.getScore(firstExpression) ?? 0.0;
 
-        if(facialExpression > _maxValueOfExpression)
+        if (facialExpression > _maxValueOfExpression) {
           _maxValueOfExpression = double.parse(facialExpression.toStringAsFixed(2));
+        }
 
-        if (facialExpression > 0.50) {
+        // Use confirm face detection to increment counter
+        if (facialExpression > 0.5 && _confirmFaceDetection) {
+
           if (!_isDone) {
             _facialExpressionCount++;
             _isDone = true;
           }
-        } else {
+        } else if (facialExpression < 0.1 && widget.expression == 'Mouth Lower') {
+          _isDone = false;
+        }
+        else if (facialExpression < 0.5 && widget.expression != 'Mouth Lower') {
           _isDone = false;
         }
       } else {
@@ -111,12 +149,12 @@ class _TrainingSessionPageState extends State<TrainingSessionPage> {
         if(avgOfValue > _maxValueOfExpression)
           _maxValueOfExpression = double.parse(avgOfValue.toStringAsFixed(2));
 
-        if (facialExpression1 > 0.50 && facialExpression2 > 0.50) {
+        if (facialExpression1 > 0.50 && facialExpression2 > 0.50 && _confirmFaceDetection) {
           if (!_isDone) {
             _facialExpressionCount++;
             _isDone = true; // The expression is done and it's not possible overlap
           }
-        } else {
+        } else if (facialExpression1 < 0.50 && facialExpression2 < 0.50) {
           _isDone = false; //
         }
       }

@@ -22,14 +22,12 @@ class _TrainingPage extends State<TrainingPage> {
 
   // List names of games
   List<String> nameTrainingList = [
-    "😣 Brow Down ",
-    "🤨 Brow Up ",
-    "😮 Mouth Open ",
-    "😊 Mouth Smile ",
-    "😚 Mouth Pucker ",
-    "🙁 Mouth Lower ",
-    "Premium Training",
-    "Premium Training",
+    "😣 Brow Down",
+    "🤨 Brow Up",
+    "😮 Mouth Open",
+    "😊 Mouth Smile",
+    "😚 Mouth Pucker",
+    "🙁 Mouth Lower",
     "Premium Training",
     "Premium Training",
   ];
@@ -43,8 +41,6 @@ class _TrainingPage extends State<TrainingPage> {
     "Practice lowering your bottom lip",
     "Upgrade now to access this session!",
     "Upgrade now to access this session!",
-    "Upgrade now to access this session!",
-    "Upgrade now to access this session!",
   ];
 
   List<String> nameTrainingOverviewDescriptionList = [
@@ -56,8 +52,6 @@ class _TrainingPage extends State<TrainingPage> {
     "Lower your bottom lip to refine control of the depressor labii and related muscles.",
     "",
     "",
-    "",
-    ""
   ];
 
   // To change the visibility of the text when you scroll
@@ -105,7 +99,7 @@ class _TrainingPage extends State<TrainingPage> {
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 child: HomePageCard(
                   title: 'Training',
-                  image: AssetImage('assets/images/training_icon.png'),
+                  image: const AssetImage('assets/images/training_icon.png'),
                   onTap: () => print('Home page card'),
                 ),
               ),
@@ -151,7 +145,7 @@ class _TrainingPage extends State<TrainingPage> {
                                 // Passes the expression to be trained to the training session page
                                   builder: (context) =>
                                       TrainingOverviewPage(
-                                        expression: nameTrainingList[index],
+                                        expression: nameTrainingList[index].split(" ")[1] + " " + nameTrainingList[index].split(" ")[2],
                                         description: nameTrainingOverviewDescriptionList[index],
                                       )
                               )
