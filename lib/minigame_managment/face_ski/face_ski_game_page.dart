@@ -119,7 +119,7 @@ class _FaceSkiGamePageState extends State<FaceSkiGamePage> {
       builder: (BuildContext context) {
         return GameOverMenu(
           handleRestart: handleRestart,
-          gameName: 'Face Ski',
+          gameName: 'Game Over',
           quitNavigate: '/minigames_page',
         );
       },

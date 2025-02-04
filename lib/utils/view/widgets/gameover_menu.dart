@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mimix_app/utils/view/widgets/texts/header_text.dart';
-import 'buttons/icon_button.dart';
+import 'buttons/primary_button.dart';
 import 'buttons/secondary_button.dart';
 
 class GameOverMenu extends StatelessWidget {
@@ -31,26 +31,21 @@ class GameOverMenu extends StatelessWidget {
                 text: gameName,
                 size: HeaderText.H4
             ),
-            SizedBox(height: 16),
-            SecondaryButton(
-                text: 'Restart',
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  handleRestart();
-                }),
+            SizedBox(height: 10),
+            PrimaryButton(
+              text: 'Restart',
+              onPressed: () {
+                Navigator.of(context).pop();
+                handleRestart();
+              },
+              height: 32, // Altezza ridotta
+            ),
             SecondaryButton(
                 text: 'Quit',
                 onPressed: () {
                   Navigator.popUntil(context, ModalRoute.withName(quitNavigate));
-                }),
-            Container(
-              alignment: Alignment.bottomRight,
-              child: IconButtonWidget(
-                  icon: Icons.volume_up,
-                  onPressed: () => {
-                    print("Volume icon pressed")
-                  }),
-            )
+                },
+            ),
           ],
         ),
       ),
