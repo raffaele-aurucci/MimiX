@@ -30,6 +30,18 @@ class _TrainingOverviewPage extends State<TrainingOverviewPage> {
     super.dispose();
   }
 
+  String getPathOfExpression(String expression){
+    switch(expression){
+      case 'Brow Up' : return 'assets/gif/brow_up.gif';
+      case 'Brow Down' : return 'assets/gif/brow_down.gif';
+      case 'Mouth Lower' : return 'assets/gif/mouth_lower.gif';
+      case 'Mouth Open' : return 'assets/gif/mouth_open.gif';
+      case 'Mouth Pucker' : return 'assets/gif/mouth_pucker.gif';
+      case 'Mouth Smile' : return 'assets/gif/mouth_smile.gif';
+      default : return '';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -58,7 +70,7 @@ class _TrainingOverviewPage extends State<TrainingOverviewPage> {
                   Container(
                         margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
                         height: screenHeight * 0.45,
-                        child: const Image(image: AssetImage('assets/images/face_mesh.png')),
+                        child: Image.asset(getPathOfExpression(widget.expression), scale: 3.5,),
                   ),
 
                   const SizedBox(height: 10),

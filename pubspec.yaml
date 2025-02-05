@@ -84,6 +84,8 @@ flutter:
     - assets/tiles/
     - assets/images/emoticons/
 
+    - assets/gif/
+
     # assets camera for mediapipe-task-vision
     - assets/camera/
     - assets/camera/assets/
