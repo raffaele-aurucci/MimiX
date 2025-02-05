@@ -82,6 +82,7 @@ flutter:
     - assets/audio/dino_run/
     - assets/audio/face_ski/
     - assets/tiles/
+    - assets/images/emoticons/
 
     # assets camera for mediapipe-task-vision
     - assets/camera/

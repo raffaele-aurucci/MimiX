@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:mimix_app/user_management/logic/user_logic.dart';
 import 'package:mimix_app/user_management/view/home_page.dart';
@@ -39,7 +41,6 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
     "Mouth Smile",
     "Mouth Open",
     "Mouth Pucker",
-    "Mouth Lower",
     "Brow Up",
     "Brow Down",
   ];
@@ -49,20 +50,18 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
     {"mouthSmileRight": 0.0},
     {"jawOpen": 0.0},
     {"mouthPucker": 0.0},
-    {"mouthShrugLower": 0.0},
     {"browOuterUpLeft": 0.0},
     {"browOuterUpRight": 0.0},
     {"browDownLeft": 0.0},
     {"browDownRight": 0.0},
   ];
 
-  List<String> emojiExpression = [
-    '😊',
-    '😮',
-    '😚',
-    '🙁',
-    '🤨',
-    '😣'
+  List<String> emojiImagePath = [
+    'assets/images/emoticons/mouth_smile.png',
+    'assets/images/emoticons/mouth_open.png',
+    'assets/images/emoticons/mouth_pucker.png',
+    'assets/images/emoticons/brow_up.png',
+    'assets/images/emoticons/brow_down.png',
   ];
 
 
@@ -79,7 +78,35 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
     });
   }
 
+  // Flag to confirm face detection
+  bool _confirmFaceDetection = false;
+  Timer? _faceDetectionTimer;
+  bool _isDoneCheckFaceDetect = false;
+
   void handleFaceDetected(bool isFaceDetected) {
+    // Check isFaceDetected == true && preceded value == false && check not is done
+    if (isFaceDetected && !_isFaceDetected && !_isDoneCheckFaceDetect) {
+      _faceDetectionTimer?.cancel();
+
+      // Set a timer for confirm face detection and check expressions
+      _faceDetectionTimer = Timer(const Duration(milliseconds: 500), () {
+        if (_isFaceDetected) {
+          setState(() {
+            _confirmFaceDetection = true;
+            _isDoneCheckFaceDetect = true;
+          });
+        }
+      });
+    }
+    // Check if isFaceDetected == false and preceded value == true
+    else if (!isFaceDetected && _isFaceDetected) {
+      setState(() {
+        _confirmFaceDetection = false;
+        _isDoneCheckFaceDetect = false;
+      });
+    }
+
+    // Change value of _isFaceDetected
     setState(() {
       _isFaceDetected = isFaceDetected;
     });
@@ -94,21 +121,23 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
     var mouthSmileRight = _expressionScores!.getScore('mouthSmileRight');
     var jawOpen = _expressionScores!.getScore('jawOpen');
     var mouthPucker = _expressionScores!.getScore('mouthPucker');
-    var mouthShrugLower = _expressionScores!.getScore('mouthShrugLower');
     var browDownLeft = _expressionScores!.getScore('browDownLeft');
     var browDownRight = _expressionScores!.getScore('browDownRight');
     var browOuterUpLeft = _expressionScores!.getScore('browOuterUpLeft');
     var browOuterUpRight = _expressionScores!.getScore('browOuterUpRight');
 
+    if (_facialExpressionCount == _GOAL) {
+      handleNext();
+      return;
+    }
 
     switch(expressions[_indexCheckedExpression]) {
 
       case "Mouth Smile":
         {
-          if (_facialExpressionCount == _GOAL) return;
 
           if (mouthSmileLeft != null && mouthSmileRight != null) {
-            if (mouthSmileLeft > 0.5 && mouthSmileRight > 0.5) {
+            if (mouthSmileLeft > 0.5 && mouthSmileRight > 0.5 && _confirmFaceDetection) {
 
               if (!_isDone) {
                 _facialExpressionCount += 1;
@@ -126,7 +155,7 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
                 _isDone = true;
               }
 
-            } else {
+            } else if (mouthSmileLeft < 0.5 && mouthSmileRight < 0.5){
               _isDone = false;
             }
           }
@@ -134,10 +163,9 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
 
       case "Mouth Open": {
 
-        if (_facialExpressionCount == _GOAL) return;
-
         if (jawOpen != null) {
-          if (jawOpen > 0.5) {
+
+          if (jawOpen > 0.5 && _confirmFaceDetection) {
             if (!_isDone) {
               _facialExpressionCount += 1;
               expressionAvgScores[2]['jawOpen'] = incrementalAvg(
@@ -146,7 +174,7 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
                   _facialExpressionCount);
               _isDone = true;
             }
-          } else {
+          } else if (jawOpen < 0.5) {
             _isDone = false;
           }
         }
@@ -154,10 +182,9 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
 
       case "Mouth Pucker": {
 
-        if (_facialExpressionCount == _GOAL) return;
-
         if (mouthPucker != null) {
-          if (mouthPucker > 0.5) {
+
+          if (mouthPucker > 0.5 && _confirmFaceDetection) {
             if (!_isDone) {
               _facialExpressionCount += 1;
               expressionAvgScores[3]['mouthPucker'] = incrementalAvg(
@@ -166,57 +193,31 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
                   _facialExpressionCount);
               _isDone = true;
             }
-          } else {
+          } else if (mouthPucker < 0.1){
             _isDone = false;
           }
         }
-      }
-
-      case "Mouth Lower": {
-
-        if (_facialExpressionCount == _GOAL) return;
-
-        if (mouthShrugLower != null) {
-          if (mouthShrugLower > 0.5) {
-
-            if (!_isDone) {
-              _facialExpressionCount += 1;
-              expressionAvgScores[4]['mouthShrugLower'] = incrementalAvg(
-                  expressionAvgScores[4]['mouthShrugLower']!,
-                  mouthShrugLower,
-                  _facialExpressionCount);
-            }
-            _isDone = true;
-          }
-          else {
-            _isDone = false;
-          }
-        }
-
       }
 
       case "Brow Up": {
 
-        if (_facialExpressionCount == _GOAL) return;
-
         if (browOuterUpLeft != null && browOuterUpRight != null){
-          if (browOuterUpLeft > 0.5 && browOuterUpRight > 0.5){
+          if (browOuterUpLeft > 0.5 && browOuterUpRight > 0.5 && _confirmFaceDetection){
 
             if (!_isDone) {
               _facialExpressionCount += 1;
-              expressionAvgScores[5]['browOuterUpLeft'] = incrementalAvg(
-                  expressionAvgScores[5]['browOuterUpLeft']!,
+              expressionAvgScores[4]['browOuterUpLeft'] = incrementalAvg(
+                  expressionAvgScores[4]['browOuterUpLeft']!,
                   browOuterUpLeft,
                   _facialExpressionCount);
-              expressionAvgScores[6]['browOuterUpRight'] = incrementalAvg(
-                  expressionAvgScores[6]['browOuterUpRight']!,
+              expressionAvgScores[5]['browOuterUpRight'] = incrementalAvg(
+                  expressionAvgScores[5]['browOuterUpRight']!,
                   browOuterUpRight,
                   _facialExpressionCount);
               _isDone = true;
             }
-            else {
-              _isDone = false;
-            }
+          } else if (browOuterUpLeft < 0.5 && browOuterUpRight < 0.5){
+            _isDone = false;
           }
         }
 
@@ -224,44 +225,43 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
 
       case "Brow Down": {
 
-        if (_facialExpressionCount == _GOAL) return;
-
         if (browDownLeft != null && browDownRight != null){
-          if (browDownLeft > 0.5 && browDownRight > 0.5){
+          if (browDownLeft > 0.5 && browDownRight > 0.5 && _confirmFaceDetection){
 
             if (!_isDone){
               _facialExpressionCount += 1;
-              expressionAvgScores[7]['browDownLeft'] = incrementalAvg(
-                  expressionAvgScores[7]['browDownLeft']!,
+              expressionAvgScores[6]['browDownLeft'] = incrementalAvg(
+                  expressionAvgScores[6]['browDownLeft']!,
                   browDownLeft,
                   _facialExpressionCount);
-              expressionAvgScores[8]['browDownRight'] = incrementalAvg(
-                  expressionAvgScores[8]['browDownRight']!,
+              expressionAvgScores[7]['browDownRight'] = incrementalAvg(
+                  expressionAvgScores[7]['browDownRight']!,
                   browDownRight,
                   _facialExpressionCount);
               _isDone = true;
             }
-          } else {
+          } else if (browDownLeft < 0.5 && browDownRight < 0.5){
             _isDone = false;
           }
         }
-
       }
 
     }
-
   }
 
-  Future<void> handleNextButton() async {
 
-    _facialExpressionCount = 0;
-    _isDone = false;
+  Future<void> handleNext() async {
 
-    if (_indexCheckedExpression < 5) {
+    setState(() {
+      _facialExpressionCount = 0;
+      _isDone = false;
+    });
+
+    if (_indexCheckedExpression < 4) {
       _indexCheckedExpression += 1;
     }
 
-    else if (_indexCheckedExpression == 5){
+    else if (_indexCheckedExpression == 4){
       bool? isCheckInserted = await insertCheckAbilityByUserId(expressionAvgScores, context.read<UserProvider>().user!.id!);
 
       if (isCheckInserted != null && isCheckInserted) {
@@ -344,19 +344,34 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
                       ),
                     ),
 
-                    Spacer(), // Ora funziona perché la Column è in un Expanded
+                    Spacer(),
 
-                    HeaderText(
-                      text: emojiExpression[_indexCheckedExpression],
-                      size: 45,
-                    ),
+                    // HeaderText(
+                    //   text: emojiExpression[_indexCheckedExpression],
+                    //   size: 45,
+                    // ),
+                    Image.asset(emojiImagePath[_indexCheckedExpression], scale: 5,),
 
                     Spacer(),
 
-                    NextButton(
-                      text: 'Next',
-                      onPressed: _facialExpressionCount == _GOAL ? handleNextButton : null,
-                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(5, (index) {
+                        return Container(
+                          margin: EdgeInsets.symmetric(horizontal: 4),
+                          width: 12,
+                          height: 12,
+                          decoration: BoxDecoration(
+                            color: index == _indexCheckedExpression ? PaletteColor.darkBlue : PaletteColor.progressBarBackground, // Cambia colore se attivo
+                            shape: BoxShape.circle,
+                            border: index != _indexCheckedExpression ? Border.all( // Bordo aggiunto
+                              color: Colors.black,
+                              width: 0.01,
+                            ) : null
+                          ),
+                        );
+                      }),
+                    )
                   ],
                 ),
               )
