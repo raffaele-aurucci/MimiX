@@ -2,22 +2,15 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:mimix_app/user_management/logic/user_logic.dart';
-import 'package:mimix_app/user_management/view/home_page.dart';
-import 'package:mimix_app/utils/view/widgets/buttons/next_button.dart';
-import 'package:mimix_app/utils/view/widgets/buttons/secondary_button.dart';
 import 'package:provider/provider.dart';
 
 import '../../expression_management/beans/expression_scores.dart';
 import '../../expression_management/view/web_view.dart';
 import '../../user_management/beans/user_provider.dart';
 import '../../utils/view/app_palette.dart';
-import '../../utils/view/widgets/buttons/icon_button.dart';
-import '../../utils/view/widgets/pause_menu.dart';
-import '../../utils/view/widgets/stopwatch.dart';
 import '../../utils/view/widgets/texts/header_text.dart';
 import '../../utils/view/widgets/training_progress_bar.dart';
-import '../../utils/view/widgets/training_summary.dart';
-import '../../utils/view/widgets/user_level.dart';
+import 'menu_page.dart';
 
 
 class CheckAbilityPage extends StatefulWidget {
@@ -274,7 +267,7 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
 
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(builder: (context) => const MenuPage()),
       );
 
       // TODO: go to let's get started
