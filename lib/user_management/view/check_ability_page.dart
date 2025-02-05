@@ -158,7 +158,7 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
 
         if (jawOpen != null) {
 
-          if (jawOpen > 0.6 && _confirmFaceDetection) {
+          if (jawOpen > 0.65 && _confirmFaceDetection) {
             if (!_isDone) {
               _facialExpressionCount += 1;
               expressionAvgScores[2]['jawOpen'] = incrementalAvg(
@@ -167,7 +167,7 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
                   _facialExpressionCount);
               _isDone = true;
             }
-          } else if (jawOpen < 0.6) {
+          } else if (jawOpen < 0.65) {
             _isDone = false;
           }
         }
@@ -177,7 +177,9 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
 
         if (mouthPucker != null) {
 
-          if (mouthPucker > 0.9 && _confirmFaceDetection) {
+          print('mouthpucker $mouthPucker');
+
+          if (mouthPucker > 0.97 && _confirmFaceDetection) {
             if (!_isDone) {
               _facialExpressionCount += 1;
               expressionAvgScores[3]['mouthPucker'] = incrementalAvg(
@@ -195,7 +197,7 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
       case "Brow Up": {
 
         if (browOuterUpLeft != null && browOuterUpRight != null){
-          if (browOuterUpLeft > 0.7 && browOuterUpRight > 0.7 && _confirmFaceDetection){
+          if (browOuterUpLeft > 0.8 && browOuterUpRight > 0.8 && _confirmFaceDetection){
 
             if (!_isDone) {
               _facialExpressionCount += 1;
@@ -209,7 +211,7 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
                   _facialExpressionCount);
               _isDone = true;
             }
-          } else if (browOuterUpLeft < 0.7 && browOuterUpRight < 0.7){
+          } else if (browOuterUpLeft < 0.8 && browOuterUpRight < 0.8){
             _isDone = false;
           }
         }
@@ -339,10 +341,6 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
 
                     Spacer(),
 
-                    // HeaderText(
-                    //   text: emojiExpression[_indexCheckedExpression],
-                    //   size: 45,
-                    // ),
                     Image.asset(emojiImagePath[_indexCheckedExpression], scale: 5,),
 
                     Spacer(),
