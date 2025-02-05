@@ -50,17 +50,19 @@ class _FaceRunGamePageState extends State<FaceRunGamePage> {
   }
 
   void handleGameOver() {
-    showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (BuildContext context) {
-        return GameOverMenu(
-          handleRestart: handleRestart,
-          gameName: 'Game Over',
-          quitNavigate: '/minigames_page',
-        );
-      },
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) {
+          return GameOverMenu(
+            handleRestart: handleRestart,
+            gameName: 'Game Over',
+            quitNavigate: '/minigames_page',
+          );
+        },
+      );
+    });
   }
 
   void handleResume() {
