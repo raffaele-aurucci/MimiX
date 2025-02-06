@@ -22,14 +22,26 @@ class _TrainingPage extends State<TrainingPage> {
 
   // List names of games
   List<String> nameTrainingList = [
-    "😣 Brow Down",
-    "🤨 Brow Up",
-    "😮 Mouth Open",
-    "😊 Mouth Smile",
-    "😚 Mouth Pucker",
-    "🙁 Mouth Lower",
+    "Brow Down",
+    "Brow Up",
+    "Mouth Open",
+    "Mouth Smile",
+    "Mouth Pucker",
+    "Mouth Lower",
     "Premium Training",
     "Premium Training",
+  ];
+
+  // List emoji
+  List<String> emojiImagePath = [
+    'assets/images/emoticons/brow_down.png',
+    'assets/images/emoticons/brow_up.png',
+    'assets/images/emoticons/mouth_open.png',
+    'assets/images/emoticons/mouth_smile.png',
+    'assets/images/emoticons/mouth_pucker.png',
+    'assets/images/emoticons/mouth_lower.png',
+    'assets/images/emoticons/lock.png',
+    'assets/images/emoticons/lock.png',
   ];
 
   List<String> nameTrainingDescriptionList = [
@@ -131,6 +143,7 @@ class _TrainingPage extends State<TrainingPage> {
                         title: nameTrainingList[index],
                         description: nameTrainingDescriptionList[index],
                         onTap: () => {},
+                        image: emojiImagePath[index]
                       );
                     }
                     else {
@@ -151,6 +164,7 @@ class _TrainingPage extends State<TrainingPage> {
                               )
                           )
                         },
+                        image: emojiImagePath[index]
                       );
                     }
                   },
