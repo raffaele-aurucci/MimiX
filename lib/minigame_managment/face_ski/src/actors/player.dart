@@ -18,7 +18,6 @@ class Player extends PositionComponent
       : _body = SpriteComponent(sprite: sprite, anchor: Anchor.center);
 
   late double orientation = 0.0;
-
   final SpriteComponent _body;
   final _moveDirection = Vector2(0, 1);
 
@@ -28,8 +27,9 @@ class Player extends PositionComponent
   bool left = false;
 
   static const _maxSpeed = 50;
-  static const _acceleration = 0.5;
-  var _speed = 5.0;
+  static const _acceleration = 0.4;
+  static const _rotationSpeed = 5.0; // Velocità di rotazione dolce
+  var _speed = 0.0;
   var _isOnGround = true;
 
   @override
@@ -42,14 +42,20 @@ class Player extends PositionComponent
 
   @override
   void update(double dt) {
-
     _moveDirection.x = GlobalState.playerOrientation;
     _moveDirection.y = 1;
 
     _moveDirection.normalize();
     _speed = lerpDouble(_speed, _maxSpeed, _acceleration * dt)!;
 
-    angle = _moveDirection.screenAngle() + pi;
+    // Rotazione dolce verso la nuova direzione con il percorso più breve
+    final targetAngle = _moveDirection.screenAngle() + pi;
+    double angleDifference = (targetAngle - angle) % (2 * pi);
+    if (angleDifference > pi) {
+      angleDifference -= 2 * pi;
+    }
+    angle += angleDifference * (_rotationSpeed * dt);
+
     position.addScaled(_moveDirection, _speed * dt);
 
     if (_isOnGround) {
@@ -80,7 +86,6 @@ class Player extends PositionComponent
   }
 
   double jump() {
-
     _isOnGround = false;
     final jumpFactor = _speed / _maxSpeed;
     final jumpScale = lerpDouble(1, 1.2, jumpFactor)!;
