@@ -9,6 +9,7 @@ class RewardCard extends StatelessWidget {
   final String description;
   final double progress;
   final AssetImage image;
+  final bool complete;
 
   const RewardCard({
     Key? key,
@@ -16,6 +17,7 @@ class RewardCard extends StatelessWidget {
     required this.description,
     required this.progress,
     required this.image,
+    required this.complete
   }) : super(key: key);
 
   @override
@@ -59,7 +61,7 @@ class RewardCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                     image: DecorationImage(
                       image: image,
-                      opacity: 0.5
+                        opacity: complete ? 1 : 0.5
                     ),
                   ),
                 ),
