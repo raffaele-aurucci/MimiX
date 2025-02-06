@@ -15,7 +15,7 @@ class PlayerController {
     _resetTimer?.cancel();
 
     // Crea un nuovo timer che resetta l'orientamento dopo un secondo
-    _resetTimer = Timer(Duration(milliseconds: 120), () {
+    _resetTimer = Timer(Duration(milliseconds: 200), () {
       GlobalState.playerOrientation = 0.0;
     });
   }
