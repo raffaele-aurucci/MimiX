@@ -1,4 +1,5 @@
 // Start application
+import 'package:mimix_app/application_management/view/tutorial.dart';
 import 'package:mimix_app/minigame_managment/view/minigame_page.dart';
 import 'package:mimix_app/training_managment/view/training_page.dart';
 import 'package:mimix_app/user_management/beans/check_log.dart';
@@ -73,7 +74,7 @@ class MimixApp extends StatelessWidget {
         theme: AppTheme.lightTheme,
         home: objects['user'] != null && objects['checkLog'] != null ? const MenuPage()
             : objects['user'] != null && objects['checkLog'] == null ? const CheckAbilityPage()
-            : const RegistrationPage()
+            : const Tutorial()
     )
     );
   }

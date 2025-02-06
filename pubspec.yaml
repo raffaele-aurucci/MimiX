@@ -84,6 +84,7 @@ flutter:
     - assets/tiles/
     - assets/images/emoticons/
     - assets/images/rewards/
+    - assets/images/tutorial/
 
     - assets/gif/
 
