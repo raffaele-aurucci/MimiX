@@ -180,7 +180,7 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
 
           print('mouthpucker $mouthPucker');
 
-          if (mouthPucker > 0.95 && _confirmFaceDetection) {
+          if (mouthPucker > 0.97 && _confirmFaceDetection) {
             if (!_isDone) {
               _facialExpressionCount += 1;
               expressionAvgScores[3]['mouthPucker'] = incrementalAvg(
@@ -189,7 +189,7 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
                   _facialExpressionCount);
               _isDone = true;
             }
-          } else if (mouthPucker < 0.1){
+          } else if (mouthPucker < 0.97){
             _isDone = false;
           }
         }
@@ -357,7 +357,7 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
                             color: index <= _indexCheckedExpression ? PaletteColor.darkBlue : PaletteColor.progressBarBackground, // Cambia colore se attivo
                             shape: BoxShape.circle,
                             border: index != _indexCheckedExpression ? Border.all( // Bordo aggiunto
-                              color: Colors.black,
+                              color: PaletteColor.darkBlue,
                               width: 0.01,
                             ) : null
                           ),

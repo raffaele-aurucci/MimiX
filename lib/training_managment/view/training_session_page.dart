@@ -27,34 +27,27 @@ class TrainingSessionPage extends StatefulWidget {
 }
 
 class _TrainingSessionPageState extends State<TrainingSessionPage> {
+
   late final StopwatchWidgetController _stopwatchController;
 
-  int _goal = 0; // The goal to reach: the number of expression to replicate
+  int _GOAL = 0; // The goal to reach: the number of expression to replicate
   int _facialExpressionCount = 0; // Number of repetitions of the expression
   bool _isDone = false; // If the expression has been made
   bool _isPaused = false; // If the training is paused
   bool _goalSucces = false; // If the goal is achieved
-
-  // If there is a single expression (mouth open) or two expressions (brow up left and right) to manage
-  int _numberOfExpressionToTraining = 0;
 
   double _maxValueOfExpression = 0.0;
 
   bool _isOverlayVisible = true;
   bool _isFaceDetected = false;
 
-  String firstExpression = "";
-  String secondExpression = "";
 
   late ExpressionScores? _expressionScores;
 
   @override
   void initState() {
     super.initState();
-
-    // It checks the value passed to the page: if it is composed from one or two expressions.
-    _checkExpression(widget.expression);
-    _goal = 5 * widget.userLevel;
+    _GOAL = 5 * widget.userLevel;
   }
 
   void handleOverlay(bool hidden) {
@@ -106,8 +99,8 @@ class _TrainingSessionPageState extends State<TrainingSessionPage> {
 
   // If the user reach the goal of user level.
   void handleGoalSuccess(){
-    if (_facialExpressionCount >= _goal) {
-      showTrainingSummary(); // Mostra l'AlertDialog
+    if (_facialExpressionCount >= _GOAL) {
+      showTrainingSummary();
       _goalSucces = true;
       _stopwatchController.stop();
     }
@@ -117,78 +110,146 @@ class _TrainingSessionPageState extends State<TrainingSessionPage> {
   void handleExpressionScore(ExpressionScores? expressionScores) {
     _expressionScores = expressionScores;
 
-    if (!_goalSucces && _numberOfExpressionToTraining != 0 && !_isPaused) {
+    if (!_goalSucces && !_isPaused) {
       handleGoalSuccess();
 
-      if (_numberOfExpressionToTraining == 1) {
-        var facialExpression = _expressionScores?.getScore(firstExpression) ?? 0.0;
+      switch (widget.expression) {
+        case "Mouth Smile":
+          {
+            var facialExpression1 = _expressionScores?.getScore(
+                'mouthSmileLeft') ?? 0.0;
+            var facialExpression2 = _expressionScores?.getScore(
+                'mouthSmileRight') ?? 0.0;
 
-        if (facialExpression > _maxValueOfExpression) {
-          _maxValueOfExpression = double.parse(facialExpression.toStringAsFixed(2));
-        }
+            var avgOfValue = (facialExpression1 + facialExpression2) / 2;
 
-        // Use confirm face detection to increment counter
-        if (facialExpression > 0.5 && _confirmFaceDetection) {
+            if (avgOfValue > _maxValueOfExpression) {
+              _maxValueOfExpression =
+                  double.parse(avgOfValue.toStringAsFixed(2));
+            }
 
-          if (!_isDone) {
-            _facialExpressionCount++;
-            _isDone = true;
+            if (facialExpression1 > 0.9 && facialExpression2 > 0.9 &&
+                _confirmFaceDetection) {
+              if (!_isDone) {
+                _facialExpressionCount++;
+                _isDone = true;
+              }
+            } else if (facialExpression1 < 0.9 && facialExpression2 < 0.9) {
+              _isDone = false;
+            }
           }
-        } else if (facialExpression < 0.1 && widget.expression == 'Mouth Lower') {
-          _isDone = false;
-        }
-        else if (facialExpression < 0.5 && widget.expression != 'Mouth Lower') {
-          _isDone = false;
-        }
-      } else {
-        var facialExpression1 = _expressionScores?.getScore(firstExpression) ?? 0.0;
-        var facialExpression2 = _expressionScores?.getScore(secondExpression) ?? 0.0;
 
-        var avgOfValue = (facialExpression1 + facialExpression2)/2;
+        case "Mouth Open":
+          {
+            var facialExpression = _expressionScores?.getScore('jawOpen') ??
+                0.0;
 
-        if(avgOfValue > _maxValueOfExpression)
-          _maxValueOfExpression = double.parse(avgOfValue.toStringAsFixed(2));
+            if (facialExpression > _maxValueOfExpression) {
+              _maxValueOfExpression =
+                  double.parse(facialExpression.toStringAsFixed(2));
+            }
 
-        if (facialExpression1 > 0.50 && facialExpression2 > 0.50 && _confirmFaceDetection) {
-          if (!_isDone) {
-            _facialExpressionCount++;
-            _isDone = true; // The expression is done and it's not possible overlap
+
+            if (facialExpression > 0.65 && _confirmFaceDetection) {
+              if (!_isDone) {
+                _facialExpressionCount++;
+                _isDone = true;
+              }
+            } else if (facialExpression < 0.65) {
+              _isDone = false;
+            }
           }
-        } else if (facialExpression1 < 0.50 && facialExpression2 < 0.50) {
-          _isDone = false; //
-        }
+
+        case "Mouth Pucker":
+          {
+            var facialExpression = _expressionScores?.getScore('mouthPucker') ??
+                0.0;
+
+            if (facialExpression > _maxValueOfExpression) {
+              _maxValueOfExpression =
+                  double.parse(facialExpression.toStringAsFixed(2));
+            }
+
+            if (facialExpression > 0.97 && _confirmFaceDetection) {
+              if (!_isDone) {
+                _facialExpressionCount++;
+                _isDone = true;
+              }
+            } else if (facialExpression < 0.97) {
+              _isDone = false;
+            }
+          }
+
+        case "Brow Up":
+          {
+            var facialExpression1 = _expressionScores?.getScore(
+                'browOuterUpLeft') ?? 0.0;
+            var facialExpression2 = _expressionScores?.getScore(
+                'browOuterUpRight') ?? 0.0;
+
+            var avgOfValue = (facialExpression1 + facialExpression2) / 2;
+
+            if (avgOfValue > _maxValueOfExpression) {
+              _maxValueOfExpression =
+                  double.parse(avgOfValue.toStringAsFixed(2));
+            }
+
+            if (facialExpression1 > 0.8 && facialExpression2 > 0.8 &&
+                _confirmFaceDetection) {
+              if (!_isDone) {
+                _facialExpressionCount++;
+                _isDone = true;
+              }
+            } else if (facialExpression1 < 0.8 && facialExpression2 < 0.8) {
+              _isDone = false;
+            }
+          }
+
+        case "Brow Down":
+          {
+            var facialExpression1 = _expressionScores?.getScore(
+                'browDownLeft') ?? 0.0;
+            var facialExpression2 = _expressionScores?.getScore(
+                'browDownRight') ?? 0.0;
+
+            var avgOfValue = (facialExpression1 + facialExpression2) / 2;
+
+            if (avgOfValue > _maxValueOfExpression) {
+              _maxValueOfExpression =
+                  double.parse(avgOfValue.toStringAsFixed(2));
+            }
+
+            if (facialExpression1 > 0.3 && facialExpression2 > 0.3 &&
+                _confirmFaceDetection) {
+              if (!_isDone) {
+                _facialExpressionCount++;
+                _isDone = true;
+              }
+            } else if (facialExpression1 < 0.3 && facialExpression2 < 0.3) {
+              _isDone = false;
+            }
+          }
+
+        case "Mouth Lower":
+          {
+            var facialExpression = _expressionScores?.getScore(
+                'mouthShrugLower') ?? 0.0;
+
+            if (facialExpression > _maxValueOfExpression) {
+              _maxValueOfExpression =
+                  double.parse(facialExpression.toStringAsFixed(2));
+            }
+
+            if (facialExpression > 0.6 && _confirmFaceDetection) {
+              if (!_isDone) {
+                _facialExpressionCount++;
+                _isDone = true;
+              }
+            } else if (facialExpression < 0.6) {
+              _isDone = false;
+            }
+          }
       }
-    }
-  }
-
-  // Check the value passed to the page
-  void _checkExpression(String expression) {
-    if (expression == "Mouth Open") {
-      firstExpression = "jawOpen";
-      _numberOfExpressionToTraining = 1;
-    }
-    if (expression == "Mouth Pucker") {
-      firstExpression = "mouthPucker";
-      _numberOfExpressionToTraining = 1;
-    }
-    if (expression == "Mouth Lower") {
-      firstExpression = "mouthShrugLower";
-      _numberOfExpressionToTraining = 1;
-    }
-    if (expression == "Brow Down") {
-      firstExpression = "browDownLeft";
-      secondExpression = "browDownRight";
-      _numberOfExpressionToTraining = 2;
-    }
-    if (expression == "Brow Up") {
-      firstExpression = "browOuterUpLeft";
-      secondExpression = "browOuterUpRight";
-      _numberOfExpressionToTraining = 2;
-    }
-    if (expression == "Mouth Smile") {
-      firstExpression = "mouthSmileLeft";
-      secondExpression = "mouthSmileRight";
-      _numberOfExpressionToTraining = 2;
     }
   }
 
@@ -316,7 +377,7 @@ class _TrainingSessionPageState extends State<TrainingSessionPage> {
               Container(
                 width: screenWidth * 0.65,
                 child: TrainingProgressBar(
-                  progress: _facialExpressionCount / _goal,
+                  progress: _facialExpressionCount / _GOAL,
                   height: TrainingProgressBar.trainingBar,
                   expressionCount: _facialExpressionCount,
                 ),
