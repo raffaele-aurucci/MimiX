@@ -28,7 +28,7 @@ class FaceSkiGamePage extends StatefulWidget {
 class _FaceSkiGamePageState extends State<FaceSkiGamePage> {
 
   // instance of game
-  late final FaceSkiGame game;
+  late final FaceSkiGame game = FaceSkiGame(onGameOverMethodCalled: showGameOverMenu, onWinMethodCalled: showWinMenu);
 
   // save the local high score
   int highScore = 0;
@@ -40,12 +40,7 @@ class _FaceSkiGamePageState extends State<FaceSkiGamePage> {
   void handleOverlay(bool hidden) {
     setState(() {
       _isOverlayVisible = hidden;
-      if (GlobalState.startGame == false) {
-        game.startGame();
-        GlobalState.startGame = true;
-      }else{
-        game.startGame();
-      }
+      game.gameplay.player.unblockMovement();
     });
   }
 
@@ -109,7 +104,7 @@ class _FaceSkiGamePageState extends State<FaceSkiGamePage> {
   @override
   void initState() {
     super.initState();
-    game = FaceSkiGame(onGameOverMethodCalled: showGameOverMenu, onWinMethodCalled: showWinMenu);
+    game.startGameBlocked();
   }
 
   void showGameOverMenu() {
