@@ -32,8 +32,8 @@ class _TaskPage extends State<TaskPage> {
     "Mouth Smile",
     "Mouth Pucker",
     "Mouth Lower",
-    "Stay tuned",
-    "Stay tuned"
+    "Premium Task",
+    "Premium Task"
   ];
 
   List<String> nameTaskDescriptionList = [
@@ -43,8 +43,8 @@ class _TaskPage extends State<TaskPage> {
     "Learn to form a natural smile form natural",
     "Master puckering your lips",
     "Practice lowering your bottom lip",
-    "Lorem ipsum dolor sit amen, consec...",
-    "Lorem ipsum dolor sit amen, consec..."
+    "Upgrade now to complete this task!",
+    "Upgrade now to complete this task!"
   ];
 
   List<double> progressValue = [1, 0.4, 0.3, 0.2, 1, 0.6, 0, 0];
