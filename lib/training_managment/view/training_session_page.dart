@@ -134,7 +134,7 @@ class _TrainingSessionPageState extends State<TrainingSessionPage> {
                 _facialExpressionCount++;
                 _isDone = true;
               }
-            } else if (facialExpression1 < 0.1 && facialExpression2 < 0.1) {
+            } else if (facialExpression1 < 0.8 && facialExpression2 < 0.8) {
               _isDone = false;
             }
           }
@@ -155,7 +155,7 @@ class _TrainingSessionPageState extends State<TrainingSessionPage> {
                 _facialExpressionCount++;
                 _isDone = true;
               }
-            } else if (facialExpression < 0.1) {
+            } else if (facialExpression < 0.65) {
               _isDone = false;
             }
           }
@@ -200,7 +200,7 @@ class _TrainingSessionPageState extends State<TrainingSessionPage> {
                 _facialExpressionCount++;
                 _isDone = true;
               }
-            } else if (facialExpression1 < 0.1 && facialExpression2 < 0.1) {
+            } else if (facialExpression1 < 0.8 && facialExpression2 < 0.8) {
               _isDone = false;
             }
           }
@@ -225,7 +225,7 @@ class _TrainingSessionPageState extends State<TrainingSessionPage> {
                 _facialExpressionCount++;
                 _isDone = true;
               }
-            } else if (facialExpression1 < 0.1 && facialExpression2 < 0.1) {
+            } else if (facialExpression1 < 0.3 && facialExpression2 < 0.3) {
               _isDone = false;
             }
           }
@@ -246,7 +246,7 @@ class _TrainingSessionPageState extends State<TrainingSessionPage> {
                 _facialExpressionCount++;
                 _isDone = true;
               }
-            } else if (facialExpression < 0.1) {
+            } else if (facialExpression < 0.65) {
               _isDone = false;
             }
           }

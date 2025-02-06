@@ -149,7 +149,7 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
                 _isDone = true;
               }
 
-            } else if (mouthSmileLeft < 0.1 && mouthSmileRight < 0.1){
+            } else if (mouthSmileLeft < 0.8 && mouthSmileRight < 0.8){
               _isDone = false;
             }
           }
@@ -210,7 +210,7 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
                   _facialExpressionCount);
               _isDone = true;
             }
-          } else if (browOuterUpLeft < 0.1 && browOuterUpRight < 0.1){
+          } else if (browOuterUpLeft < 0.8 && browOuterUpRight < 0.8){
             _isDone = false;
           }
         }
@@ -234,7 +234,7 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
                   _facialExpressionCount);
               _isDone = true;
             }
-          } else if (browDownLeft < 0.1 && browDownRight < 0.1){
+          } else if (browDownLeft < 0.3 && browDownRight < 0.3){
             _isDone = false;
           }
         }

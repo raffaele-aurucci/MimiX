@@ -158,7 +158,7 @@ class _TrainingPage extends State<TrainingPage> {
                                 // Passes the expression to be trained to the training session page
                                   builder: (context) =>
                                       TrainingOverviewPage(
-                                        expression: nameTrainingList[index].split(" ")[1] + " " + nameTrainingList[index].split(" ")[2],
+                                        expression: nameTrainingList[index],
                                         description: nameTrainingOverviewDescriptionList[index],
                                       )
                               )
