@@ -58,6 +58,8 @@ class Gameplay extends Component with HasGameReference<FaceSkiGame> {
 
   AudioPlayer? _bgmPlayer;
 
+  PlayerController playerController = PlayerController();
+
   @override
   Future<void> onLoad() async {
     final map = await TiledComponent.load(
@@ -187,6 +189,7 @@ class Gameplay extends Component with HasGameReference<FaceSkiGame> {
               sprite: _spriteSheet.getSprite(5, 9),
               onCollected: _onSnowmanCollected,
             );
+
             await _world.add(snowman);
             break;
         }
@@ -282,6 +285,7 @@ class Gameplay extends Component with HasGameReference<FaceSkiGame> {
 
   void _onCheckpoint(RectangleHitbox checkpoint) {
     _lastSafePosition.setFrom(checkpoint.absoluteCenter);
+    game.score.value += 150;
     checkpoint.removeFromParent();
   }
 
@@ -289,6 +293,8 @@ class Gameplay extends Component with HasGameReference<FaceSkiGame> {
     final jumpFactor = player.jump();
     final jumpScale = lerpDouble(1, 1.08, jumpFactor)!;
     final jumpDuration = lerpDouble(0, 0.8, jumpFactor)!;
+
+    game.score.value += 50;
 
     _camera.viewfinder.add(
       ScaleEffect.by(
@@ -325,6 +331,7 @@ class Gameplay extends Component with HasGameReference<FaceSkiGame> {
 
   void _onSnowmanCollected() {
     ++_nSnowmanCollected;
+    game.score.value += 100;
     _hud.updateSnowmanCount(_nSnowmanCollected);
   }
 
@@ -340,9 +347,6 @@ class Gameplay extends Component with HasGameReference<FaceSkiGame> {
       onGameOver.call();
     }
   }
-
-  // Crea un'istanza di PlayerController
-  PlayerController playerController = PlayerController();
 
   void turnLeft() {
     playerController.turnLeft();
