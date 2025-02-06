@@ -109,7 +109,7 @@ class _FaceSkiGamePageState extends State<FaceSkiGamePage> {
   @override
   void initState() {
     super.initState();
-    game = FaceSkiGame(onGameOverMethodCalled: showGameOverMenu);
+    game = FaceSkiGame(onGameOverMethodCalled: showGameOverMenu, onWinMethodCalled: showWinMenu);
   }
 
   void showGameOverMenu() {
@@ -120,6 +120,20 @@ class _FaceSkiGamePageState extends State<FaceSkiGamePage> {
         return GameOverMenu(
           handleRestart: handleRestart,
           gameName: 'Game Over',
+          quitNavigate: '/minigames_page',
+        );
+      },
+    );
+  }
+
+  void showWinMenu() {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return GameOverMenu(
+          handleRestart: handleRestart,
+          gameName: 'You Won!',
           quitNavigate: '/minigames_page',
         );
       },
