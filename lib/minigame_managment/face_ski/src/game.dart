@@ -36,8 +36,8 @@ class FaceSkiGame extends FlameGame with HasCollisionDetection {
     score.value = 0;
     lives.value = 5;
     GlobalState.isPaused = false;
-
     GlobalState.active = false;
+    GlobalState.isPlayerBlocked = false;
 
     gameplay = Gameplay(
       onLevelCompleted: _handleLevelCompleted,
@@ -49,6 +49,28 @@ class FaceSkiGame extends FlameGame with HasCollisionDetection {
     resumeGame();
   }
 
+  void startGameBlocked() {
+    Flame.device.setPortrait();
+    Flame.device.fullScreen();
+    print("Avvio nuova partita con player bloccato...");
+
+    score.value = 0;
+    lives.value = 5;
+    GlobalState.isPaused = false;
+    GlobalState.active = false;
+    GlobalState.isPlayerBlocked = true;
+
+    gameplay = Gameplay(
+      onLevelCompleted: _handleLevelCompleted,
+      onGameOver: _handleGameOver,
+    );
+
+    add(gameplay);
+
+    resumeGame();
+  }
+
+
   void resumeGame() {
     GlobalState.isPaused = false;
     resumeEngine();
@@ -58,7 +80,7 @@ class FaceSkiGame extends FlameGame with HasCollisionDetection {
     score.value = 0;
     lives.value = 5;
     GlobalState.isPaused = false;
-
+    GlobalState.isPlayerBlocked = false;
     GlobalState.active = false;
 
     remove(gameplay);

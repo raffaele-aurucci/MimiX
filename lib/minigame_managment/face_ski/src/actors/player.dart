@@ -26,11 +26,12 @@ class Player extends PositionComponent
   late final _offsetRight = Vector2(_body.width * 0.25, 0);
   bool left = false;
 
-  static const _maxSpeed = 50;
-  static const _acceleration = 0.4;
-  static const _rotationSpeed = 5.0; // Velocità di rotazione dolce
+
+  static const _rotationSpeed = 5.0;
   var _speed = 0.0;
   var _isOnGround = true;
+  var _maxSpeed = 50.0;
+  var _acceleration = 0.4;
 
   @override
   Future<void> onLoad() async {
@@ -104,5 +105,16 @@ class Player extends PositionComponent
     );
 
     return jumpFactor;
+  }
+
+  void blockMovement() {
+    _speed = 0.0;
+    _maxSpeed = 0.0;
+    _acceleration = 0.0;
+  }
+
+  void unblockMovement() {
+    _maxSpeed = 50.0;
+    _acceleration = 0.4;
   }
 }

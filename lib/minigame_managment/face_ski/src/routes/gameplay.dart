@@ -39,7 +39,6 @@ class Gameplay extends Component with HasGameReference<FaceSkiGame> {
   late final CameraComponent _camera;
   late Player player;
   late final Vector2 _lastSafePosition;
-  late final RectangleComponent _fader;
   late final Hud _hud;
   late final SpriteSheet _spriteSheet;
 
@@ -80,19 +79,12 @@ class Gameplay extends Component with HasGameReference<FaceSkiGame> {
     await _handleSpawnPoints(map);
     await _handleTriggers(map);
 
-    _fader = RectangleComponent(
-      size: _camera.viewport.virtualSize,
-      paint: Paint()..color = game.backgroundColor(),
-      children: [OpacityEffect.fadeOut(LinearEffectController(1.5))],
-      priority: 1,
-    );
-
     _hud = Hud(
       playerSprite: _spriteSheet.getSprite(5, 10),
       snowmanSprite: _spriteSheet.getSprite(5, 9),
     );
 
-    await _camera.viewport.addAll([_fader, _hud]);
+    await _camera.viewport.addAll([_hud]);
     await _camera.viewfinder.add(_cameraShake);
     _cameraShake.pause();
   }
@@ -185,10 +177,16 @@ class Gameplay extends Component with HasGameReference<FaceSkiGame> {
               sprite: _spriteSheet.getSprite(5, 10),
               priority: 1,
             );
+
+            if (GlobalState.isPlayerBlocked) {
+              player.blockMovement(); // Metodo da creare nel Player per bloccare il movimento
+            }
+
             await _world.add(player);
             _camera.follow(player);
             _lastSafePosition = Vector2(object.x, object.y);
             break;
+
           case 'Snowman':
             final snowman = Snowman(
               position: Vector2(object.x, object.y),
@@ -320,7 +318,6 @@ class Gameplay extends Component with HasGameReference<FaceSkiGame> {
   }
 
   void _onTrailEnd() {
-    _fader.add(OpacityEffect.fadeIn(LinearEffectController(1.5)));
     GlobalState.active = false;
     _levelCompleted = true;
 
@@ -349,7 +346,6 @@ class Gameplay extends Component with HasGameReference<FaceSkiGame> {
       player.resetTo(_lastSafePosition);
     } else {
       _gameOver = true;
-      _fader.add(OpacityEffect.fadeIn(LinearEffectController(1.5)));
       onGameOver.call();
     }
   }
@@ -360,5 +356,4 @@ class Gameplay extends Component with HasGameReference<FaceSkiGame> {
   void turnRight() {
     playerController.turnRight();
   }
-
 }

@@ -1,5 +1,6 @@
+import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:mimix_app/minigame_managment/dino_run/src/dino_run.dart';
+import 'package:mimix_app/minigame_managment/face_ski/src/game.dart';
 import 'package:mimix_app/utils/view/widgets/buttons/primary_button.dart';
 
 import 'package:mimix_app/utils/view/app_palette.dart';
@@ -12,18 +13,18 @@ import 'face_ski_game_page.dart';
 class FaceSkiPage extends StatefulWidget {
   const FaceSkiPage({super.key});
   @override
-  State<FaceSkiPage> createState() => _FaceBreakoutOverviewPageState();
+  State<FaceSkiPage> createState() => _FaceSkiOverviewPageState();
 }
 
-class _FaceBreakoutOverviewPageState extends State<FaceSkiPage> {
+class _FaceSkiOverviewPageState extends State<FaceSkiPage> {
 
   // static game for adding scene
-  late final DinoRun game;
+  late final FaceSkiGame game = FaceSkiGame();
 
   @override
   void initState() {
     super.initState();
-    game = DinoRun(handleGameOver: () => {});
+    game.startGameBlocked();
   }
 
   @override
@@ -85,6 +86,9 @@ class _FaceBreakoutOverviewPageState extends State<FaceSkiPage> {
                       decoration: BoxDecoration(
                           border: Border.all(color: PaletteColor.darkBlue, width: 2)
                       ),
+                      child: GameWidget(
+                        game: game,
+                      )
                   )),
 
 

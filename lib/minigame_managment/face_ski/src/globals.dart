@@ -5,6 +5,8 @@ class GlobalState {
   static bool active = false;
   static bool isPaused = false;
   static bool startGame = false;
+  static bool isPlayerBlocked = false;
+
 }
 
 class PlayerController {
