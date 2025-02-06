@@ -34,12 +34,12 @@ class _RewardPage extends State<RewardPage> {
 
   // List path image
   List<String> ImagePath = [
-    'assets/images/reward_mouth_smile.png',
-    'assets/images/reward_brow_down.png',
-    'assets/images/reward_brow_up.png',
-    'assets/images/reward_mouth_open.png',
-    'assets/images/reward_mouth_pucker.png',
-    'assets/images/reward_mouth_lower.png',
+    'assets/images/reward/reward_mouth_smile.png',
+    'assets/images/reward/reward_brow_down.png',
+    'assets/images/reward/reward_brow_up.png',
+    'assets/images/reward/reward_mouth_open.png',
+    'assets/images/reward/reward_mouth_pucker.png',
+    'assets/images/reward/reward_mouth_lower.png',
     'assets/images/emoticons/lock.png',
     'assets/images/emoticons/lock.png',
   ];
@@ -99,7 +99,7 @@ class _RewardPage extends State<RewardPage> {
                     margin: const EdgeInsets.symmetric(horizontal: 20),
                     child: HomePageCard(
                       title: 'Rewards',
-                      image: const AssetImage('assets/images/rewards_icon.png'),
+                      image: const AssetImage('assets/images/reward/rewards_icon.png'),
                       onTap: () => print('Home page card'),
                     ),
                   ),
