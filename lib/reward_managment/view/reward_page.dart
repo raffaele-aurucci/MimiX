@@ -30,7 +30,7 @@ class _RewardPage extends State<RewardPage> {
     "Premium Reward",
   ];
 
-  List<double> progressRewardList = [0.4, 0.25, 1, 0.3, 0.2, 0.4, 0, 0];
+  List<double> progressRewardList = [0.4, 0.25, 1, 0.3, 0.2, 0.4, -1, -1];
 
   // List path image
   List<String> ImagePath = [
@@ -122,9 +122,9 @@ class _RewardPage extends State<RewardPage> {
                               RewardCard(
                                 title: nameRewardList[index],
                                 description: nameRewardDescriptionList[index],
-                                progress: progressRewardList[index],
+                                progress: progressRewardList[index] == -1 ? 0 : progressRewardList[index],
                                 image: AssetImage(ImagePath[index]),
-                                complete: progressRewardList[index] == 1 ? true : false,
+                                complete: (progressRewardList[index] == 1 || progressRewardList[index] == -1) ? true : false,
                               ),
                               const SizedBox(height: 10),
                             ],
