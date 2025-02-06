@@ -62,6 +62,7 @@ class Enemy extends SpriteAnimationComponent
 
   @override
   void update(double dt) {
+    print(enemyData.speedX);
     position.x -= enemyData.speedX * dt;
 
     // enemy visible in widget game

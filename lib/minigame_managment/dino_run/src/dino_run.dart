@@ -130,9 +130,8 @@ class DinoRun extends FlameGame with TapCallbacks, HasCollisionDetection, DragCa
 
       if (camera.backdrop.firstChild<BackGroundScreen>() != null){
         var speed = camera.backdrop.firstChild<BackGroundScreen>()!.speed;
-        speed = min(speed + 1.1 * dt, 300);
+        speed = min(speed + (0.15 * dt), 200);
         camera.backdrop.firstChild<BackGroundScreen>()!.speed = speed;
-        print('speed $speed');
         if (camera.backdrop.firstChild<BackGroundScreen>()!.parallax != null) {
           camera.backdrop.firstChild<BackGroundScreen>()!.parallax!.baseVelocity = Vector2(speed / pow(2, 6), 0);
         }

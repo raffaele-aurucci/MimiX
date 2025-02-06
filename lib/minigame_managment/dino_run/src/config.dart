@@ -23,11 +23,11 @@ class EnemyData {
   final int nFrames;
   final double stepTime;
   final Vector2 textureSize;
-  final double speedX;
+  double speedX;
   final bool canFly;
   final String name;
 
-  const EnemyData({
+  EnemyData({
     required this.image,
     required this.nFrames,
     required this.stepTime,

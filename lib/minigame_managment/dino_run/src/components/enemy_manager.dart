@@ -13,7 +13,16 @@ class EnemyManager extends Component with HasGameReference<DinoRun> {
 
   final Random _random = Random();
 
-  final Timer _timer = Timer(3, repeat: true);
+  // spawn time
+  double spawnTime = 3.0;
+  final double spawnTimeReduction = 0.025;
+  Timer _timer = Timer(3, repeat: true);
+
+  // velocity of enemies
+  double speedXScorpio = 90;
+  double speedXVulture = 110;
+  double speedXHyena = 130;
+
 
   // each 3 seconds spawn a random enemy
   EnemyManager() {
@@ -22,7 +31,14 @@ class EnemyManager extends Component with HasGameReference<DinoRun> {
 
   void spawnRandomEnemy() {
     final randomIndex = _random.nextInt(_data.length);
-    final enemyData = _data.elementAt(randomIndex);
+    var enemyData = _data.elementAt(randomIndex);
+
+    switch(enemyData.name){
+      case 'scorpio': enemyData.speedX = speedXScorpio;
+      case 'vulture': enemyData.speedX = speedXVulture;
+      case 'hyena' : enemyData.speedX = speedXHyena;
+    }
+
     final enemy = Enemy(enemyData);
 
     enemy.anchor = Anchor.bottomLeft;
@@ -41,6 +57,15 @@ class EnemyManager extends Component with HasGameReference<DinoRun> {
     enemy.size = enemyData.textureSize;
 
     game.world.add(enemy);
+
+
+    if (spawnTime > 1.5) {
+      spawnTime -= spawnTimeReduction;
+      _timer.stop();
+      _timer = Timer(spawnTime, repeat: true, onTick: spawnRandomEnemy);
+      _timer.start();
+    }
+
   }
 
   // called after onLoad()
@@ -75,7 +100,7 @@ class EnemyManager extends Component with HasGameReference<DinoRun> {
           nFrames: 6,
           stepTime: 0.09,
           textureSize: Vector2(48, 48),
-          speedX: 150,
+          speedX: 130,
           canFly: false,
           name: 'hyena'
         ),
@@ -88,6 +113,12 @@ class EnemyManager extends Component with HasGameReference<DinoRun> {
   @override
   void update(double dt) {
     _timer.update(dt);
+
+    // update velocity of enemies
+    speedXScorpio = min(speedXScorpio + (0.15 * dt), 120);
+    speedXVulture = min(speedXVulture + (0.15 * dt), 140);
+    speedXHyena = min(speedXHyena + (0.15 * dt), 160);
+
     super.update(dt);
   }
 
