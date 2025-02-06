@@ -131,7 +131,7 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
         {
 
           if (mouthSmileLeft != null && mouthSmileRight != null) {
-            if (mouthSmileLeft > 0.9 && mouthSmileRight > 0.9 && _confirmFaceDetection) {
+            if (mouthSmileLeft > 0.8 && mouthSmileRight > 0.8 && _confirmFaceDetection) {
 
               if (!_isDone) {
                 _facialExpressionCount += 1;
@@ -149,7 +149,7 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
                 _isDone = true;
               }
 
-            } else if (mouthSmileLeft < 0.9 && mouthSmileRight < 0.9){
+            } else if (mouthSmileLeft < 0.1 && mouthSmileRight < 0.1){
               _isDone = false;
             }
           }
@@ -178,8 +178,6 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
 
         if (mouthPucker != null) {
 
-          print('mouthpucker $mouthPucker');
-
           if (mouthPucker > 0.97 && _confirmFaceDetection) {
             if (!_isDone) {
               _facialExpressionCount += 1;
@@ -189,7 +187,7 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
                   _facialExpressionCount);
               _isDone = true;
             }
-          } else if (mouthPucker < 0.97){
+          } else if (mouthPucker < 0.1){
             _isDone = false;
           }
         }
@@ -212,7 +210,7 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
                   _facialExpressionCount);
               _isDone = true;
             }
-          } else if (browOuterUpLeft < 0.8 && browOuterUpRight < 0.8){
+          } else if (browOuterUpLeft < 0.1 && browOuterUpRight < 0.1){
             _isDone = false;
           }
         }
@@ -236,7 +234,7 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
                   _facialExpressionCount);
               _isDone = true;
             }
-          } else if (browDownLeft < 0.3 && browDownRight < 0.3){
+          } else if (browDownLeft < 0.1 && browDownRight < 0.1){
             _isDone = false;
           }
         }

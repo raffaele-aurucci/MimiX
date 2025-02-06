@@ -128,13 +128,13 @@ class _TrainingSessionPageState extends State<TrainingSessionPage> {
                   double.parse(avgOfValue.toStringAsFixed(2));
             }
 
-            if (facialExpression1 > 0.9 && facialExpression2 > 0.9 &&
+            if (facialExpression1 > 0.8 && facialExpression2 > 0.8 &&
                 _confirmFaceDetection) {
               if (!_isDone) {
                 _facialExpressionCount++;
                 _isDone = true;
               }
-            } else if (facialExpression1 < 0.9 && facialExpression2 < 0.9) {
+            } else if (facialExpression1 < 0.1 && facialExpression2 < 0.1) {
               _isDone = false;
             }
           }
@@ -155,7 +155,7 @@ class _TrainingSessionPageState extends State<TrainingSessionPage> {
                 _facialExpressionCount++;
                 _isDone = true;
               }
-            } else if (facialExpression < 0.65) {
+            } else if (facialExpression < 0.1) {
               _isDone = false;
             }
           }
@@ -175,7 +175,7 @@ class _TrainingSessionPageState extends State<TrainingSessionPage> {
                 _facialExpressionCount++;
                 _isDone = true;
               }
-            } else if (facialExpression < 0.97) {
+            } else if (facialExpression < 0.1) {
               _isDone = false;
             }
           }
@@ -200,7 +200,7 @@ class _TrainingSessionPageState extends State<TrainingSessionPage> {
                 _facialExpressionCount++;
                 _isDone = true;
               }
-            } else if (facialExpression1 < 0.8 && facialExpression2 < 0.8) {
+            } else if (facialExpression1 < 0.1 && facialExpression2 < 0.1) {
               _isDone = false;
             }
           }
@@ -225,27 +225,28 @@ class _TrainingSessionPageState extends State<TrainingSessionPage> {
                 _facialExpressionCount++;
                 _isDone = true;
               }
-            } else if (facialExpression1 < 0.3 && facialExpression2 < 0.3) {
+            } else if (facialExpression1 < 0.1 && facialExpression2 < 0.1) {
               _isDone = false;
             }
           }
 
         case "Mouth Lower":
           {
+
             var facialExpression = _expressionScores?.getScore(
                 'mouthShrugLower') ?? 0.0;
-
+            print('mouthLower $facialExpression');
             if (facialExpression > _maxValueOfExpression) {
               _maxValueOfExpression =
                   double.parse(facialExpression.toStringAsFixed(2));
             }
 
-            if (facialExpression > 0.6 && _confirmFaceDetection) {
+            if (facialExpression > 0.65 && _confirmFaceDetection) {
               if (!_isDone) {
                 _facialExpressionCount++;
                 _isDone = true;
               }
-            } else if (facialExpression < 0.6) {
+            } else if (facialExpression < 0.1) {
               _isDone = false;
             }
           }
