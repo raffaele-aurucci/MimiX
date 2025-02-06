@@ -119,7 +119,7 @@ class _FaceRunGamePageState extends State<FaceRunGamePage> {
       if (mouthSmileLeft > 0.7 && mouthSmileRight > 0.7
           && jawOpen < mouthSmileLeft && jawOpen < mouthSmileRight) {
         game.jumpDino();
-      } else if (jawOpen >= 0.5 && mouthSmileLeft < jawOpen
+      } else if (jawOpen >= 0.65 && mouthSmileLeft < jawOpen
           && mouthSmileRight < jawOpen) {
         game.superJumpDino();
       }

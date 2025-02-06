@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flame/camera.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
@@ -123,6 +125,21 @@ class DinoRun extends FlameGame with TapCallbacks, HasCollisionDetection, DragCa
     // update chargeTimer
     chargeTimer.update(dt);
 
+    // update parallax velocity
+    if (playState != PlayState.welcome) {
+
+      if (camera.backdrop.firstChild<BackGroundScreen>() != null){
+        var speed = camera.backdrop.firstChild<BackGroundScreen>()!.speed;
+        speed = min(speed + 1.1 * dt, 300);
+        camera.backdrop.firstChild<BackGroundScreen>()!.speed = speed;
+        print('speed $speed');
+        if (camera.backdrop.firstChild<BackGroundScreen>()!.parallax != null) {
+          camera.backdrop.firstChild<BackGroundScreen>()!.parallax!.baseVelocity = Vector2(speed / pow(2, 6), 0);
+        }
+      }
+
+    }
+
     // game over
     _checkGameOver();
     super.update(dt);
@@ -165,6 +182,15 @@ class DinoRun extends FlameGame with TapCallbacks, HasCollisionDetection, DragCa
       score.value = 0;
       lives.value = 5;
       charges.value = 3;
+
+      // reset velocity of parallax
+      if (camera.backdrop.firstChild<BackGroundScreen>() != null){
+        double speed = 100;
+        camera.backdrop.firstChild<BackGroundScreen>()!.speed = speed;
+        if (camera.backdrop.firstChild<BackGroundScreen>()!.parallax != null) {
+          camera.backdrop.firstChild<BackGroundScreen>()!.parallax!.baseVelocity = Vector2(speed / pow(2, 6), 0);
+        }
+      }
 
       resumeEngine();
       startGame();

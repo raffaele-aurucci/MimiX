@@ -9,7 +9,7 @@ import 'package:mimix_app/minigame_managment/dino_run/src/config.dart';
 
 class BackGroundScreen extends ParallaxComponent {
   BackGroundScreen({required this.speed});
-  final double speed;
+  double speed;
   @override
   FutureOr<void> onLoad() async {
     final layers = [
