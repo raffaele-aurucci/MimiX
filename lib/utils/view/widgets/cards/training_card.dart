@@ -22,49 +22,49 @@ class TrainingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Stack(
-        children: [
-          Container(
-              width: 150, // To edit
-              height: 150, // To edit
-              // Add the function
-              child: Container(
-                padding: const EdgeInsets.all(16.0),
-                decoration: BoxDecoration(
-                  color: PaletteColor.whiteColor,
-                  borderRadius: BorderRadius.circular(12),
-                  // border: Border.all(color: PaletteColor.borderCard, width: 1)
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.3),
-                      blurRadius: 5,
-                      offset: Offset(0, 5),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CardTitleText(text: title, size: CardTitleText.H6),
-                    const SizedBox(height: 8),
-                    DescriptionText(text: description, size: DescriptionText.P2,),
-                  ],
-                ),
-              )
-          ),
-          Positioned(
-            bottom: 20,
-            right: 20,
-            child: Image.asset(
-              image,
-              width: 25,
-              height: 25,
-              fit: BoxFit.cover,
+      child: Container(
+        width: 150, // To edit
+        height: 150, // To edit
+        // Add the function
+        child: Stack(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                color: PaletteColor.whiteColor,
+                borderRadius: BorderRadius.circular(12),
+                // border: Border.all(color: PaletteColor.borderCard, width: 1)
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    blurRadius: 5,
+                    offset: Offset(0, 5),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CardTitleText(text: title, size: CardTitleText.H6),
+                  const SizedBox(height: 8),
+                  DescriptionText(text: description, size: DescriptionText.P2,),
+                ],
+              ),
             ),
-          ),
-        ],
+            Positioned(
+              bottom: 8,
+              right: 8,
+              child: Image.asset(
+                image,
+                width: 25,
+                height: 25,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ],
+        ),
       ),
-      );
+    );
   }
 }
 
