@@ -60,7 +60,7 @@ class HomePage extends StatelessWidget {
                   const SizedBox(height: 10),
                   HomePageCard(
                       title: "Rewards",
-                      image: const AssetImage('assets/images/reward/rewards_icon.png'),
+                      image: const AssetImage('assets/images/rewards/rewards_icon.png'),
                       onTap: () => {
                         Navigator.push(
                           context,

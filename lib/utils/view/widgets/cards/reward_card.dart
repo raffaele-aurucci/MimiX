@@ -48,9 +48,9 @@ class RewardCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CardTitleText(text: title, size: CardTitleText.H5),
+                      CardTitleText(text: title, size: CardTitleText.H6),
                       SizedBox(height: 8),
-                      DescriptionText(text: description, size: DescriptionText.P1),
+                      DescriptionText(text: description, size: DescriptionText.P2),
                     ],
                   ),
                 ),
