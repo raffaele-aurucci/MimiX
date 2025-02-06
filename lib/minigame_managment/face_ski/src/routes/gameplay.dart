@@ -155,14 +155,20 @@ class Gameplay extends Component with HasGameReference<FaceSkiGame> {
     _world = World(children: [map]);
     await add(_world);
 
+    // Ottieni la dimensione disponibile
+    final screenSize = game.size;
+    final aspectRatio = screenSize.x / screenSize.y;
+
+    // Imposta la risoluzione in base alla dimensione del contenitore
     const height = 200.0;
-    const width = 135.0;
+    final width = height * aspectRatio;
 
     _camera = CameraComponent.withFixedResolution(
       width: width,
       height: height,
       world: _world,
     );
+
     await add(_camera);
   }
 
