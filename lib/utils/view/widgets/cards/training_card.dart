@@ -56,8 +56,8 @@ class TrainingCard extends StatelessWidget {
               right: 8,
               child: Image.asset(
                 image,
-                width: 25,
-                height: 25,
+                width: 26,
+                height: 26,
                 fit: BoxFit.cover,
               ),
             ),

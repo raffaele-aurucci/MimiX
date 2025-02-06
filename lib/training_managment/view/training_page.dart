@@ -22,46 +22,46 @@ class _TrainingPage extends State<TrainingPage> {
 
   // List names of games
   List<String> nameTrainingList = [
-    "Brow Down",
-    "Brow Up",
-    "Mouth Open",
     "Mouth Smile",
+    "Mouth Open",
     "Mouth Pucker",
     "Mouth Lower",
+    "Brow Down",
+    "Brow Up",
     "Premium Training",
     "Premium Training",
   ];
 
   // List emoji
   List<String> emojiImagePath = [
-    'assets/images/emoticons/brow_down.png',
-    'assets/images/emoticons/brow_up.png',
-    'assets/images/emoticons/mouth_open.png',
     'assets/images/emoticons/mouth_smile.png',
+    'assets/images/emoticons/mouth_open.png',
     'assets/images/emoticons/mouth_pucker.png',
     'assets/images/emoticons/mouth_lower.png',
+    'assets/images/emoticons/brow_up.png',
+    'assets/images/emoticons/brow_down.png',
     'assets/images/emoticons/lock.png',
     'assets/images/emoticons/lock.png',
   ];
 
   List<String> nameTrainingDescriptionList = [
-    "Improve your ability to lower your eyebrows",
-    "Enhance your skill in raising your eyebrows",
-    "Practice opening your mouth naturally",
     "Learn to form a natural smile",
+    "Practice opening your mouth naturally",
     "Master puckering your lips for focused gestures",
     "Practice lowering your bottom lip",
+    "Enhance your skill in raising your eyebrows",
+    "Improve your ability to lower your eyebrows",
     "Upgrade now to access this session!",
     "Upgrade now to access this session!",
   ];
 
   List<String> nameTrainingOverviewDescriptionList = [
-    "Lower your eyebrows to effectively strengthen and control the frontalis muscles.",
-    "Raise your eyebrows to enhance the mobility and precision of the frontalis muscles.",
-    "Open your mouth naturally to train and relax the orbicularis oris and other muscles.",
     "Smile naturally to engage and strengthen the zygomatic muscles for better expressions.",
+    "Open your mouth naturally to train and relax the orbicularis oris and other muscles.",
     "Pucker your lips tightly to improve the strength and focus of the orbicularis oris.",
-    "Lower your bottom lip to refine control of the depressor labii and related muscles.",
+    "Lower your bottom lip to refine control of the depressor labia and related muscles.",
+    "Raise your eyebrows to enhance the mobility and precision of the frontalis muscles.",
+    "Lower your eyebrows to effectively strengthen and control the frontalis muscles.",
     "",
     "",
   ];

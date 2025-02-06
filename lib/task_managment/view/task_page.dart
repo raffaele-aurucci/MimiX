@@ -26,28 +26,28 @@ class _TaskPage extends State<TaskPage> {
 
   // List names of games
   List<String> nameTaskList = [
-    "Brow Down",
-    "Brow Up",
-    "Mouth Open",
     "Mouth Smile",
+    "Mouth Open",
     "Mouth Pucker",
     "Mouth Lower",
+    "Brow Up",
+    "Brow Down",
     "Premium Task",
     "Premium Task"
   ];
 
   List<String> nameTaskDescriptionList = [
-    "Improve your ability to lower your eyebrows",
-    "Enhance your skill in raising your eyebrows",
-    "Practice opening your mouth naturally mouth",
     "Learn to form a natural smile form natural",
+    "Practice opening your mouth naturally mouth",
     "Master puckering your lips",
     "Practice lowering your bottom lip",
+    "Enhance your skill in raising your eyebrows",
+    "Improve your ability to lower your eyebrows",
     "Upgrade now to complete this task!",
     "Upgrade now to complete this task!"
   ];
 
-  List<double> progressValue = [1, 0.4, 0.3, 0.2, 1, 0.6, 0, 0];
+  List<double> progressValue = [1, 0.4, 0.3, 0.2, 0.8, 0.6, 0, 0];
 
   // To change the visibility of the text when you scroll
   bool _onScroll(ScrollNotification notification) {
