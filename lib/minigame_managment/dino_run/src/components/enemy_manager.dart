@@ -60,6 +60,7 @@ class EnemyManager extends Component with HasGameReference<DinoRun> {
 
 
     if (spawnTime > 1.5) {
+      print('spawn: $spawnTime');
       spawnTime -= spawnTimeReduction;
       _timer.stop();
       _timer = Timer(spawnTime, repeat: true, onTick: spawnRandomEnemy);
