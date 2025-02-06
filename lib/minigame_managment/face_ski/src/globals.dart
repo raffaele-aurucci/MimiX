@@ -6,6 +6,7 @@ class GlobalState {
   static bool isPaused = false;
   static bool startGame = false;
   static bool isPlayerBlocked = false;
+  static bool isPreviewPage = false;
 
 }
 

@@ -62,7 +62,7 @@ class Gameplay extends Component with HasGameReference<FaceSkiGame> {
   @override
   Future<void> onLoad() async {
     final map = await TiledComponent.load(
-      'Level.tmx',
+      GlobalState.isPreviewPage ? 'MiniMape.tmx' : 'Level.tmx',
       Vector2.all(16),
     );
 

@@ -1,6 +1,7 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:mimix_app/minigame_managment/face_ski/src/game.dart';
+import 'package:mimix_app/minigame_managment/face_ski/src/globals.dart';
 import 'package:mimix_app/utils/view/widgets/buttons/primary_button.dart';
 
 import 'package:mimix_app/utils/view/app_palette.dart';
@@ -24,6 +25,7 @@ class _FaceSkiOverviewPageState extends State<FaceSkiPage> {
   @override
   void initState() {
     super.initState();
+    GlobalState.isPreviewPage = true;
     game.startGameBlocked();
   }
 
@@ -104,7 +106,8 @@ class _FaceSkiOverviewPageState extends State<FaceSkiPage> {
                       text: 'Play',
                       onPressed: () => {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => const FaceSkiGamePage()))
+                            MaterialPageRoute(builder: (context) => const FaceSkiGamePage())),
+                            GlobalState.isPreviewPage = false
                       }
                   )
                 ]
