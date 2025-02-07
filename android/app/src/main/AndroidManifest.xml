@@ -3,7 +3,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <application
             android:usesCleartextTraffic="true"
-            android:label="emad_2024_25_mimix"
+            android:label="Mimix"
             android:name="${applicationName}"
             android:icon="@mipmap/ic_launcher">
         <provider
