@@ -33,6 +33,7 @@ class TutorialPage extends StatelessWidget {
           const SizedBox(height: 30),
 
           Container(
+            margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
             child: Image.asset(imagePath),
           ),
 
