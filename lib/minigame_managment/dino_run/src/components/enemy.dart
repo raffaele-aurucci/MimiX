@@ -62,7 +62,6 @@ class Enemy extends SpriteAnimationComponent
 
   @override
   void update(double dt) {
-    print(enemyData.speedX);
     position.x -= enemyData.speedX * dt;
 
     // enemy visible in widget game
@@ -71,7 +70,13 @@ class Enemy extends SpriteAnimationComponent
     }
 
     // enemy not visible in widget game
-    if (position.x <= -5) {
+    if (position.x <= -15 && enemyData.name == 'scorpio') {
+      opacity = 0;
+    }
+    else if (position.x <= -10 && enemyData.name == 'vulture') {
+      opacity = 0;
+    }
+    else if (position.x <= -5 && enemyData.name == 'hyena') {
       opacity = 0;
     }
 

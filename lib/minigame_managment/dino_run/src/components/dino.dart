@@ -107,7 +107,7 @@ class Dino extends SpriteAnimationGroupComponent<DinoAnimationStates>
   void jump() {
     if (isOnGround && current == DinoAnimationStates.run) {
       // FlameAudio.play(AudioConstants.jump);
-      speedY = -350;
+      speedY = -400;
       current = DinoAnimationStates.idle;
     }
   }
@@ -118,7 +118,7 @@ class Dino extends SpriteAnimationGroupComponent<DinoAnimationStates>
         // FlameAudio.play(AudioConstants.jump);
         game.chargeTimer.stop();
         game.chargeTimer.start();
-        speedY = -450;
+        speedY = -500;
         current = DinoAnimationStates.idle;
         game.charges.value = game.charges.value - 1;
       }
@@ -138,8 +138,8 @@ class Dino extends SpriteAnimationGroupComponent<DinoAnimationStates>
       removeFromParent();
     }
     anchor = Anchor.bottomLeft;
-    position = Vector2(32, game.virtualSize.y - 10);
-    size = Vector2.all(48);
+    position = Vector2(16, game.virtualSize.y - 10);
+    size = Vector2.all(64);
     current = DinoAnimationStates.run;
     isHit = false;
     speedY = 0.0;
