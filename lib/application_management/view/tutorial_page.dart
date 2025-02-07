@@ -50,6 +50,10 @@ class TutorialPage extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: indexPage == index ? PaletteColor.darkBlue : PaletteColor.progressBarBackground,
+                  border: indexPage != index ? Border.all( // Bordo aggiunto
+                    color: PaletteColor.darkBlue,
+                    width: 0.01,
+                  ) : null
                 ),
               ),
             ),
