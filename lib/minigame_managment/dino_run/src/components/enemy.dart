@@ -65,7 +65,7 @@ class Enemy extends SpriteAnimationComponent
     position.x -= enemyData.speedX * dt;
 
     // enemy visible in widget game
-    if (position.x <= game.virtualSize.x - 32) {
+    if (position.x <= game.virtualSize.x - 42) {
       opacity = 1.0;
     }
 

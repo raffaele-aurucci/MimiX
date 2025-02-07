@@ -41,7 +41,7 @@ class Dino extends SpriteAnimationGroupComponent<DinoAnimationStates>
 
   double yMax = 0.0;
   double speedY = 0.0;
-  static const double gravity = 600;
+  static const double gravity = 575;
 
   final Timer _hitTimer = Timer(1);
   bool isHit = false;
@@ -118,7 +118,7 @@ class Dino extends SpriteAnimationGroupComponent<DinoAnimationStates>
         // FlameAudio.play(AudioConstants.jump);
         game.chargeTimer.stop();
         game.chargeTimer.start();
-        speedY = -500;
+        speedY = -480;
         current = DinoAnimationStates.idle;
         game.charges.value = game.charges.value - 1;
       }
