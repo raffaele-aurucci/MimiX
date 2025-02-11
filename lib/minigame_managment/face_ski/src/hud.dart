@@ -6,10 +6,11 @@ import 'package:flame/effects.dart';
 import 'package:flame/input.dart';
 import 'package:flutter/material.dart' hide Viewport;
 
+import 'globals.dart';
+
 class Hud extends PositionComponent with ParentIsA<Viewport>, HasGameReference {
   Hud({
     required Sprite playerSprite,
-    required Sprite snowmanSprite,
   })  : _player1 = SpriteComponent(
           sprite: playerSprite,
           anchor: Anchor.center,
@@ -24,79 +25,29 @@ class Hud extends PositionComponent with ParentIsA<Viewport>, HasGameReference {
           sprite: playerSprite,
           anchor: Anchor.center,
           scale: Vector2.all(0.6),
-        ),
-        _snowman = SpriteComponent(
-          sprite: snowmanSprite,
-          anchor: Anchor.center,
-          scale: Vector2.all(0.6),
         );
 
-
-  final _score = TextComponent(
-    text: 'x0',
-    anchor: Anchor.centerLeft,
-    textRenderer: TextPaint(
-      style: const TextStyle(
-        color: Colors.black,
-        fontSize: 8,
-      ),
-    ),
-  );
 
   final SpriteComponent _player1;
   final SpriteComponent _player2;
   final SpriteComponent _player3;
-  final SpriteComponent _snowman;
 
   @override
   Future<void> onLoad() async {
-    _player1.position.setValues(
-      12,
-      13,
-    );
+    await super.onLoad();
 
-    _player2.position.setValues(
-      24,
-      13,
-    );
+    const xPosition= 68.0;
+    const yPosition = 14.0;
 
-    _player3.position.setValues(
-      36,
-      13,
-    );
+    const spacing = 12.0;
 
-    _snowman.position.setValues(
-      parent.virtualSize.x - 35,
-      _player1.y,
-    );
+    _player1.position.setValues(xPosition - spacing, yPosition);
+    _player2.position.setValues(xPosition, yPosition);
+    _player3.position.setValues(xPosition + spacing, yPosition);
 
-    _score.position.setValues(
-      _snowman.position.x + 8,
-      _snowman.position.y,
-    );
-
-    await addAll([_player1, _player2, _player3, _snowman, _score]);
-  }
-
-  void updateSnowmanCount(int count) {
-    _score.text = 'x$count';
-
-    _snowman.add(
-      RotateEffect.by(
-        pi / 8,
-        RepeatedEffectController(ZigzagEffectController(period: 0.2), 2),
-      ),
-    );
-
-    _score.add(
-      ScaleEffect.by(
-        Vector2.all(1.5),
-        EffectController(
-          duration: 0.1,
-          alternate: true,
-        ),
-      ),
-    );
+    if(!GlobalState.isPreviewPage){
+      await addAll([_player1, _player2, _player3]);
+    }
   }
 
   void updateLifeCount(int count) {

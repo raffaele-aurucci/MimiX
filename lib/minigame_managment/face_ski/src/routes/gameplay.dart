@@ -42,12 +42,7 @@ class Gameplay extends Component with HasGameReference<FaceSkiGame> {
   late final Hud _hud;
   late final SpriteSheet _spriteSheet;
 
-  int _nSnowmanCollected = 0;
   int _nLives = 3;
-
-  late int _star1;
-  late int _star2;
-  late int _star3;
 
   int _nTrailTriggers = 0;
   bool get _isOffTrail => _nTrailTriggers == 0;
@@ -71,17 +66,12 @@ class Gameplay extends Component with HasGameReference<FaceSkiGame> {
     final tiles = game.images.fromCache('tilemap_packed.png');
     _spriteSheet = SpriteSheet(image: tiles, srcSize: Vector2.all(16));
 
-    _star1 = map.tileMap.map.properties.getValue<int>('Star1')!;
-    _star2 = map.tileMap.map.properties.getValue<int>('Star2')!;
-    _star3 = map.tileMap.map.properties.getValue<int>('Star3')!;
-
     await _setupWorldAndCamera(map);
     await _handleSpawnPoints(map);
     await _handleTriggers(map);
 
     _hud = Hud(
       playerSprite: _spriteSheet.getSprite(5, 10),
-      snowmanSprite: _spriteSheet.getSprite(5, 9),
     );
 
     await _camera.viewport.addAll([_hud]);
@@ -320,22 +310,10 @@ class Gameplay extends Component with HasGameReference<FaceSkiGame> {
   void _onTrailEnd() {
     GlobalState.active = false;
     _levelCompleted = true;
-
-    if (_nSnowmanCollected >= _star3) {
-      onLevelCompleted.call(3);
-    } else if (_nSnowmanCollected >= _star2) {
-      onLevelCompleted.call(2);
-    } else if (_nSnowmanCollected >= _star1) {
-      onLevelCompleted.call(1);
-    } else {
-      onLevelCompleted.call(0);
-    }
   }
 
   void _onSnowmanCollected() {
-    ++_nSnowmanCollected;
     game.score.value += 100;
-    _hud.updateSnowmanCount(_nSnowmanCollected);
   }
 
   void _resetPlayer() {
