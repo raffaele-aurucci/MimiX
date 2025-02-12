@@ -22,7 +22,7 @@ class HomePageCard extends StatelessWidget {
       GestureDetector(
         onTap: onTap,
         child: Container(
-          height: 115,
+          height: 110,
           padding: const EdgeInsets.all(16.0),
           decoration: BoxDecoration(
           color: PaletteColor.powderBlue,
@@ -49,8 +49,8 @@ class HomePageCard extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: 90,
-                  height: 60,
+                  width: 110,
+                  height: 80,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     image: DecorationImage(
