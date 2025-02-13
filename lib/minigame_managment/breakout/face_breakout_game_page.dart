@@ -1,6 +1,7 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:mimix_app/minigame_managment/breakout/src/breakout.dart';
+import 'package:mimix_app/minigame_managment/breakout/src/config.dart';
 
 import 'package:mimix_app/utils/view/app_palette.dart';
 

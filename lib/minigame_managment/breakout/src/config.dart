@@ -22,4 +22,8 @@ const brickHeight = gameHeight * 0.03;
 
 const difficultyModifier = 1.03;
 
-const difficultyModifier = 1.03;
+// brick colors
+const brickBlue = Rect.fromLTWH(386, 2, 64, 32);
+const brickRed = Rect.fromLTWH(372, 62, 64, 32);
+const brickYellow = Rect.fromLTWH(222, 87, 64, 32);
+
