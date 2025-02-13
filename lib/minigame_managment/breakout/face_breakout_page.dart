@@ -84,13 +84,12 @@ class _FaceBreakoutOverviewPageState extends State<FaceBreakoutPage> {
 
                   Expanded(
                     child: Container(
+                      width: double.infinity,
                       margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
                       decoration: BoxDecoration(
                           border: Border.all(color: PaletteColor.darkBlue, width: 2)
                       ),
-                      child: GameWidget.controlled(
-                        gameFactory: () => game,
-                      ),
+                      child: Image.asset('assets/images/breakout/face_breakout_preview.jpg', fit: BoxFit.fill,),
                   )),
 
 

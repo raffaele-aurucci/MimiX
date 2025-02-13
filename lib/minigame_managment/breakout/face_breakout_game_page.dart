@@ -150,6 +150,7 @@ class _FaceBreakoutGamePageState extends State<FaceBreakoutGamePage> {
     game = Breakout(handleGameOver: handleGameOver, handleWon: handleWon);
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -232,6 +233,7 @@ class _FaceBreakoutGamePageState extends State<FaceBreakoutGamePage> {
                     child: Container(
                       margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
                       decoration: BoxDecoration(
+                          color: const Color(0xFF586787),
                           border: Border.all(color: PaletteColor.darkBlue, width: 2)
                       ),
                       child: GameWidget.controlled(

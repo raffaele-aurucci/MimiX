@@ -7,11 +7,10 @@ import 'package:flutter/material.dart';
 import '../breakout.dart';
 
 class PlayArea extends RectangleComponent with HasGameReference<Breakout> {
-  PlayArea()
-      : super(
-          paint: Paint()..color = const Color(0xffffffff),
-          children: [RectangleHitbox()],
-        );
+  PlayArea() : super(
+    paint: Paint()..color = const Color(0x00000000),
+    children: [RectangleHitbox()],
+  );
 
   @override
   FutureOr<void> onLoad() async {

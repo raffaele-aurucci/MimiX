@@ -3,6 +3,7 @@ import 'dart:math' as math;
 
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
+import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/view/app_palette.dart';
@@ -17,6 +18,7 @@ class Breakout extends FlameGame with HasCollisionDetection {
   // external function to handle game over and win (for UI)
   final Function handleGameOver;
   final Function handleWon;
+
   bool isBallBig = false;
   bool isBatBig = false;
 
@@ -49,8 +51,29 @@ class Breakout extends FlameGame with HasCollisionDetection {
   }
 
   @override
+  bool get debugMode => false;
+
+  late final Sprite spriteSheet;
+  late final Sprite bigBatSprite;
+  late final Sprite backgroundSprite;
+
+  @override
   FutureOr<void> onLoad() async {
     super.onLoad();
+
+    spriteSheet = await loadSprite('breakout/breakout.png');
+
+    bigBatSprite = await loadSprite('breakout/big_bat.png');
+
+    backgroundSprite = await loadSprite('breakout/background.png');
+
+    final background = SpriteComponent(
+      sprite: backgroundSprite,
+      size: size,
+      position: Vector2.zero(),
+    );
+
+    camera.backdrop.add(background);
 
     camera.viewfinder.anchor = Anchor.topLeft;
 
@@ -60,16 +83,15 @@ class Breakout extends FlameGame with HasCollisionDetection {
 
     // Add objects to scene but not start the game.
 
-    world.add(Bat(
+    world.add(BatNew(
         size: Vector2(batWidth, batHeight),
-        cornerRadius: const Radius.circular(batRadius / 2),
         position: Vector2(width / 2, height * 0.95),
-        color: clearBlue));
+    ));
 
     world.addAll([
       for (var i = 0; i < 10; i++)
         for (var j = 0; j < 5; j++)
-          Brick(
+          BrickNew(
             position: Vector2(
               (i + 0.5) * brickWidth + (i + 1) * brickGutter,
               (j + 2.0) * brickHeight + j * brickGutter,
@@ -79,14 +101,14 @@ class Breakout extends FlameGame with HasCollisionDetection {
                   (i == 8 && j == 1) ||
                   (i == 3 && j == 3) ||
                   (i == 6 && j == 3)) {
-                return bigBallBrickColor;
+                return Colors.red;
               } else if ((i == 3 && j == 1) ||
                   (i == 1 && j == 3) ||
                   (i == 6 && j == 1) ||
                   (i == 8 && j == 3)) {
-                return bigBatBrickColor;
+                return Colors.yellow;
               } else {
-                return clearBlue;
+                return Colors.blue;
               }
             }(),
           ),
@@ -95,16 +117,16 @@ class Breakout extends FlameGame with HasCollisionDetection {
 
   TextComponent? _countdownText;
   int countdownValue = 3;
-  late Ball _ball;
+  late BallNew _ball;
   double countdownTimer = 1.0;
   bool isCountdownActive = false;
 
   void startGame() {
-    _ball = Ball(radius: ballRadius, position: size / 2, velocity: Vector2(350, 350));
+    _ball = BallNew(radius: ballRadius, position: size / 2, velocity: Vector2(350, 350));
 
     // Preview scene components.
-    world.removeAll(world.children.query<Bat>());
-    world.removeAll(world.children.query<Brick>());
+    world.removeAll(world.children.query<BatNew>());
+    world.removeAll(world.children.query<BrickNew>());
 
     if (_countdownText != null && _countdownText!.isMounted) {
       _countdownText!.removeFromParent();
@@ -112,18 +134,16 @@ class Breakout extends FlameGame with HasCollisionDetection {
 
     // New scene.
     world.add(
-      Bat(
+      BatNew(
         size: Vector2(batWidth, batHeight),
-        cornerRadius: const Radius.circular(batRadius / 2),
         position: Vector2(width / 2, height * 0.95),
-        color: clearBlue,
       ),
     );
 
     world.addAll([
       for (var i = 0; i < 10; i++)
         for (var j = 0; j < 5; j++)
-          Brick(
+          BrickNew(
             position: Vector2(
               (i + 0.5) * brickWidth + (i + 1) * brickGutter,
               (j + 2.0) * brickHeight + j * brickGutter,
@@ -133,14 +153,14 @@ class Breakout extends FlameGame with HasCollisionDetection {
                   (i == 8 && j == 1) ||
                   (i == 3 && j == 3) ||
                   (i == 6 && j == 3)) {
-                return bigBallBrickColor;
+                return Colors.red;
               } else if ((i == 3 && j == 1) ||
                   (i == 1 && j == 3) ||
                   (i == 6 && j == 1) ||
                   (i == 8 && j == 3)) {
-                return bigBatBrickColor;
+                return Colors.yellow;
               } else {
-                return clearBlue;
+                return Colors.blue;
               }
             }(),
           ),
@@ -200,13 +220,13 @@ class Breakout extends FlameGame with HasCollisionDetection {
 
   void moveBatLeft() {
     if (playState == PlayState.playing) {
-      world.children.query<Bat>().first.moveBy(-batStep);
+      world.children.query<BatNew>().first.moveBy(-batStep);
     }
   }
 
   void moveBatRight() {
     if (playState == PlayState.playing) {
-      world.children.query<Bat>().first.moveBy(batStep);
+      world.children.query<BatNew>().first.moveBy(batStep);
     }
   }
 
@@ -217,8 +237,8 @@ class Breakout extends FlameGame with HasCollisionDetection {
         _ball.removeFromParent();
       }
 
-      world.removeAll(world.children.query<Bat>());
-      world.removeAll(world.children.query<Brick>());
+      world.removeAll(world.children.query<BatNew>());
+      world.removeAll(world.children.query<BrickNew>());
 
       if(_countdownText != null && _countdownText!.isMounted) {
         _countdownText!.removeFromParent();
