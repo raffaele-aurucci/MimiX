@@ -7,10 +7,10 @@ import 'package:flame/effects.dart';
 import '../breakout.dart';
 import '../config.dart';
 
-class BatNew extends SpriteComponent with HasGameReference<Breakout> {
+class Bat extends SpriteComponent with HasGameReference<Breakout> {
   late Sprite _originalSprite;
 
-  BatNew({
+  Bat({
     required super.position,
     required super.size,
   }) : super(anchor: Anchor.center);
@@ -28,8 +28,18 @@ class BatNew extends SpriteComponent with HasGameReference<Breakout> {
   }
 
   void moveBy(double dx) {
+
+    // Limit position of bat
+    double newX = position.x + dx;
+    newX = newX.clamp(size.x / 2, game.width - size.x / 2);
+
+    // add(MoveToEffect(
+    //   Vector2((position.x + dx).clamp(0, game.width), position.y),
+    //   EffectController(duration: 0.1),
+    // ));
+
     add(MoveToEffect(
-      Vector2((position.x + dx).clamp(0, game.width), position.y),
+      Vector2(newX, position.y),
       EffectController(duration: 0.1),
     ));
   }

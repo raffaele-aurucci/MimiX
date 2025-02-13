@@ -6,7 +6,6 @@ import 'package:flame/game.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart';
 
-import '../../../utils/view/app_palette.dart';
 import 'components/components.dart';
 import 'config.dart';
 
@@ -26,10 +25,7 @@ class Breakout extends FlameGame with HasCollisionDetection {
     required this.handleGameOver,
     required this.handleWon,
   }) : super(
-    camera: CameraComponent.withFixedResolution(
-      width: gameWidth,
-      height: gameHeight,
-    ),
+    camera: CameraComponent(),
   ) {
     _playState = PlayState.welcome;
   }
@@ -83,7 +79,7 @@ class Breakout extends FlameGame with HasCollisionDetection {
 
     // Add objects to scene but not start the game.
 
-    world.add(BatNew(
+    world.add(Bat(
         size: Vector2(batWidth, batHeight),
         position: Vector2(width / 2, height * 0.95),
     ));
@@ -91,7 +87,7 @@ class Breakout extends FlameGame with HasCollisionDetection {
     world.addAll([
       for (var i = 0; i < 10; i++)
         for (var j = 0; j < 5; j++)
-          BrickNew(
+          Brick(
             position: Vector2(
               (i + 0.5) * brickWidth + (i + 1) * brickGutter,
               (j + 2.0) * brickHeight + j * brickGutter,
@@ -117,16 +113,16 @@ class Breakout extends FlameGame with HasCollisionDetection {
 
   TextComponent? _countdownText;
   int countdownValue = 3;
-  late BallNew _ball;
+  late Ball _ball;
   double countdownTimer = 1.0;
   bool isCountdownActive = false;
 
   void startGame() {
-    _ball = BallNew(radius: ballRadius, position: size / 2, velocity: Vector2(350, 350));
+    _ball = Ball(radius: ballRadius, position: size / 2, velocity: Vector2(100, 100));
 
     // Preview scene components.
-    world.removeAll(world.children.query<BatNew>());
-    world.removeAll(world.children.query<BrickNew>());
+    world.removeAll(world.children.query<Bat>());
+    world.removeAll(world.children.query<Brick>());
 
     if (_countdownText != null && _countdownText!.isMounted) {
       _countdownText!.removeFromParent();
@@ -134,7 +130,7 @@ class Breakout extends FlameGame with HasCollisionDetection {
 
     // New scene.
     world.add(
-      BatNew(
+      Bat(
         size: Vector2(batWidth, batHeight),
         position: Vector2(width / 2, height * 0.95),
       ),
@@ -143,7 +139,7 @@ class Breakout extends FlameGame with HasCollisionDetection {
     world.addAll([
       for (var i = 0; i < 10; i++)
         for (var j = 0; j < 5; j++)
-          BrickNew(
+          Brick(
             position: Vector2(
               (i + 0.5) * brickWidth + (i + 1) * brickGutter,
               (j + 2.0) * brickHeight + j * brickGutter,
@@ -168,11 +164,11 @@ class Breakout extends FlameGame with HasCollisionDetection {
 
     _countdownText = TextComponent(
       text: countdownValue.toString(),
-      position: Vector2(width / 2 - 35, height * 0.45),
+      position: Vector2(width / 2 - 12.5, height * 0.45),
       textRenderer: TextPaint(
         style: const TextStyle(
-          color: PaletteColor.darkBlue,
-          fontSize: 150,
+          color: Color(0xFFDE1010),
+          fontSize: 40,
           fontWeight: FontWeight.bold,
           fontFamily: 'Raleway',
         ),
@@ -220,13 +216,13 @@ class Breakout extends FlameGame with HasCollisionDetection {
 
   void moveBatLeft() {
     if (playState == PlayState.playing) {
-      world.children.query<BatNew>().first.moveBy(-batStep);
+      world.children.query<Bat>().first.moveBy(-batStep);
     }
   }
 
   void moveBatRight() {
     if (playState == PlayState.playing) {
-      world.children.query<BatNew>().first.moveBy(batStep);
+      world.children.query<Bat>().first.moveBy(batStep);
     }
   }
 
@@ -237,8 +233,8 @@ class Breakout extends FlameGame with HasCollisionDetection {
         _ball.removeFromParent();
       }
 
-      world.removeAll(world.children.query<BatNew>());
-      world.removeAll(world.children.query<BrickNew>());
+      world.removeAll(world.children.query<Bat>());
+      world.removeAll(world.children.query<Brick>());
 
       if(_countdownText != null && _countdownText!.isMounted) {
         _countdownText!.removeFromParent();

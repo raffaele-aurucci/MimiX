@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 
 import '../breakout.dart';
 import '../config.dart';
-import 'ball_new.dart';
-import 'bat_new.dart';
+import 'ball.dart';
+import 'bat.dart';
 
-class BrickNew extends SpriteComponent with CollisionCallbacks, HasGameReference<Breakout> {
-  BrickNew({
+class Brick extends SpriteComponent with CollisionCallbacks, HasGameReference<Breakout> {
+  Brick({
     required super.position,
     required Color color
   }) : _brickColor = color,
@@ -51,7 +51,7 @@ class BrickNew extends SpriteComponent with CollisionCallbacks, HasGameReference
 
       case Colors.red:
         Future.delayed(const Duration(milliseconds: 100), () {
-          game.world.children.query<BallNew>().forEach((ball) {
+          game.world.children.query<Ball>().forEach((ball) {
             if(!game.isBallBig) {
               ball.size *= 1.7;
               ball.sprite = Sprite(
@@ -72,7 +72,7 @@ class BrickNew extends SpriteComponent with CollisionCallbacks, HasGameReference
         break;
 
       case Colors.yellow:
-        game.world.children.query<BatNew>().forEach((bat) {
+        game.world.children.query<Bat>().forEach((bat) {
           if (!game.isBatBig) {
             bat.size.x *= 2;
             bat.setSprite(game.bigBatSprite);
@@ -88,11 +88,11 @@ class BrickNew extends SpriteComponent with CollisionCallbacks, HasGameReference
         break;
     }
 
-    if (game.world.children.query<BrickNew>().length == 1) {
+    if (game.world.children.query<Brick>().length == 1) {
       game.playState = PlayState.won;
       game.handleWon();
-      game.world.removeAll(game.world.children.query<BallNew>());
-      game.world.removeAll(game.world.children.query<BatNew>());
+      game.world.removeAll(game.world.children.query<Ball>());
+      game.world.removeAll(game.world.children.query<Bat>());
     }
   }
 }

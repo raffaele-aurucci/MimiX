@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:mimix_app/minigame_managment/breakout/src/config.dart';
 
 import '../breakout.dart';
-import 'bat_new.dart';
-import 'brick_new.dart';
+import 'bat.dart';
+import 'brick.dart';
 import 'play_area.dart';
 
-class BallNew extends SpriteComponent
+class Ball extends SpriteComponent
     with CollisionCallbacks, HasGameReference<Breakout> {
 
-  BallNew({
+  Ball({
     required this.velocity,
     required super.position,
     required double radius,
@@ -60,17 +60,17 @@ class BallNew extends SpriteComponent
         velocity.x = -velocity.x;
       } else if (intersectionPoints.first.x >= game.width) {
         velocity.x = -velocity.x;
-      } else if (intersectionPoints.first.y >= game.height) {
+      } else if (intersectionPoints.first.y >= game.height - 1) {
         add(RemoveEffect(
-            delay: 0.35,
+            delay: 0,
             onComplete: () {
               game.playState = PlayState.gameOver;
               game.handleGameOver();
             }));
       }
-    } else if (other is BatNew) {
+    } else if (other is Bat) {
       velocity.y = -velocity.y;
-    } else if (other is BrickNew) {
+    } else if (other is Brick) {
       if (position.y < other.position.y - other.size.y / 2) {
         velocity.y = -velocity.y;
       } else if (position.y > other.position.y + other.size.y / 2) {
