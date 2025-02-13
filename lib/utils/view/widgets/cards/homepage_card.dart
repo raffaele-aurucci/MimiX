@@ -49,8 +49,8 @@ class HomePageCard extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: 110,
-                  height: 80,
+                  width: 65,
+                  height: 70,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     image: DecorationImage(

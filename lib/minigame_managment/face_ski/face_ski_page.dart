@@ -95,7 +95,7 @@ class _FaceSkiOverviewPageState extends State<FaceSkiPage> {
 
 
                   const DescriptionText(
-                    text: 'Face Run is a classic game where players control a character that must navigate through an endless obstacle course.',
+                    text: 'Face Ski lets players control a skier with facial expressions, racing to the finish, collecting rewards, and dodging obstacles.',
                     size: DescriptionText.P1,
                     alignment: DescriptionText.Center,
                   ),
