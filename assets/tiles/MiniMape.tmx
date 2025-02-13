@@ -6,7 +6,7 @@
   <property name="Star3" type="int" value="16"/>
  </properties>
  <tileset firstgid="1" name="tilemap_packed" tilewidth="16" tileheight="16" tilecount="132" columns="12" objectalignment="center">
-  <image source="tilemap_packed.png" width="192" height="176"/>
+  <image source="ski_master/tilemap_packed.png" width="192" height="176"/>
  </tileset>
  <layer id="6" name="Path" width="30" height="20" offsetx="0" offsety="7.10543e-15">
   <data encoding="csv">

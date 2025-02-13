@@ -99,7 +99,7 @@ class _RewardPage extends State<RewardPage> {
                     margin: const EdgeInsets.symmetric(horizontal: 20),
                     child: HomePageCard(
                       title: 'Rewards',
-                      image: const AssetImage('assets/images/rewards/rewards_icon.png'),
+                      image: const AssetImage('assets/images/icons/reward_icon.png'),
                       onTap: () => print('Home page card'),
                     ),
                   ),

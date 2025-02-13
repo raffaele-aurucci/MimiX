@@ -128,7 +128,7 @@ Widget buildMonthlyCard() {
         children: [
           SizedBox(
               height: 100,
-              child: Image.asset('assets/images/plot.png')
+              child: Image.asset('assets/images/cards/plot.png')
           ),
           const SizedBox(height: 16),
           const DescriptionText(

@@ -47,7 +47,7 @@ class _CheckCompletedStatePage extends State<CheckCompletedPage> {
 
                   Container(
                         margin: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                        child: Image.asset('assets/images/check_completed.png',),
+                        child: Image.asset('assets/images/tutorial/check_completed.png',),
                   ),
 
                   const SizedBox(height: 20),

@@ -92,6 +92,9 @@ flutter:
     - assets/images/emoticons/
     - assets/images/rewards/
     - assets/images/tutorial/
+    - assets/images/ski_master/
+    - assets/images/cards/
+    - assets/images/icons/
 
     - assets/gif/
 

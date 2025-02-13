@@ -62,7 +62,7 @@ class _SettingsPage extends State<SettingsPage> {
                 CircleAvatar(
                   radius: 50,
                   backgroundColor: PaletteColor.progressBarBackground,
-                  child: Image.asset('assets/images/user.png')
+                  child: Image.asset('assets/images/icons/user.png')
                 ),
                 SizedBox(height: 8),
 

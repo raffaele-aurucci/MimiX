@@ -48,7 +48,7 @@ class ProgressBar extends StatelessWidget {
         quarterTurns: -1,
         child: Container(
           height: height, // TODO: remove fixed height
-          width: width,
+          width: MediaQuery.of(context).size.width * 0.6,
           decoration: BoxDecoration(
             color: PaletteColor.progressBarBackground,
             borderRadius: BorderRadius.circular(16.0),

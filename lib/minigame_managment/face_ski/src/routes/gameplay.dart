@@ -61,9 +61,9 @@ class Gameplay extends Component with HasGameReference<FaceSkiGame> {
       Vector2.all(16),
     );
 
-    await game.images.load('tilemap_packed.png');
+    await game.images.load('ski_master/tilemap_packed.png');
 
-    final tiles = game.images.fromCache('tilemap_packed.png');
+    final tiles = game.images.fromCache('ski_master/tilemap_packed.png');
     _spriteSheet = SpriteSheet(image: tiles, srcSize: Vector2.all(16));
 
     await _setupWorldAndCamera(map);

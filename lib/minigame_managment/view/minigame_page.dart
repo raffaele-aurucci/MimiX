@@ -35,14 +35,14 @@ class _MinigamePage extends State<MinigamePage> {
 
   // List image of games
   List<AssetImage> imageGameList = [
-    const AssetImage('assets/images/face_breakout.jpg'),
-    const AssetImage('assets/images/dino_run.jpg'),
-    const AssetImage('assets/images/ski_master_card_image.png'),
-    const AssetImage('assets/images/lock_game.png'),
-    const AssetImage('assets/images/lock_game.png'),
-    const AssetImage('assets/images/lock_game.png'),
-    const AssetImage('assets/images/lock_game.png'),
-    const AssetImage('assets/images/lock_game.png'),
+    const AssetImage('assets/images/cards/face_breakout.jpg'),
+    const AssetImage('assets/images/cards/dino_run.jpg'),
+    const AssetImage('assets/images/cards/ski_master_card_image.png'),
+    const AssetImage('assets/images/cards/lock_game.png'),
+    const AssetImage('assets/images/cards/lock_game.png'),
+    const AssetImage('assets/images/cards/lock_game.png'),
+    const AssetImage('assets/images/cards/lock_game.png'),
+    const AssetImage('assets/images/cards/lock_game.png'),
   ];
 
   // To change the visibility of the text when you scroll
@@ -89,7 +89,7 @@ class _MinigamePage extends State<MinigamePage> {
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 child: HomePageCard(
                   title: 'Minigames',
-                  image: const AssetImage('assets/images/minigames_icon.png'),
+                  image: const AssetImage('assets/images/icons/minigames_icon.png'),
                   onTap: () => print('Home page card'),
                 ),
               ),

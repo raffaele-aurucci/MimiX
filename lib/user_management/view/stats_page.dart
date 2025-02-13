@@ -25,7 +25,7 @@ class StatsPage extends StatelessWidget {
                     ProfileImageWithLevel(
                       experienceLevel: context.watch<UserProvider>().user!.level,
                       experienceProgress: context.watch<UserProvider>().user!.levelProgress + 0.2,
-                      profileImage: const AssetImage('assets/images/user.png'),
+                      profileImage: const AssetImage('assets/images/icons/user.png'),
                     )
                   ],
                 ),
@@ -36,7 +36,7 @@ class StatsPage extends StatelessWidget {
                     Expanded(
                       child: CardStats(cardStats: CardStats.dailyStats), // Daily time card
                     ),
-                    SizedBox(width: 4), // Spaziatura tra i blocchi
+                    SizedBox(width: 4),
                     Expanded(
                       child: CardStats(cardStats: CardStats.monthlyStats), // Monthly time card
                     ),

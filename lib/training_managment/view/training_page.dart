@@ -111,7 +111,7 @@ class _TrainingPage extends State<TrainingPage> {
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 child: HomePageCard(
                   title: 'Training',
-                  image: const AssetImage('assets/images/training_icon.png'),
+                  image: const AssetImage('assets/images/icons/training_icon.png'),
                   onTap: () => print('Home page card'),
                 ),
               ),

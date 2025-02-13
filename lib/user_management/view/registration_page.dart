@@ -29,7 +29,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               const HeaderText(text: 'Hello Beautiful', size: 20),
                               const HeaderText(text: 'User Profile', size: HeaderText.H3),
                               const SizedBox(height: 30),
-                              Image.asset('assets/images/welcome.png'),
+                              Image.asset('assets/images/tutorial/welcome.png'),
                               const FormWidget(),
                             ],
                 )

@@ -28,27 +28,27 @@ class HomePage extends StatelessWidget {
                     ProfileImageWithLevel(
                       experienceLevel: context.watch<UserProvider>().user!.level,
                       experienceProgress: context.watch<UserProvider>().user!.levelProgress + 0.2,
-                      profileImage: const AssetImage('assets/images/user.png'),
+                      profileImage: const AssetImage('assets/images/icons/user.png'),
                     )
                   ],),
                   const SizedBox(height: 40),
                   HomePageCard(
                       title: "Minigames",
-                      image: const AssetImage('assets/images/minigames_icon.png'),
+                      image: const AssetImage('assets/images/icons/minigames_icon.png'),
                       onTap: () => {
                       Navigator.pushNamed(context, '/minigames_page')
                       }),
                   const SizedBox(height: 10),
                   HomePageCard(
                       title: "Training",
-                      image: const AssetImage('assets/images/training_icon.png'),
+                      image: const AssetImage('assets/images/icons/training_icon.png'),
                       onTap: () => {
                         Navigator.pushNamed(context, '/training_page')
                       }),
                   const SizedBox(height: 10),
                   HomePageCard(
                       title: "Tasks",
-                      image: const AssetImage('assets/images/tasks_icon.png'),
+                      image: const AssetImage('assets/images/icons/tasks_icon.png'),
                       onTap: () => {
                         Navigator.push(
                           context,
@@ -60,7 +60,7 @@ class HomePage extends StatelessWidget {
                   const SizedBox(height: 10),
                   HomePageCard(
                       title: "Rewards",
-                      image: const AssetImage('assets/images/rewards/rewards_icon.png'),
+                      image: const AssetImage('assets/images/icons/reward_icon.png'),
                       onTap: () => {
                         Navigator.push(
                           context,
