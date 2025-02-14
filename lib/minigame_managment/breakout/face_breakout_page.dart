@@ -49,7 +49,7 @@ class _FaceBreakoutOverviewPageState extends State<FaceBreakoutPage> {
             child: Column(
                 children: [
                   HeaderText(text: 'Face Breakout', size: HeaderText.H3),
-                  SizedBox(height: 8),
+                  SizedBox(height: 15),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

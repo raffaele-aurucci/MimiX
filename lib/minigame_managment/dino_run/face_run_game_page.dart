@@ -173,21 +173,22 @@ class _FaceRunGamePageState extends State<FaceRunGamePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       // Left side
-                      const Column(
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             children: [
-                              HeaderText(text: '😊', size: HeaderText.H4),
-                              HeaderText(text: ' Jump', size: 20.0),
+                              Image.asset('assets/images/emoticons/mouth_smile.png', width: 30, height: 30),
+                              const HeaderText(text: ' Jump', size: 20.0),
                             ],
                           ),
+                          const SizedBox(height: 6),
                           Row(
                             children: [
-                              HeaderText(text: '😮', size: HeaderText.H4),
-                              HeaderText(text: ' Super Jump', size: 20.0),
+                              Image.asset('assets/images/emoticons/mouth_open.png', width: 30, height: 30),
+                              const HeaderText(text: ' Super Jump', size: 20.0),
                             ],
-                          ),
+                          )
                         ],
                       ),
 
