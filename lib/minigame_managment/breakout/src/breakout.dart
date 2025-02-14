@@ -117,11 +117,16 @@ class Breakout extends FlameGame with HasCollisionDetection {
   TextComponent? _countdownText;
   int countdownValue = 3;
   late Ball _ball;
+  late Bat _bat;
   double countdownTimer = 1.0;
   bool isCountdownActive = false;
 
   void startGame() {
     _ball = Ball(radius: ballRadius, position: size / 2, velocity: Vector2(100, 100));
+    _bat = Bat(
+      size: Vector2(batWidth, batHeight),
+      position: Vector2(width / 2, height * 0.95),
+    );
 
     // Preview scene components.
     world.removeAll(world.children.query<Bat>());
@@ -132,12 +137,7 @@ class Breakout extends FlameGame with HasCollisionDetection {
     }
 
     // New scene.
-    world.add(
-      Bat(
-        size: Vector2(batWidth, batHeight),
-        position: Vector2(width / 2, height * 0.95),
-      ),
-    );
+    world.add(_bat);
 
     double gridWidth = 10 * brickWidth + 9 * brickGutter;
     double startX = (width - gridWidth) / 2;
@@ -239,6 +239,12 @@ class Breakout extends FlameGame with HasCollisionDetection {
         _ball.removeFromParent();
       }
 
+      if (_bat.isMounted){
+        _bat.removeFromParent();
+      }
+
+      isBatBig = false;
+      isBallBig = false;
       world.removeAll(world.children.query<Bat>());
       world.removeAll(world.children.query<Brick>());
 
@@ -253,5 +259,4 @@ class Breakout extends FlameGame with HasCollisionDetection {
       startGame();
     }
   }
-
 }
