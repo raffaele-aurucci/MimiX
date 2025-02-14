@@ -2,7 +2,6 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:mimix_app/minigame_managment/breakout/face_breakout_game_page.dart';
 import 'package:mimix_app/minigame_managment/breakout/src/breakout.dart';
-import 'package:mimix_app/minigame_managment/breakout/src/config.dart';
 import 'package:mimix_app/utils/view/widgets/buttons/primary_button.dart';
 
 import 'package:mimix_app/utils/view/app_palette.dart';
@@ -10,7 +9,6 @@ import 'package:mimix_app/utils/view/app_palette.dart';
 import '../../utils/view/widgets/buttons/icon_button.dart';
 import '../../utils/view/widgets/texts/description_text.dart';
 import '../../utils/view/widgets/texts/header_text.dart';
-import '../../utils/view/widgets/alert_dialog.dart';
 
 class FaceBreakoutPage extends StatefulWidget {
   const FaceBreakoutPage({super.key});
@@ -52,7 +50,7 @@ class _FaceBreakoutOverviewPageState extends State<FaceBreakoutPage> {
                 children: [
                   HeaderText(text: 'Face Breakout', size: HeaderText.H3),
                   SizedBox(height: 8),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       // Left side
@@ -61,20 +59,21 @@ class _FaceBreakoutOverviewPageState extends State<FaceBreakoutPage> {
                         children: [
                           Row(
                             children: [
-                              HeaderText(text: '😊', size: HeaderText.H4),
-                              HeaderText(text: ' Left', size: 20.0),
+                              Image.asset('assets/images/emoticons/mouth_smile.png', width: 30, height: 30),
+                              const HeaderText(text: ' Left', size: 20.0),
                             ],
                           ),
+                          SizedBox(height: 6),
                           Row(
                             children: [
-                              HeaderText(text: '😚', size: HeaderText.H4),
-                              HeaderText(text: ' Right', size: 20.0),
+                              Image.asset('assets/images/emoticons/mouth_pucker.png', width: 30, height: 30),
+                              const HeaderText(text: ' Right', size: 20.0),
                             ],
                           ),
                         ],
                       ),
                       // Right side
-                      Column(
+                      const Column(
                         children: [
                           HeaderText(text: '00000', size: HeaderText.H4),
                           DescriptionText(text: 'HI 00000', size: DescriptionText.P2)

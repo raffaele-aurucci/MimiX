@@ -1,7 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:mimix_app/minigame_managment/breakout/src/breakout.dart';
-import 'package:mimix_app/minigame_managment/breakout/src/config.dart';
 
 import 'package:mimix_app/utils/view/app_palette.dart';
 
@@ -192,19 +191,20 @@ class _FaceBreakoutGamePageState extends State<FaceBreakoutGamePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       // Left side
-                      const Column(
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             children: [
-                              HeaderText(text: '😊', size: HeaderText.H4),
-                              HeaderText(text: ' Left', size: 20.0),
+                              Image.asset('assets/images/emoticons/mouth_smile.png', width: 30, height: 30),
+                              const HeaderText(text: ' Left', size: 20.0),
                             ],
                           ),
+                          SizedBox(height: 6),
                           Row(
                             children: [
-                              HeaderText(text: '😚', size: HeaderText.H4),
-                              HeaderText(text: ' Right', size: 20.0),
+                              Image.asset('assets/images/emoticons/mouth_pucker.png', width: 30, height: 30),
+                              const HeaderText(text: ' Right', size: 20.0),
                             ],
                           ),
                         ],
