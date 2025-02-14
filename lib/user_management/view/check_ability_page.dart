@@ -178,7 +178,7 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
 
         if (mouthPucker != null) {
 
-          if (mouthPucker > 0.97 && _confirmFaceDetection) {
+          if (mouthPucker > 0.95 && _confirmFaceDetection) {
             if (!_isDone) {
               _facialExpressionCount += 1;
               expressionAvgScores[3]['mouthPucker'] = incrementalAvg(
@@ -196,7 +196,7 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
       case "Brow Up": {
 
         if (browOuterUpLeft != null && browOuterUpRight != null){
-          if (browOuterUpLeft > 0.8 && browOuterUpRight > 0.8 && _confirmFaceDetection){
+          if (browOuterUpLeft > 0.7 && browOuterUpRight > 0.7 && _confirmFaceDetection){
 
             if (!_isDone) {
               _facialExpressionCount += 1;
@@ -210,7 +210,7 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
                   _facialExpressionCount);
               _isDone = true;
             }
-          } else if (browOuterUpLeft < 0.8 && browOuterUpRight < 0.8){
+          } else if (browOuterUpLeft < 0.7 && browOuterUpRight < 0.7){
             _isDone = false;
           }
         }
@@ -220,7 +220,7 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
       case "Brow Down": {
 
         if (browDownLeft != null && browDownRight != null){
-          if (browDownLeft > 0.3 && browDownRight > 0.3 && _confirmFaceDetection){
+          if (browDownLeft > 0.25 && browDownRight > 0.25 && _confirmFaceDetection){
 
             if (!_isDone){
               _facialExpressionCount += 1;
@@ -234,7 +234,7 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
                   _facialExpressionCount);
               _isDone = true;
             }
-          } else if (browDownLeft < 0.3 && browDownRight < 0.3){
+          } else if (browDownLeft < 0.25 && browDownRight < 0.25){
             _isDone = false;
           }
         }
