@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
@@ -13,7 +11,9 @@ class Bat extends SpriteComponent with HasGameReference<Breakout> {
   Bat({
     required super.position,
     required super.size,
-  }) : super(anchor: Anchor.center);
+  }) : super(anchor: Anchor.center){
+    debugMode = true;
+  }
 
   @override
   Future<void> onLoad() async {
@@ -23,8 +23,7 @@ class Bat extends SpriteComponent with HasGameReference<Breakout> {
       srcSize: Vector2(batRect.width, batRect.height),
     );
     sprite = _originalSprite;
-
-    add(RectangleHitbox());
+    updateHitbox(Vector2(size.x, size.y * 0.1));
   }
 
   void moveBy(double dx) {
@@ -44,12 +43,24 @@ class Bat extends SpriteComponent with HasGameReference<Breakout> {
     ));
   }
 
+  void updateHitbox(Vector2 newSize) {
+    removeWhere((component) => component is RectangleHitbox);
+
+    add(RectangleHitbox(
+      size: newSize,
+      position: Vector2((size.x - newSize.x) / 2, 0),
+    ));
+  }
+
+
   void setSprite(Sprite newSprite) {
     sprite = newSprite;
+    updateHitbox(Vector2(size.x, size.y * 0.1));
   }
 
   void resetSprite() {
     sprite = _originalSprite;
+    updateHitbox(Vector2(size.x, size.y * 0.1));
   }
 }
 
