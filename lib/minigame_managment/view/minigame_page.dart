@@ -35,7 +35,7 @@ class _MinigamePage extends State<MinigamePage> {
 
   // List image of games
   List<AssetImage> imageGameList = [
-    const AssetImage('assets/images/cards/face_breakout.jpg'),
+    const AssetImage('assets/images/cards/face_breakout.png'),
     const AssetImage('assets/images/cards/dino_run.jpg'),
     const AssetImage('assets/images/cards/ski_master_card_image.png'),
     const AssetImage('assets/images/cards/lock_game.png'),
