@@ -12,7 +12,7 @@ const batStep = 6.0;
 const batRect = Rect.fromLTWH(2, 53, 104, 24);
 
 // brick
-const brickGutter = 3.6;
+const brickGutter = 1.5;
 const brickWidth = 30.0;
 const brickHeight = 16.0;
 

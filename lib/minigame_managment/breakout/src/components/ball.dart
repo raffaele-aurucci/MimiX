@@ -58,9 +58,9 @@ class Ball extends SpriteComponent
         velocity.y = -velocity.y;
       } else if (intersectionPoints.first.x <= 0) {
         velocity.x = -velocity.x;
-      } else if (intersectionPoints.first.x >= game.width - 1) {
+      } else if (intersectionPoints.first.x >= game.width - 5) {
         velocity.x = -velocity.x;
-      } else if (intersectionPoints.first.y >= game.height - 1) {
+      } else if (intersectionPoints.first.y >= game.height - 5) {
         add(RemoveEffect(
             delay: 0,
             onComplete: () {
