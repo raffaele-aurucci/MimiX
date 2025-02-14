@@ -170,7 +170,7 @@ class _TrainingSessionPageState extends State<TrainingSessionPage> {
                   double.parse(facialExpression.toStringAsFixed(2));
             }
 
-            if (facialExpression > 0.97 && _confirmFaceDetection) {
+            if (facialExpression > 0.95 && _confirmFaceDetection) {
               if (!_isDone) {
                 _facialExpressionCount++;
                 _isDone = true;
@@ -194,13 +194,13 @@ class _TrainingSessionPageState extends State<TrainingSessionPage> {
                   double.parse(avgOfValue.toStringAsFixed(2));
             }
 
-            if (facialExpression1 > 0.8 && facialExpression2 > 0.8 &&
+            if (facialExpression1 > 0.7 && facialExpression2 > 0.7 &&
                 _confirmFaceDetection) {
               if (!_isDone) {
                 _facialExpressionCount++;
                 _isDone = true;
               }
-            } else if (facialExpression1 < 0.8 && facialExpression2 < 0.8) {
+            } else if (facialExpression1 < 0.7 && facialExpression2 < 0.7) {
               _isDone = false;
             }
           }
@@ -219,13 +219,13 @@ class _TrainingSessionPageState extends State<TrainingSessionPage> {
                   double.parse(avgOfValue.toStringAsFixed(2));
             }
 
-            if (facialExpression1 > 0.3 && facialExpression2 > 0.3 &&
+            if (facialExpression1 > 0.25 && facialExpression2 > 0.25 &&
                 _confirmFaceDetection) {
               if (!_isDone) {
                 _facialExpressionCount++;
                 _isDone = true;
               }
-            } else if (facialExpression1 < 0.3 && facialExpression2 < 0.3) {
+            } else if (facialExpression1 < 0.25 && facialExpression2 < 0.25) {
               _isDone = false;
             }
           }
