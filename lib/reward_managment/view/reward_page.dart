@@ -45,14 +45,14 @@ class _RewardPage extends State<RewardPage> {
   ];
 
   List<String> nameRewardDescriptionList = [
-    "Achieve 100 mouth smiles and become the true maestro of smile!",
-    "Lower your eyebrows 35 times to unlock your intense focus skills!",
-    "Raise your eyebrows 50 times and master the art of surprise!",
-    "Open your mouth 110 times and become the ultimate jaw-dropper!",
-    "Pucker your lips 70 times and perfect your kiss technique!",
-    "Lower your mouth 25 times and perfect your jaw control!",
-    "Upgrade now to unlock this reward!",
-    "Upgrade now to unlock this reward!"
+    "Achieve 100 mouth smiles and become the true maestro of the smiles!",
+    "Lower your eyebrows 35 times to unlock your powerful focus skills!",
+    "Raise your eyebrows 50 times and master the surprising art of expression!",
+    "Open your mouth 110 times and become the ultimate jaw-dropping sensation!",
+    "Pucker your lips 70 times and perfect your irresistible kiss technique!",
+    "Lower your mouth 25 times and perfect your impressive jaw control!",
+    "Upgrade now to unlock this exclusive reward and elevate your experience!",
+    "Upgrade now to unlock this exclusive reward and elevate your experience!"
   ];
 
   // To change the visibility of the text when you scroll
