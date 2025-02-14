@@ -60,14 +60,18 @@ class _FaceBreakoutOverviewPageState extends State<FaceBreakoutPage> {
                           Row(
                             children: [
                               Image.asset('assets/images/emoticons/mouth_smile.png', width: 30, height: 30),
+                              const SizedBox(width: 6),
+                              Image.asset('assets/images/icons/left-arrow.png', width: 20, height: 20),
                               const HeaderText(text: ' Left', size: 20.0),
                             ],
                           ),
-                          SizedBox(height: 6),
+                          const SizedBox(height: 6),
                           Row(
                             children: [
                               Image.asset('assets/images/emoticons/mouth_pucker.png', width: 30, height: 30),
-                              const HeaderText(text: ' Right', size: 20.0),
+                              const SizedBox(width: 6),
+                              Image.asset('assets/images/icons/right-arrow.png', width: 20, height: 20),
+                              const HeaderText(text: ' Right ', size: 20.0),
                             ],
                           ),
                         ],

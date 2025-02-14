@@ -179,6 +179,8 @@ class _FaceRunGamePageState extends State<FaceRunGamePage> {
                           Row(
                             children: [
                               Image.asset('assets/images/emoticons/mouth_smile.png', width: 30, height: 30),
+                              const SizedBox(width: 6),
+                              Image.asset('assets/images/icons/up-arrow.png', width: 20, height: 20),
                               const HeaderText(text: ' Jump', size: 20.0),
                             ],
                           ),
@@ -186,6 +188,8 @@ class _FaceRunGamePageState extends State<FaceRunGamePage> {
                           Row(
                             children: [
                               Image.asset('assets/images/emoticons/mouth_open.png', width: 30, height: 30),
+                              const SizedBox(width: 6),
+                              Image.asset('assets/images/icons/sx-arrow.png', width: 20, height: 20),
                               const HeaderText(text: ' Super Jump', size: 20.0),
                             ],
                           )
