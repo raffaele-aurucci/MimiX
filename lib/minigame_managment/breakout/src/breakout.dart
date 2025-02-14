@@ -84,12 +84,15 @@ class Breakout extends FlameGame with HasCollisionDetection {
         position: Vector2(width / 2, height * 0.95),
     ));
 
+    double gridWidth = 10 * brickWidth + 9 * brickGutter;
+    double startX = (width - gridWidth) / 2;
+
     world.addAll([
       for (var i = 0; i < 10; i++)
         for (var j = 0; j < 5; j++)
           Brick(
             position: Vector2(
-              (i + 0.5) * brickWidth + (i + 1) * brickGutter,
+              startX + (i + 0.5) * brickWidth + i * brickGutter,
               (j + 2.0) * brickHeight + j * brickGutter,
             ),
             color: () {
@@ -136,12 +139,15 @@ class Breakout extends FlameGame with HasCollisionDetection {
       ),
     );
 
+    double gridWidth = 10 * brickWidth + 9 * brickGutter;
+    double startX = (width - gridWidth) / 2;
+
     world.addAll([
       for (var i = 0; i < 10; i++)
         for (var j = 0; j < 5; j++)
           Brick(
             position: Vector2(
-              (i + 0.5) * brickWidth + (i + 1) * brickGutter,
+              startX + (i + 0.5) * brickWidth + i * brickGutter,
               (j + 2.0) * brickHeight + j * brickGutter,
             ),
             color: () {
