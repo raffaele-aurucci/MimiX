@@ -26,11 +26,11 @@ class _MinigamePage extends State<MinigamePage> {
     "Face Breakout",
     "Face Run",
     "Face Ski",
-    "Pay to Unlock",
-    "Pay to Unlock",
-    "Pay to Unlock",
-    "Pay to Unlock",
-    "Pay to Unlock",
+    "Premium Game",
+    "Premium Game",
+    "Premium Game",
+    "Premium Game",
+    "Premium Game",
   ];
 
   // List image of games
