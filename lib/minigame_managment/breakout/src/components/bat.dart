@@ -11,9 +11,7 @@ class Bat extends SpriteComponent with HasGameReference<Breakout> {
   Bat({
     required super.position,
     required super.size,
-  }) : super(anchor: Anchor.center){
-    debugMode = true;
-  }
+  }) : super(anchor: Anchor.center);
 
   @override
   Future<void> onLoad() async {
