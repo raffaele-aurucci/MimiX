@@ -78,6 +78,21 @@ class Brick extends SpriteComponent with CollisionCallbacks, HasGameReference<Br
             bat.setSprite(game.bigBatSprite);
             game.isBatBig = true;
 
+            // Calcola i limiti del gioco
+            final gameWidth = game.size.x;
+            final batRightEdge = bat.position.x + bat.size.x / 2;
+            final batLeftEdge = bat.position.x - bat.size.x / 2;
+
+            // Se la bat esce a destra, spostala verso sinistra
+            if (batRightEdge > gameWidth) {
+              bat.position.x = gameWidth - bat.size.x / 2;
+            }
+
+            // Se la bat esce a sinistra, spostala verso destra
+            if (batLeftEdge < 0) {
+              bat.position.x = bat.size.x / 2;
+            }
+
             Future.delayed(const Duration(seconds: 15), () {
               bat.size.x /= 2;
               bat.resetSprite();
