@@ -26,7 +26,7 @@ class Gameplay extends Component with HasGameReference<FaceSkiGame> {
   static const _bgmMinVol = 0;
   static const _bgmMaxVol = 0.6;
 
-  final ValueChanged<int> onLevelCompleted;
+  final VoidCallback onLevelCompleted;
   final VoidCallback onGameOver;
 
   late final _resetTimer = Timer(1, autoStart: false, onTick: _resetPlayer);
@@ -310,6 +310,7 @@ class Gameplay extends Component with HasGameReference<FaceSkiGame> {
   void _onTrailEnd() {
     GlobalState.active = false;
     _levelCompleted = true;
+    onLevelCompleted();
   }
 
   void _onSnowmanCollected() {
