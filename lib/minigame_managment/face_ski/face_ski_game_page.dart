@@ -175,21 +175,26 @@ class _FaceSkiGamePageState extends State<FaceSkiGamePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       // Left side
-                      const Column(
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             children: [
-                              HeaderText(text: '😊', size: HeaderText.H4),
-                              HeaderText(text: ' Right', size: 20.0),
+                              Image.asset('assets/images/emoticons/mouth_open.png', width: 30, height: 30),
+                              const SizedBox(width: 6),
+                              Image.asset('assets/images/icons/left-arrow.png', width: 20, height: 20),
+                              const HeaderText(text: ' Left', size: 20.0),
                             ],
                           ),
+                          const SizedBox(height: 6),
                           Row(
                             children: [
-                              HeaderText(text: '😮', size: HeaderText.H4),
-                              HeaderText(text: ' Left', size: 20.0),
+                              Image.asset('assets/images/emoticons/mouth_smile.png', width: 30, height: 30),
+                              const SizedBox(width: 6),
+                              Image.asset('assets/images/icons/right-arrow.png', width: 20, height: 20),
+                              const HeaderText(text: ' Right ', size: 20.0),
                             ],
-                          ),
+                          )
                         ],
                       ),
 

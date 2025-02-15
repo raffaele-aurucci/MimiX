@@ -53,8 +53,8 @@ class _FaceBreakoutOverviewPageState extends State<FaceRunPage> {
             child: Column(
                 children: [
                   const HeaderText(text: 'Face Run', size: HeaderText.H3),
-                  const SizedBox(height: 8),
-                  const Row(
+                  const SizedBox(height: 15),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       // Left side
@@ -63,20 +63,25 @@ class _FaceBreakoutOverviewPageState extends State<FaceRunPage> {
                         children: [
                           Row(
                             children: [
-                              HeaderText(text: '😊', size: HeaderText.H4),
-                              HeaderText(text: ' Jump', size: 20.0),
+                              Image.asset('assets/images/emoticons/mouth_smile.png', width: 30, height: 30),
+                              const SizedBox(width: 6),
+                              Image.asset('assets/images/icons/up-arrow.png', width: 20, height: 20),
+                              const HeaderText(text: ' Jump', size: 20.0),
                             ],
                           ),
+                          const SizedBox(height: 6),
                           Row(
                             children: [
-                              HeaderText(text: '😮', size: HeaderText.H4),
-                              HeaderText(text: ' Super Jump', size: 20.0),
+                              Image.asset('assets/images/emoticons/mouth_open.png', width: 30, height: 30),
+                              const SizedBox(width: 6),
+                              Image.asset('assets/images/icons/sx-arrow.png', width: 20, height: 20),
+                              const HeaderText(text: ' Super Jump', size: 20.0),
                             ],
-                          ),
+                          )
                         ],
                       ),
                       // Right side
-                      Column(
+                      const Column(
                         children: [
                           HeaderText(text: '00000', size: HeaderText.H4),
                           DescriptionText(text: 'HI 00000', size: DescriptionText.P2)
