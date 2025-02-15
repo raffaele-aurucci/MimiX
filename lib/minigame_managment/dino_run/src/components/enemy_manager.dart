@@ -23,15 +23,25 @@ class EnemyManager extends Component with HasGameReference<DinoRun> {
   double speedXVulture = 110;
   double speedXHyena = 130;
 
-
   // each 3 seconds spawn a random enemy
   EnemyManager() {
     _timer.onTick = spawnRandomEnemy;
   }
 
+  int deLucaCounter = 0;
+
   void spawnRandomEnemy() {
-    final randomIndex = _random.nextInt(_data.length);
+
+    // increment deLucaCounter
+    deLucaCounter += 1;
+
+    final randomIndex = _random.nextInt(_data.length - 1);
     var enemyData = _data.elementAt(randomIndex);
+
+    if (deLucaCounter > 5) {
+      enemyData = _data.elementAt(_data.length - 1);
+      deLucaCounter = 0;
+    }
 
     switch(enemyData.name){
       case 'scorpio': enemyData.speedX = speedXScorpio;
@@ -47,14 +57,21 @@ class EnemyManager extends Component with HasGameReference<DinoRun> {
       game.virtualSize.y - 12, // da basso verso l'alto
     );
 
-    // random y position for 'vulture' enemy
+    // random y position for 'vulture' enemy and 'deLuca'
     if (enemyData.canFly) {
       final newHeight = _random.nextDouble() * 2 * enemyData.textureSize.y;
       enemy.position.y -= newHeight;
     }
 
-    enemy.opacity = 0;
-    enemy.size = Vector2.all(60);
+    enemy.opacity = 0.0;
+
+    if (enemyData.name != 'deLuca') {
+      enemy.size = Vector2.all(60);
+    }
+
+    if (enemyData.name == 'deLuca') {
+      enemy.size = Vector2.all(90);
+    }
 
     game.world.add(enemy);
 
@@ -103,6 +120,15 @@ class EnemyManager extends Component with HasGameReference<DinoRun> {
           speedX: 130,
           canFly: false,
           name: 'hyena'
+        ),
+        EnemyData(
+            image: game.images.fromCache(ImageConstants.deLuca),
+            nFrames: 2,
+            stepTime: 0.08,
+            textureSize: Vector2(56, 68),
+            speedX: 150,
+            canFly: true,
+            name: 'deLuca'
         ),
       ]);
     }

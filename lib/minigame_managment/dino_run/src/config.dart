@@ -5,6 +5,7 @@ class ImageConstants {
   static const String vulture='dino_run/vulture.png';
   static const String dino='dino_run/dino_blue.png';
   static const String scorpio='dino_run/scorpio.png';
+  static const String deLuca='dino_run/de_luca.png';
   static const String plx1 = 'dino_run/plx-1.png';
   static const String plx2 = 'dino_run/plx-2.png';
   static const String plx3 = 'dino_run/plx-3.png';
