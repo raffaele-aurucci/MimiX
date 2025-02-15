@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,7 @@ class WebView extends StatefulWidget {
 class _WebViewState extends State<WebView> {
 
   final InAppLocalhostServer localhostServer = InAppLocalhostServer(documentRoot: 'assets/camera/');
+  InAppWebViewController? _controller;
   late final Future future;
 
   InAppWebViewSettings settings = InAppWebViewSettings(
@@ -37,16 +39,38 @@ class _WebViewState extends State<WebView> {
       disableVerticalScroll: true
   );
 
+  Timer? _messageTimer;
+  bool _isFirstMessageReceived = false;
+
   @override
   void initState() {
     super.initState();
     future = localhostServer.start();
+    _startMessageTimeout();
   }
 
   @override
   void dispose() {
     localhostServer.close();
+    _messageTimer?.cancel();
     super.dispose();
+  }
+
+  void _startMessageTimeout() {
+    _messageTimer?.cancel();
+    _messageTimer = Timer(const Duration(seconds: 10), () {
+      if (!_isFirstMessageReceived) {
+        debugPrint('No message received on 10 seconds: reload server and WebView.');
+        restartWebView();
+      }
+    });
+  }
+
+  void restartWebView() async {
+    await localhostServer.close();
+    await localhostServer.start();
+    _controller?.reload();
+    _startMessageTimeout();
   }
 
   @override
@@ -63,10 +87,17 @@ class _WebViewState extends State<WebView> {
                 url: WebUri("http://localhost:8080/index.html"),
               ),
               onWebViewCreated: (controller) {
+                _controller = controller;
+
                 controller.addWebMessageListener(
                   WebMessageListener(
                     jsObjectName: "FaceDetection",
                     onPostMessage: (message, sourceOrigin, isMainFrame, replyProxy) {
+
+                      if (!_isFirstMessageReceived) {
+                        _isFirstMessageReceived = true;
+                        _messageTimer?.cancel();
+                      }
 
                       if (message?.data != null) {
                         Map<String, dynamic> object = jsonDecode(message!.data);
