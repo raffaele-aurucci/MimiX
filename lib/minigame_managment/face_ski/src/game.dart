@@ -92,7 +92,7 @@ class FaceSkiGame extends FlameGame with HasCollisionDetection {
     resumeEngine();
   }
 
-  void _handleLevelCompleted(int stars) {
+  void _handleLevelCompleted() {
     pauseEngine();
     if (onWinMethodCalled != null) {
       onWinMethodCalled!();

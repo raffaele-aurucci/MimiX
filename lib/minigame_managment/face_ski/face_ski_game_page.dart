@@ -50,7 +50,6 @@ class _FaceSkiGamePageState extends State<FaceSkiGamePage> {
     });
   }
 
-
   void handleRestart() {
     setState(() {
       game.restartGame();
