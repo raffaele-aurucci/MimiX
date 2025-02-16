@@ -15,7 +15,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PopScope(
+        canPop: false,
+        child: Scaffold(
         body: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: SafeArea(
@@ -37,6 +39,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             )
           )
         )
+      )
     ));
   }
 }

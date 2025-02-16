@@ -307,95 +307,98 @@ class _TrainingSessionPageState extends State<TrainingSessionPage> {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
-          height: screenHeight,
-          width: screenWidth,
-          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return PopScope(
+        canPop: false,
+        child: Scaffold(
+          body: SafeArea(
+            child: Container(
+              height: screenHeight,
+              width: screenWidth,
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Column(
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      IconButtonWidget(
-                          icon: Icons.pause_sharp,
-                          onPressed: !_isOverlayVisible ? () {showPauseMenu(context);} : null
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          IconButtonWidget(
+                              icon: Icons.pause_sharp,
+                              onPressed: !_isOverlayVisible ? () {showPauseMenu(context);} : null
+                          )
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          ProfileImageWithLevel(
+                            experienceLevel: context.watch<UserProvider>().user!.level,
+                            experienceProgress: context.watch<UserProvider>().user!.levelProgress + 0.2,
+                            profileImage: const AssetImage('assets/images/icons/user.png'),
+                          )
+                        ],
                       )
                     ],
                   ),
-                  Column(
-                    children: [
-                      ProfileImageWithLevel(
-                        experienceLevel: context.watch<UserProvider>().user!.level,
-                        experienceProgress: context.watch<UserProvider>().user!.levelProgress + 0.2,
-                        profileImage: const AssetImage('assets/images/icons/user.png'),
-                      )
-                    ],
-                  )
+
+                  const SizedBox(height: 30),
+
+                  HeaderText(text: widget.expression, size: HeaderText.H3),
+
+                  const SizedBox(height: 20),
+
+                  // WebView
+                  Container(
+                    height: screenHeight * 0.4,
+                    width: screenWidth * 0.65,
+                    child: Stack(
+                      children: [
+                        WebView(
+                          onExpressionScoresUpdated: handleExpressionScore,
+                          onCameraHiddenUpdated: handleOverlay,
+                          onFaceDetectedUpdated: handleFaceDetected,
+                        ),
+                        if (_isOverlayVisible)
+                          Container(
+                            color: Colors.white,
+                            child: const Center(
+                              child: CircularProgressIndicator(
+                                color: PaletteColor.darkBlue,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 30),
+
+                  const HeaderText(text: 'Keep going!', size: HeaderText.H4),
+
+                  const SizedBox(height: 10),
+
+                  Container(
+                    width: screenWidth * 0.65,
+                    child: TrainingProgressBar(
+                      progress: _facialExpressionCount / _GOAL,
+                      height: TrainingProgressBar.trainingBar,
+                      expressionCount: _facialExpressionCount,
+                    ),
+                  ),
+
+                  const SizedBox(height: 70),
+
+                  // Stopwatch controller
+                  StopwatchWidget(
+                    onControllerReady: (controller) {
+                      _stopwatchController = controller;
+                    },
+                  ),
                 ],
               ),
-
-              const SizedBox(height: 30),
-
-              HeaderText(text: widget.expression, size: HeaderText.H3),
-
-              const SizedBox(height: 20),
-
-              // WebView
-              Container(
-                height: screenHeight * 0.4,
-                width: screenWidth * 0.65,
-                child: Stack(
-                  children: [
-                    WebView(
-                      onExpressionScoresUpdated: handleExpressionScore,
-                      onCameraHiddenUpdated: handleOverlay,
-                      onFaceDetectedUpdated: handleFaceDetected,
-                    ),
-                    if (_isOverlayVisible)
-                      Container(
-                        color: Colors.white,
-                        child: const Center(
-                          child: CircularProgressIndicator(
-                            color: PaletteColor.darkBlue,
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-
-              const SizedBox(height: 30),
-
-              const HeaderText(text: 'Keep going!', size: HeaderText.H4),
-
-              const SizedBox(height: 10),
-
-              Container(
-                width: screenWidth * 0.65,
-                child: TrainingProgressBar(
-                  progress: _facialExpressionCount / _GOAL,
-                  height: TrainingProgressBar.trainingBar,
-                  expressionCount: _facialExpressionCount,
-                ),
-              ),
-
-              const SizedBox(height: 70),
-
-              // Stopwatch controller
-              StopwatchWidget(
-                onControllerReady: (controller) {
-                  _stopwatchController = controller;
-                },
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
+        )
     );
   }
 }

@@ -48,7 +48,9 @@ class _TrainingOverviewPage extends State<TrainingOverviewPage> {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
-    return Scaffold(
+    return PopScope(
+        canPop: false,
+        child: Scaffold(
         appBar: AppBar(
           leading: IconButtonWidget(
               icon: Icons.arrow_back,
@@ -98,6 +100,7 @@ class _TrainingOverviewPage extends State<TrainingOverviewPage> {
             ),
           ),
         )
+      )
     );
   }
 }

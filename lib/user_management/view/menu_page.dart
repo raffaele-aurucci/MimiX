@@ -32,12 +32,15 @@ class _MenuPageState extends State<MenuPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _pages[_selectedIndex], // Show selected page
-      bottomNavigationBar: FooterMenu(
-        selectedIndex: _selectedIndex,
-        onItemTapped: _onItemTapped,
-      ),
+     return PopScope(
+        canPop: false,
+        child: Scaffold(
+          body: _pages[_selectedIndex], // Show selected page
+          bottomNavigationBar: FooterMenu(
+            selectedIndex: _selectedIndex,
+            onItemTapped: _onItemTapped,
+          ),
+        )
     );
   }
 }

@@ -14,32 +14,35 @@ class DialogUtils {
       barrierDismissible: false,
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(
-            title,
-            style: const TextStyle(
-              color: PaletteColor.darkBlue,
-              fontWeight: FontWeight.w500,),
-          ),
-          content: Text(
-            message,
-            style: const TextStyle(
-              color: PaletteColor.darkBlue,
+        return PopScope(
+            canPop: false,
+            child:AlertDialog(
+            title: Text(
+              title,
+              style: const TextStyle(
+                color: PaletteColor.darkBlue,
+                fontWeight: FontWeight.w500,),
             ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: onTap ?? () {
-                Navigator.of(context).pop(); // close dialog
-              },
-              child: Text(
-                buttonMessage,
-                style: const TextStyle(
-                    color: PaletteColor.darkBlue,
-                    fontWeight: FontWeight.w500),
+            content: Text(
+              message,
+              style: const TextStyle(
+                color: PaletteColor.darkBlue,
               ),
             ),
-          ],
+            actions: [
+              TextButton(
+                onPressed: onTap ?? () {
+                  Navigator.of(context).pop(); // close dialog
+                },
+                child: Text(
+                  buttonMessage,
+                  style: const TextStyle(
+                      color: PaletteColor.darkBlue,
+                      fontWeight: FontWeight.w500),
+                ),
+              ),
+            ],
+          )
         );
       },
     );

@@ -34,7 +34,9 @@ class _CheckCompletedStatePage extends State<CheckCompletedPage> {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
-    return Scaffold(
+    return PopScope(
+        canPop: false,
+        child: Scaffold(
         body: SafeArea(
           child: Container(
             height: screenHeight,
@@ -75,6 +77,7 @@ class _CheckCompletedStatePage extends State<CheckCompletedPage> {
             ),
           ),
         )
+      )
     );
   }
 }

@@ -36,7 +36,9 @@ class _FaceSkiOverviewPageState extends State<FaceSkiPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PopScope(
+        canPop: false,
+        child: Scaffold(
         appBar: AppBar(
           leading: IconButtonWidget(
               icon: Icons.arrow_back,
@@ -119,6 +121,7 @@ class _FaceSkiOverviewPageState extends State<FaceSkiPage> {
             ),
           ),
         )
+      )
     );
   }
 }

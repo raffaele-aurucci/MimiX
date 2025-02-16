@@ -270,8 +270,6 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
         context,
         MaterialPageRoute(builder: (context) => const CheckCompletedPage()),
       );
-
-      // TODO: go to let's get started
     }
   }
 
@@ -280,96 +278,99 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
-          height: screenHeight,
-          width: screenWidth,
-          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Column(
-            children: [
+    return PopScope(
+        canPop: false,
+        child: Scaffold(
+          body: SafeArea(
+            child: Container(
+              height: screenHeight,
+              width: screenWidth,
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Column(
+                children: [
 
-              const SizedBox(height: 30),
+                  const SizedBox(height: 30),
 
-              const HeaderText(text: "Check your ability", size: HeaderText.H3),
+                  const HeaderText(text: "Check your ability", size: HeaderText.H3),
 
-              const SizedBox(height: 20),
+                  const SizedBox(height: 20),
 
-              // WebView
-              Container(
-                height: screenHeight * 0.4,
-                width: screenWidth * 0.65,
-                child: Stack(
-                  children: [
-                    WebView(
-                      onExpressionScoresUpdated: handleExpressionScore,
-                      onCameraHiddenUpdated: handleOverlay,
-                      onFaceDetectedUpdated: handleFaceDetected,
+                  // WebView
+                  Container(
+                    height: screenHeight * 0.4,
+                    width: screenWidth * 0.65,
+                    child: Stack(
+                      children: [
+                        WebView(
+                          onExpressionScoresUpdated: handleExpressionScore,
+                          onCameraHiddenUpdated: handleOverlay,
+                          onFaceDetectedUpdated: handleFaceDetected,
+                        ),
+                        if (_isOverlayVisible)
+                          Container(
+                            color: Colors.white,
+                            child: const Center(
+                              child: CircularProgressIndicator(
+                                color: PaletteColor.darkBlue,
+                              ),
+                            ),
+                          ),
+                      ],
                     ),
-                    if (_isOverlayVisible)
-                      Container(
-                        color: Colors.white,
-                        child: const Center(
-                          child: CircularProgressIndicator(
-                            color: PaletteColor.darkBlue,
+                  ),
+
+                  const SizedBox(height: 30),
+
+                  HeaderText(text: expressions[_indexCheckedExpression], size: HeaderText.H4),
+
+                  const SizedBox(height: 10),
+
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          width: screenWidth * 0.65,
+                          child: TrainingProgressBar(
+                            progress: _facialExpressionCount / _GOAL,
+                            height: TrainingProgressBar.trainingBar,
+                            expressionCount: _facialExpressionCount,
                           ),
                         ),
-                      ),
-                  ],
-                ),
-              ),
 
-              const SizedBox(height: 30),
+                        const Spacer(),
 
-              HeaderText(text: expressions[_indexCheckedExpression], size: HeaderText.H4),
+                        Image.asset(emojiImagePath[_indexCheckedExpression], scale: 5,),
 
-              const SizedBox(height: 10),
+                        const Spacer(),
 
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      width: screenWidth * 0.65,
-                      child: TrainingProgressBar(
-                        progress: _facialExpressionCount / _GOAL,
-                        height: TrainingProgressBar.trainingBar,
-                        expressionCount: _facialExpressionCount,
-                      ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: List.generate(5, (index) {
+                            return Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 4),
+                              width: 12,
+                              height: 12,
+                              decoration: BoxDecoration(
+                                color: index <= _indexCheckedExpression ? PaletteColor.darkBlue : PaletteColor.progressBarBackground, // Cambia colore se attivo
+                                shape: BoxShape.circle,
+                                border: index != _indexCheckedExpression ? Border.all( // Bordo aggiunto
+                                  color: PaletteColor.darkBlue,
+                                  width: 0.01,
+                                ) : null
+                              ),
+                            );
+                          }),
+                        )
+                      ],
                     ),
+                  )
 
-                    const Spacer(),
-
-                    Image.asset(emojiImagePath[_indexCheckedExpression], scale: 5,),
-
-                    const Spacer(),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: List.generate(5, (index) {
-                        return Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 4),
-                          width: 12,
-                          height: 12,
-                          decoration: BoxDecoration(
-                            color: index <= _indexCheckedExpression ? PaletteColor.darkBlue : PaletteColor.progressBarBackground, // Cambia colore se attivo
-                            shape: BoxShape.circle,
-                            border: index != _indexCheckedExpression ? Border.all( // Bordo aggiunto
-                              color: PaletteColor.darkBlue,
-                              width: 0.01,
-                            ) : null
-                          ),
-                        );
-                      }),
-                    )
-                  ],
-                ),
-              )
-
-            ],
-          ),
+                ],
+              ),
+            ),
+          )
         ),
-      ),
-    );
+      );
   }
 }

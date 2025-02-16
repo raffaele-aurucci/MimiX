@@ -66,89 +66,92 @@ class _TaskPage extends State<TaskPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButtonWidget(
-          icon: Icons.arrow_back,
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Visibility(
-          visible: _isTextVisible,
-          child: const HeaderText(
-            text: 'Task',
-            size: HeaderText.H4,
+    return PopScope(
+        canPop: false,
+          child: Scaffold(
+          appBar: AppBar(
+          leading: IconButtonWidget(
+            icon: Icons.arrow_back,
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          title: Visibility(
+            visible: _isTextVisible,
+            child: const HeaderText(
+              text: 'Task',
+              size: HeaderText.H4,
+            ),
           ),
         ),
-      ),
-      body: NotificationListener<ScrollNotification>(
-        onNotification: _onScroll, // Listen to the scroll events
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              // HomePageCard at the top
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                child: HomePageCard(
-                  title: 'Tasks',
-                  image: const AssetImage('assets/images/icons/tasks_icon.png'),
-                  onTap: () => print('Home page card'),
-                ),
-              ),
-              const SizedBox(height: 8.0),
-              // Grid of TrainCards
-              Container(
-                decoration: const BoxDecoration(
-                  color: PaletteColor.powderBlue,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
+        body: NotificationListener<ScrollNotification>(
+          onNotification: _onScroll, // Listen to the scroll events
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                // HomePageCard at the top
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  child: HomePageCard(
+                    title: 'Tasks',
+                    image: const AssetImage('assets/images/icons/tasks_icon.png'),
+                    onTap: () => print('Home page card'),
                   ),
                 ),
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    // General card at the top of list of tasks
-                    //TODO: make the task dynamic: add the last three best tasks based on their progress.
-                    GeneralTaskCard(
-                        experienceLevel: context.watch<UserProvider>().user!.level,
-                        experienceProgress: context.watch<UserProvider>().user!.levelProgress + 0.2,
-                        firstProgress: progressValue[0],
-                        firstTaskName: nameTaskList[0],
-                        secondProgress: progressValue[4],
-                        secondTaskName: nameTaskList[4],
-                        thirdProgress: progressValue[5],
-                        thirdTaskName: nameTaskList[5],
+                const SizedBox(height: 8.0),
+                // Grid of TrainCards
+                Container(
+                  decoration: const BoxDecoration(
+                    color: PaletteColor.powderBlue,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
                     ),
-                    const SizedBox(height: 10),
-                    // GridView of tasks
-                    GridView.builder(
-                      physics: const NeverScrollableScrollPhysics(), // Disable inner scrolling
-                      shrinkWrap: true, // Let GridView size itself within the scrollable column
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, // Two cards per row
-                        crossAxisSpacing: 10.0, // Horizontal spacing
-                        mainAxisSpacing: 10.0, // Vertical spacing
+                  ),
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      // General card at the top of list of tasks
+                      //TODO: make the task dynamic: add the last three best tasks based on their progress.
+                      GeneralTaskCard(
+                          experienceLevel: context.watch<UserProvider>().user!.level,
+                          experienceProgress: context.watch<UserProvider>().user!.levelProgress + 0.2,
+                          firstProgress: progressValue[0],
+                          firstTaskName: nameTaskList[0],
+                          secondProgress: progressValue[4],
+                          secondTaskName: nameTaskList[4],
+                          thirdProgress: progressValue[5],
+                          thirdTaskName: nameTaskList[5],
                       ),
-                      itemCount: 8, // Number of TrainCards
-                      itemBuilder: (context, index) {
-                        return TaskCard(
-                          title: nameTaskList[index],
-                          description: nameTaskDescriptionList[index],
-                          progress: progressValue[index],
-                        );
-                      },
-                    ),
-                  ],
+                      const SizedBox(height: 10),
+                      // GridView of tasks
+                      GridView.builder(
+                        physics: const NeverScrollableScrollPhysics(), // Disable inner scrolling
+                        shrinkWrap: true, // Let GridView size itself within the scrollable column
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2, // Two cards per row
+                          crossAxisSpacing: 10.0, // Horizontal spacing
+                          mainAxisSpacing: 10.0, // Vertical spacing
+                        ),
+                        itemCount: 8, // Number of TrainCards
+                        itemBuilder: (context, index) {
+                          return TaskCard(
+                            title: nameTaskList[index],
+                            description: nameTaskDescriptionList[index],
+                            progress: progressValue[index],
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
+      )
     );
   }
 }

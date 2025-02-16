@@ -1,4 +1,5 @@
 // Start application
+import 'package:flutter/services.dart';
 import 'package:mimix_app/application_management/view/tutorial.dart';
 import 'package:mimix_app/minigame_managment/view/minigame_page.dart';
 import 'package:mimix_app/training_managment/view/training_page.dart';
@@ -21,6 +22,8 @@ void main() async {
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await Permission.camera.request();
   await Permission.microphone.request();
+
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
   // Simulate initialization
   final objects = await _simulateInitialization();

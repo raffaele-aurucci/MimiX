@@ -22,50 +22,53 @@ class PauseMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Container(
-        padding: EdgeInsets.all(30),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            HeaderText(
-                text: gameName,
-                size: HeaderText.H4
-            ),
-            SizedBox(height: 16),
-            PrimaryButton(
-              text: 'Resume',
-              onPressed: () {
-                Navigator.of(context).pop();
-                handleResume();
-              },
-              height: PrimaryButton.PauseButton,
-            ),
-            SecondaryButton(
-                text: 'Restart',
+    return PopScope(
+        canPop: false,
+        child: Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Container(
+          padding: EdgeInsets.all(30),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              HeaderText(
+                  text: gameName,
+                  size: HeaderText.H4
+              ),
+              SizedBox(height: 16),
+              PrimaryButton(
+                text: 'Resume',
                 onPressed: () {
                   Navigator.of(context).pop();
-                  handleRestart();
-                }),
-            SecondaryButton(
-                text: 'Quit',
-                onPressed: () {
-                  Navigator.popUntil(context, ModalRoute.withName(quitNavigate));
-                }),
-            Container(
-              alignment: Alignment.bottomRight,
-              child: IconButtonWidget(
-                  icon: Icons.volume_up,
-                  onPressed: () => {
-                    print("Volume icon pressed")
+                  handleResume();
+                },
+                height: PrimaryButton.PauseButton,
+              ),
+              SecondaryButton(
+                  text: 'Restart',
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    handleRestart();
                   }),
-            )
-          ],
+              SecondaryButton(
+                  text: 'Quit',
+                  onPressed: () {
+                    Navigator.popUntil(context, ModalRoute.withName(quitNavigate));
+                  }),
+              Container(
+                alignment: Alignment.bottomRight,
+                child: IconButtonWidget(
+                    icon: Icons.volume_up,
+                    onPressed: () => {
+                      print("Volume icon pressed")
+                    }),
+              )
+            ],
+          ),
         ),
-      ),
+      )
     );
   }
 }

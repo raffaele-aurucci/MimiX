@@ -41,7 +41,9 @@ class _SettingsPage extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
+    return PopScope(
+        canPop: false,
+        child: Scaffold(
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
@@ -156,6 +158,7 @@ class _SettingsPage extends State<SettingsPage> {
             ),
           ),
         )
+      )
     );
   }
 

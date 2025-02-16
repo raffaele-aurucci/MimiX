@@ -11,7 +11,9 @@ class StatsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+     return PopScope(
+        canPop: false,
+        child: Scaffold(
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
@@ -50,6 +52,7 @@ class StatsPage extends StatelessWidget {
             ),
         )
         ),
+      )
     );
   }
 }

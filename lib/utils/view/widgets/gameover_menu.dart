@@ -18,37 +18,40 @@ class GameOverMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Container(
-        padding: EdgeInsets.all(30),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            HeaderText(
-                text: gameName,
-                size: HeaderText.H4
-            ),
-            SizedBox(height: 10),
-            PrimaryButton(
-              text: 'Restart',
-              onPressed: () {
-                Navigator.of(context).pop();
-                handleRestart();
-              },
-              height: 32, // Altezza ridotta
-            ),
-            SecondaryButton(
-                text: 'Quit',
-                onPressed: () {
-                  Navigator.popUntil(context, ModalRoute.withName(quitNavigate));
-                },
-            ),
-          ],
+    return PopScope(
+        canPop: false,
+        child: Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
         ),
-      ),
+        child: Container(
+          padding: EdgeInsets.all(30),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              HeaderText(
+                  text: gameName,
+                  size: HeaderText.H4
+              ),
+              SizedBox(height: 10),
+              PrimaryButton(
+                text: 'Restart',
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  handleRestart();
+                },
+                height: 32, // Altezza ridotta
+              ),
+              SecondaryButton(
+                  text: 'Quit',
+                  onPressed: () {
+                    Navigator.popUntil(context, ModalRoute.withName(quitNavigate));
+                  },
+              ),
+            ],
+          ),
+        ),
+      )
     );
   }
 }

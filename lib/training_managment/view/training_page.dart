@@ -83,97 +83,100 @@ class _TrainingPage extends State<TrainingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButtonWidget(
-          icon: Icons.arrow_back,
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Visibility(
-          visible: _isTextVisible,
-          child: const HeaderText(
-            text: 'Training',
-            size: HeaderText.H4,
+     return PopScope(
+        canPop: false,
+        child:Scaffold(
+        appBar: AppBar(
+          leading: IconButtonWidget(
+            icon: Icons.arrow_back,
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          title: Visibility(
+            visible: _isTextVisible,
+            child: const HeaderText(
+              text: 'Training',
+              size: HeaderText.H4,
+            ),
           ),
         ),
-      ),
-      body: NotificationListener<ScrollNotification>(
-        onNotification: _onScroll, // Listen to the scroll events
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
+        body: NotificationListener<ScrollNotification>(
+          onNotification: _onScroll, // Listen to the scroll events
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
 
-              // HomePageCard at the top
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                child: HomePageCard(
-                  title: 'Training',
-                  image: const AssetImage('assets/images/icons/training_icon.png'),
-                  onTap: () => print('Home page card'),
-                ),
-              ),
-
-              const SizedBox(height: 8.0),
-
-              // Grid of TrainCards
-              Container(
-                decoration: const BoxDecoration(
-                  color: PaletteColor.powderBlue,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
+                // HomePageCard at the top
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  child: HomePageCard(
+                    title: 'Training',
+                    image: const AssetImage('assets/images/icons/training_icon.png'),
+                    onTap: () => print('Home page card'),
                   ),
                 ),
-                padding: const EdgeInsets.all(20.0), // Padding for the grid
-                child: GridView.builder(
-                  physics: const NeverScrollableScrollPhysics(), // Disable inner scrolling
-                  shrinkWrap: true, // Let GridView size itself within the scrollable column
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, // Two cards per row
-                    crossAxisSpacing: 10.0, // Horizontal spacing
-                    mainAxisSpacing: 10.0, // Vertical spacing
+
+                const SizedBox(height: 8.0),
+
+                // Grid of TrainCards
+                Container(
+                  decoration: const BoxDecoration(
+                    color: PaletteColor.powderBlue,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
                   ),
-                  itemCount: 8, // Number of TrainCards
-                  itemBuilder: (context, index) {
-                    if(index >= 6) {
-                      return TrainingCard(
-                        title: nameTrainingList[index],
-                        description: nameTrainingDescriptionList[index],
-                        onTap: () => {},
-                        image: emojiImagePath[index]
-                      );
-                    }
-                    else {
-                      return TrainingCard(
-                        title: nameTrainingList[index],
-                        description: nameTrainingDescriptionList[index],
-                        onTap: () =>
-                        {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                // Passes the expression to be trained to the training session page
-                                  builder: (context) =>
-                                      TrainingOverviewPage(
-                                        expression: nameTrainingList[index],
-                                        description: nameTrainingOverviewDescriptionList[index],
-                                      )
-                              )
-                          )
-                        },
-                        image: emojiImagePath[index]
-                      );
-                    }
-                  },
+                  padding: const EdgeInsets.all(20.0), // Padding for the grid
+                  child: GridView.builder(
+                    physics: const NeverScrollableScrollPhysics(), // Disable inner scrolling
+                    shrinkWrap: true, // Let GridView size itself within the scrollable column
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, // Two cards per row
+                      crossAxisSpacing: 10.0, // Horizontal spacing
+                      mainAxisSpacing: 10.0, // Vertical spacing
+                    ),
+                    itemCount: 8, // Number of TrainCards
+                    itemBuilder: (context, index) {
+                      if(index >= 6) {
+                        return TrainingCard(
+                          title: nameTrainingList[index],
+                          description: nameTrainingDescriptionList[index],
+                          onTap: () => {},
+                          image: emojiImagePath[index]
+                        );
+                      }
+                      else {
+                        return TrainingCard(
+                          title: nameTrainingList[index],
+                          description: nameTrainingDescriptionList[index],
+                          onTap: () =>
+                          {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  // Passes the expression to be trained to the training session page
+                                    builder: (context) =>
+                                        TrainingOverviewPage(
+                                          expression: nameTrainingList[index],
+                                          description: nameTrainingOverviewDescriptionList[index],
+                                        )
+                                )
+                            )
+                          },
+                          image: emojiImagePath[index]
+                        );
+                      }
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
+      )
     );
   }
 }

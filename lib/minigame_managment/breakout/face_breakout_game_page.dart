@@ -153,7 +153,9 @@ class _FaceBreakoutGamePageState extends State<FaceBreakoutGamePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PopScope(
+        canPop: false,
+        child: Scaffold(
         body: SafeArea(
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -275,6 +277,7 @@ class _FaceBreakoutGamePageState extends State<FaceBreakoutGamePage> {
             ),
           ),
         )
+      )
     );
   }
 }

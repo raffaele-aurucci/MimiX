@@ -22,7 +22,9 @@ class _TutorialState extends State<Tutorial> {
 
     final pages = getTutorialPages();
 
-    return Scaffold(
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
         body: SafeArea(
             child: Container(
               height: screenHeight,
@@ -45,6 +47,7 @@ class _TutorialState extends State<Tutorial> {
               ),
             )
         )
+      )
     );
   }
 }
