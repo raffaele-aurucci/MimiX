@@ -54,9 +54,9 @@ class Ball extends SpriteComponent
       Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollisionStart(intersectionPoints, other);
     if (other is PlayArea) {
-      if (intersectionPoints.first.y <= 0) {
+      if (intersectionPoints.first.y <= 5) {
         velocity.y = -velocity.y;
-      } else if (intersectionPoints.first.x <= 0) {
+      } else if (intersectionPoints.first.x <= 5) {
         velocity.x = -velocity.x;
       } else if (intersectionPoints.first.x >= game.width - 5) {
         velocity.x = -velocity.x;

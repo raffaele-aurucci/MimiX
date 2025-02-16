@@ -69,15 +69,16 @@ class _FaceBreakoutGamePageState extends State<FaceBreakoutGamePage> {
   void handleWon() {
     game.playState = PlayState.won;
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      DialogUtils.showErrorDialog(
-          context: context,
-          title: "You Won!",
-          message: "Please try again.",
-          buttonMessage: 'Restart',
-          onTap: () {
-            Navigator.of(context).pop();
-            game.resetGame();
-          }
+      showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) {
+          return GameOverMenu(
+            handleRestart: handleRestart,
+            gameName: 'You Won!',
+            quitNavigate: '/minigames_page',
+          );
+        },
       );
     });
   }
