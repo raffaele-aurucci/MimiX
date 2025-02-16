@@ -1,5 +1,4 @@
 // Start application
-import 'package:flutter/services.dart';
 import 'package:mimix_app/application_management/view/tutorial.dart';
 import 'package:mimix_app/minigame_managment/view/minigame_page.dart';
 import 'package:mimix_app/training_managment/view/training_page.dart';
@@ -15,15 +14,12 @@ import 'package:mimix_app/user_management/view/menu_page.dart';
 import 'package:mimix_app/utils/view/app_theme.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
-import 'package:mimix_app/user_management/view/registration_page.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await Permission.camera.request();
   await Permission.microphone.request();
-
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
   // Simulate initialization
   final objects = await _simulateInitialization();

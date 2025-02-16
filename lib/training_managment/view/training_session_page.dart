@@ -349,7 +349,7 @@ class _TrainingSessionPageState extends State<TrainingSessionPage> {
 
                   // WebView
                   Container(
-                    height: screenHeight * 0.39,
+                    height: screenHeight * 0.4,
                     width: screenWidth * 0.65,
                     child: Stack(
                       children: [

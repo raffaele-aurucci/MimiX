@@ -297,7 +297,7 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
 
                   // WebView
                   Container(
-                    height: screenHeight * 0.39,
+                    height: screenHeight * 0.4,
                     width: screenWidth * 0.65,
                     child: Stack(
                       children: [
@@ -363,7 +363,7 @@ class _CheckAbilityPageState extends State<CheckAbilityPage> {
                           }),
                         ),
 
-                        const SizedBox(height: 10)
+                        const SizedBox(height: 5)
                       ],
                     ),
                   )
