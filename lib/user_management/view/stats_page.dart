@@ -23,7 +23,12 @@ class StatsPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    HeaderText(text: '👋🏻 Hi ${context.watch<UserProvider>().user!.username}!', size: HeaderText.H4),
+                    Row(
+                      children: [
+                        Image.asset('assets/images/icons/wave-hand.png', width: 30, height: 30),
+                        HeaderText(text: ' Hi ${context.watch<UserProvider>().user!.username}!', size: HeaderText.H4),
+                      ],
+                    ),
                     ProfileImageWithLevel(
                       experienceLevel: context.watch<UserProvider>().user!.level,
                       experienceProgress: context.watch<UserProvider>().user!.levelProgress + 0.2,
