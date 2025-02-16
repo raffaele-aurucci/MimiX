@@ -3,7 +3,7 @@
 </p>
 
 <h3 align="center">
- MimiX
+ Mimix
 </h3>
 
 <p align="center">
