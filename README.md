@@ -7,7 +7,7 @@
 </h3>
 
 <p align="center">
- A <b>Digital Therapeutics app</b> designed to support the execution of facial expression exercises powered by <b>AI</b> and <b>Gamification</b>.  
+ A <b>Digital Therapeutics app</b> designed to support the execution of facial expression exercises :innocent:.  
 </p>
 
 <p align="center">
