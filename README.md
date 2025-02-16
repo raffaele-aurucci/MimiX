@@ -33,7 +33,7 @@ That’s why we created **Mimix**: an innovative **Digital Therapeutics app** th
 
 The experience is enhanced with **Gamification techniques**: increasing levels of challenge, tasks to complete, milestones to reach, and rewards to win-making the process engaging and motivating.
 
-***With Mimix, we want to help people preserve their facial expressions… one smile at a time!*** 😊
+***"With Mimix, we want to help people preserve their facial expressions… one smile at a time!"*** 😊
 
 ## Table of Contents 
 - [App Overview](#app-overview)
@@ -61,6 +61,51 @@ For persistent data storage, we utilize ```SQLite```, ensuring efficient and rel
 
 
 ## Repository Contents
-
+The repository is structured as follows:  
+- ```android/```: Contains all configuration files for Android, such as permissions, splash screen, etc.  
+- ```ios/```: Similar to the Android directory (additional adjustments might be necessary).  
+- ```assets/```: Includes all assets used by the app, such as images, GIFs, fonts, etc.  
+- ```lib/```: The core of the system, containing all the app's subsystems.  
+- ```web_project/```: Contains files executed on localhost, including an HTML page that accesses the device's camera and a TypeScript file for running inference with MediaPipe AI models.  
+- ```pubspec.yaml```: Essential configuration file for the Flutter project.
 
 ## Installation Guide
+
+### Flutter project
+To correctly execute the project, follow the installation guide for ```Flutter``` at this [link](https://docs.flutter.dev/get-started/install): choose your preferred development environment and target device. We recommend Android as the target environment.  
+
+Use Flutter SDK version **>=3.5.3** and **<=3.6.0** to avoid dependency issues.  
+
+Next, run the following command in your terminal from root of project:  
+
+```bash
+flutter pub get
+```
+
+### Web project
+Optionally, if you need to edit the files executed within the ```web_project``` directory, install ```NodeJS``` from this [link](https://nodejs.org/en/download/current).  
+
+The only files that should be modified are:  
+- ```index.html```  
+- ```index.ts```  
+- ```style.ts```  
+
+After installing NodeJS, run the following commands installing all required dependencies:  
+
+```bash
+npm install
+```
+
+Starts the local development server.
+```bash
+npm run start
+```
+
+Builds the project to be deployed in the WebView.
+```bash
+npm run build
+```
+
+Insert the build in folder ```assets/``` overwriting the ```camera/``` folder (old build).
+
+
