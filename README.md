@@ -29,7 +29,7 @@ Every day, millions of people with facial muscle degeneration see their ability 
 
 The problem? Without regular exercise, the degeneration progresses more rapidly. And when exercises are repetitive and unengaging, it’s easy to give up.  
 
-That’s why we created **Mimix**: an innovative **Digital Therapeutics app** that turns therapy into a game! Using **AI-powered facial expression recognition**, our app offers targeted exercises through interactive mini-games, helping users slow down the loss of facial mobility in a fun and effective way.  
+That’s why we created **Mimix**: an innovative **Digital Therapeutics app** that turns therapy into a game! Using **AI-powered Facial Expression Detection**, our app offers targeted exercises through interactive mini-games, helping users slow down the loss of facial mobility in a fun and effective way.  
 
 The experience is enhanced with **Gamification techniques**: increasing levels of challenge, tasks to complete, milestones to reach, and rewards to win-making the process engaging and motivating.
 
