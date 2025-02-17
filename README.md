@@ -12,16 +12,18 @@
 
 <p align="center">
  <a href="#"><img src="https://img.shields.io/github/contributors/raffaele-aurucci/MimiX?style=for-the-badge" alt="Contributors"/></a>
- <img src="https://img.shields.io/github/last-commit/raffaele-aurucci/MimiX?style=for-the-badge" alt="last commit">
+ <a href="#"><img src="https://img.shields.io/github/last-commit/raffaele-aurucci/MimiX?style=for-the-badge" alt="last commit"></a>
 </p>
 
+<p align="center">
+    <a href="https://github.com/raffaele-aurucci/MimiX/raw/master/mimix.apk"><img src="https://img.shields.io/badge/Download Now (Android)-MìmiX-blue?style=for-the-badge" alt="download MìmiX">
+</p>
+        
 <div align="center">
   
 [@raffaele-aurucci](https://github.com/raffaele-aurucci), [@Sabix10](https://github.com/Sabix10), [@DomenicoAnzalone](https://github.com/DomenicoAnzalone)
 
 </div>
-
-
 
 # MìmiX
 
@@ -79,8 +81,21 @@ The repository is structured as follows:
 - ```lib/```: The core of the system, containing all the app's subsystems.  
 - ```web_project/```: Contains files executed on localhost, including an HTML page that accesses the device's camera and a TypeScript file for running inference with MediaPipe AI models.  
 - ```pubspec.yaml```: Essential configuration file for the Flutter project.
-
+- ```mimix.apk```: The compiled APK file for installing and testing the application on Android devices.
+  
 ## Installation Guide
+
+### Android device
+To install MìmiX on Android device follow the following steps:  
+ 1. **⏬ Download the APK:** Click the button below
+    <p align="center">
+        <a href="https://github.com/raffaele-aurucci/MimiX/raw/master/mimix.apk"><img src="https://img.shields.io/badge/Download Now (Android)-MìmiX-blue?style=for-the-badge" alt="download MìmiX">
+    </p>
+ 2. **🛠️ Enable installation from unknown source:** Open Settings, go to Security/Privacy (the location may vary depending on the device), find Install unknown apps, select the browser or file manager to open the APK and enable the option.
+ 3. **📦 Install the APK:** Open your file manager on the device, navigate to the folder where you saved the file (e.g., Download), tap on mimix.apk, confirm the installation and follow the on-screen instructions.
+ 4. **🚀 Launch the Application:** Once the installation is complete, You will find the app on your home screen or in the app drawer.
+
+
 
 ### Flutter project
 To correctly execute the project, follow the installation guide for ```Flutter``` at this [link](https://docs.flutter.dev/get-started/install): choose your preferred development environment and target device. We recommend Android as the target environment.  
