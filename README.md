@@ -17,7 +17,7 @@
 
 <div align="center">
   
-[@raffaele-aurucci](https://github.com/raffaele-aurucci), [@CSSabino](https://github.com/CSSabino), [@DomenicoAnzalone](https://github.com/DomenicoAnzalone)
+[@raffaele-aurucci](https://github.com/raffaele-aurucci), [@Sabix10](https://github.com/Sabix10), [@DomenicoAnzalone](https://github.com/DomenicoAnzalone)
 
 </div>
 
