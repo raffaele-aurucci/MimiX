@@ -45,6 +45,9 @@ The experience is enhanced with **Gamification techniques**: increasing levels o
 - [Architecture](#architecture)
 - [Repository Contents](#repository-contents)
 - [Installation Guide](#installation-guide)
+   - [Android device](#android-device)
+   - [Flutter project](#flutter-project)
+   - [Web project](#web-project)
 
 ## App Overview
 
