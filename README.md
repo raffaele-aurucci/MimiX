@@ -50,11 +50,18 @@ The experience is enhanced with **Gamification techniques**: increasing levels o
 ![HOME_PAGE](https://github.com/user-attachments/assets/51e0c380-628b-4715-b101-fa2fce156a08)
 
 ### Minigame Pages
-![FACE_BREAKOUT](https://github.com/user-attachments/assets/e32d4412-cdca-4ecd-b4c6-66f3560d5c0d)
-![FACE_RUN](https://github.com/user-attachments/assets/7254e9f0-c56e-425a-aa2d-29de7dd67180)
-![FACE_SKI](https://github.com/user-attachments/assets/c887195d-e658-4c4c-944a-13b08595792a)
+<div>
+  <img src="https://github.com/user-attachments/assets/e32d4412-cdca-4ecd-b4c6-66f3560d5c0d" alt="FACE_BREAKOUT"> &nbsp;
+  <img src="https://github.com/user-attachments/assets/7254e9f0-c56e-425a-aa2d-29de7dd67180" alt="FACE_RUN"> &nbsp;
+  <img src="https://github.com/user-attachments/assets/c66ae782-17c4-40a3-9bcc-20e274b00e29" alt="FACE_SKI">
+</div>
 
 ### Training Pages
+<div>
+  <img src="https://github.com/user-attachments/assets/79c4d718-185e-4fa8-85b8-d57e4514120e" alt="FACE_BREAKOUT"> &nbsp;
+  <img src="https://github.com/user-attachments/assets/189123c5-5426-41ee-a5d8-ebb345596e45" alt="FACE_RUN"> &nbsp;
+  <img src="https://github.com/user-attachments/assets/f2f74c1e-cc98-4373-ab88-c92c467406cc" alt="FACE_SKI">
+</div>
 
 ## Architecture
 Mimix is designed as a standalone application. We use ```Flutter``` for both the frontend and backend, except for AI model computation, which is handled using ```HTML5```, ```CSS```, and ```JavaScript``` executed through a local server embedded through a WebView. This WebView handles the processing and accesses the device's camera to display the user's face in real-time.  
