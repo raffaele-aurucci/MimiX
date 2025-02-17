@@ -47,8 +47,12 @@ The experience is enhanced with **Gamification techniques**: increasing levels o
 ## App Overview
 
 ### Home Page
+![HOME_PAGE](https://github.com/user-attachments/assets/51e0c380-628b-4715-b101-fa2fce156a08)
 
 ### Minigame Pages
+![FACE_BREAKOUT](https://github.com/user-attachments/assets/e32d4412-cdca-4ecd-b4c6-66f3560d5c0d)
+![FACE_RUN](https://github.com/user-attachments/assets/7254e9f0-c56e-425a-aa2d-29de7dd67180)
+![FACE_SKI](https://github.com/user-attachments/assets/c887195d-e658-4c4c-944a-13b08595792a)
 
 ### Training Pages
 
