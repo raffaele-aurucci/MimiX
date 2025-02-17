@@ -30,7 +30,6 @@ class FaceSkiGame extends FlameGame with HasCollisionDetection {
 
   void startGame() {
     Flame.device.setPortrait();
-    Flame.device.fullScreen();
     print("Avvio nuova partita...");
 
     score.value = 0;
@@ -51,7 +50,6 @@ class FaceSkiGame extends FlameGame with HasCollisionDetection {
 
   void startGameBlocked() {
     Flame.device.setPortrait();
-    Flame.device.fullScreen();
     print("Avvio nuova partita con player bloccato...");
 
     score.value = 0;
