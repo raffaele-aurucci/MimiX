@@ -11,8 +11,8 @@
 </p>
 
 <p align="center">
- <a href="#"><img src="https://img.shields.io/github/contributors/raffaele-aurucci/MìmiX?style=for-the-badge" alt="Contributors"/></a>
- <img src="https://img.shields.io/github/last-commit/raffaele-aurucci/MìmiX?style=for-the-badge" alt="last commit">
+ <a href="#"><img src="https://img.shields.io/github/contributors/raffaele-aurucci/MimiX?style=for-the-badge" alt="Contributors"/></a>
+ <img src="https://img.shields.io/github/last-commit/raffaele-aurucci/MimiX?style=for-the-badge" alt="last commit">
 </p>
 
 <div align="center">
