@@ -23,7 +23,7 @@
 
 
 
-# Mìmix
+# MìmiX
 
 Every day, millions of people with facial muscle degeneration see their ability to move gradually decline. Rehabilitation is essential, but it’s often boring and hard to follow consistently.  
 
