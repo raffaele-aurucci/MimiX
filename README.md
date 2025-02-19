@@ -137,4 +137,10 @@ npm run build
 
 Insert the build in folder ```assets/``` overwriting the ```camera/``` folder (old build).
 
+## License
+This project is distributed under the [AGPL-3.0 license](LICENSE).
+
+<img width="200" src="https://github.com/user-attachments/assets/ab5f5ec8-9553-49dd-8c5e-551e846874fd" alt="AGPL-3.0 LICENSE">
+
+
 
