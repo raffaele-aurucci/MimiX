@@ -1,13 +1,13 @@
 <p align="center">
-    <img width="200" src="https://github.com/user-attachments/assets/f7322182-7f81-4e71-89c6-f6d01fcbb6c2" alt="MìmiX logo">
+    <img width="200" src="https://github.com/user-attachments/assets/f7322182-7f81-4e71-89c6-f6d01fcbb6c2" alt="MîmiX logo">
 </p>
 
 <h3 align="center">
- MìmiX
+ MîmiX
 </h3>
 
 <p align="center">
- A <b>Digital Therapeutics app</b> designed to support the execution of facial expression exercises :innocent:.  
+ A <b>Digital Health App</b> to support the execution of facial expression exercises :innocent:.  
 </p>
 
 <p align="center">
@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/raffaele-aurucci/MimiX/raw/master/mimix.apk"><img src="https://img.shields.io/badge/Download Now (Android)-MìmiX-blue?style=for-the-badge" alt="download MìmiX">
+    <a href="https://github.com/raffaele-aurucci/MimiX/raw/master/mimix.apk"><img src="https://img.shields.io/badge/Download Now (Android)-MîmiX-blue?style=for-the-badge" alt="download MîmiX">
 </p>
         
 <div align="center">
@@ -25,17 +25,17 @@
 
 </div>
 
-# MìmiX
+# MîmiX
 
-Every day, millions of people with facial muscle degeneration see their ability to move gradually decline. Rehabilitation is essential, but it’s often boring and hard to follow consistently.  
+Every day, millions of people with facial muscle degeneration see their expressiveness gradually decrease. Rehabilitation is essential, but it's often boring and hard to follow consistently.
 
 The problem? Without regular exercise, the degeneration progresses more rapidly. And when exercises are repetitive and unengaging, it’s easy to give up.  
 
-That’s why we created **MìmiX**: an innovative **Digital Therapeutics app** that turns therapy into a game! Using **AI-powered Facial Expression Detection**, our app offers targeted exercises through interactive mini-games, helping users slow down the loss of facial mobility in a fun and effective way.  
+That’s why we created **MîmiX**: an innovative **Digital Health App** that transforms therapy into a game! Using **AI-powered Facial Expression Detection**, our app offers targeted exercises through interactive mini-games, helping users slow down the loss of facial mobility in a fun and effective way.  
 
-The experience is enhanced with **Gamification techniques**: increasing levels of challenge, tasks to complete, milestones to reach, and rewards to win-making the process engaging and motivating.
+The experience is enhanced with **Gamification techniques**: increasing levels of challenge, tasks to complete, milestones to reach, and rewards to win, making the process engaging and motivating.
 
-***"With MìmiX, we want to help people preserve their facial expressions… one smile at a time!"*** 😊
+***"With MîmiX, we want to help people preserve their expressiveness... one smile at a time!"*** 😊
 
 ## Table of Contents 
 - [App Overview](#app-overview)
@@ -69,11 +69,11 @@ The experience is enhanced with **Gamification techniques**: increasing levels o
 </div>
 
 ## Architecture
-MìmiX is designed as a standalone application. We use ```Flutter``` for both the frontend and backend, except for AI model computation, which is handled using ```HTML5```, ```CSS```, and ```JavaScript``` executed through a local server embedded through a WebView. This WebView handles the processing and accesses the device's camera to display the user's face in real-time.  
+MîmiX is designed as a standalone application. We use ```Flutter``` for both the frontend and backend, except for AI model computation, which is handled using ```HTML5```, ```CSS```, and ```JavaScript``` executed through a local server embedded through a WebView. This WebView handles the processing and accesses the device's camera to display the user's face in real-time.  
 The AI models used are part of the Face Landmarks package from ```MediaPipe```, which includes a Face Detector, a Face Mesh, and a Face Blendshape for real-time facial analysis and expression recognition.  
 For persistent data storage, we utilize ```SQLite```, ensuring efficient and reliable local data management. Finally, we leverage the ```Flame``` game engine, which is optimized for 2D development and seamlessly integrates with Flutter, providing a performant and smooth gaming experience.  
 
-<img width="600" src="https://github.com/user-attachments/assets/f0c31612-2a44-47fd-b9ba-48fdc1979afb" alt="MìmiX Architectures">
+<img width="600" src="https://github.com/user-attachments/assets/f0c31612-2a44-47fd-b9ba-48fdc1979afb" alt="MîmiX Architectures">
 
 
 ## Repository Contents
@@ -89,10 +89,10 @@ The repository is structured as follows:
 ## Installation Guide
 
 ### Android device
-To install MìmiX on Android device follow the following steps:  
+To install MîmiX on Android device follow the following steps:  
  1. **⏬ Download the APK:** Click the button below
     <p align="center">
-        <a href="https://github.com/raffaele-aurucci/MimiX/raw/master/mimix.apk"><img src="https://img.shields.io/badge/Download Now (Android)-MìmiX-blue?style=for-the-badge" alt="download MìmiX">
+        <a href="https://github.com/raffaele-aurucci/MimiX/raw/master/mimix.apk"><img src="https://img.shields.io/badge/Download Now (Android)-MîmiX-blue?style=for-the-badge" alt="download MîmiX">
     </p>
  2. **🛠️ Enable installation from unknown source:** Open Settings, go to Security/Privacy (the location may vary depending on the device), find Install unknown apps, select the browser or file manager to open the APK and enable the option.
  3. **📦 Install the APK:** Open your file manager on the device, navigate to the folder where you saved the file (e.g., Download), tap on mimix.apk, confirm the installation and follow the on-screen instructions.
